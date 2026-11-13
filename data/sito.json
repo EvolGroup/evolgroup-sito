@@ -68,5 +68,8 @@
     }
   ],
   "cellulare": "+39 350 132 9301",
-  "mostraCivico": true
+  "mostraCivico": true,
+  "chiaviModuli": {
+    "generale": "ad32d959-7e1d-41ab-972b-d29003f21fc9"
+  }
 }

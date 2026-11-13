@@ -159,7 +159,7 @@ function piede(testoWa = 'Buongiorno, vi contatto dal sito evolgroup.it') {
     <div><h4>Contatti</h4><p>${esc(SITO.indirizzo)}</p><p><a href="mailto:${SITO.email}">${SITO.email}</a></p><p>Tel. <a href="tel:${tel(SITO.telefoni[0])}">${SITO.telefoni[0]}</a></p><p>Cell. <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a></p>
       <p><a href="${SITO.privacy}" rel="noopener">Privacy policy</a> · <a href="${SITO.cookie}" rel="noopener">Cookie policy</a></p></div>
     <div><h4>Newsletter</h4><p>Novità sul mercato immobiliare di Milano e nuovi immobili, una volta al mese.</p>
-      <form class="newsletter" data-form="newsletter"><input type="email" name="email" placeholder="La tua email" required aria-label="Email"><button class="btn">Iscriviti</button>
+      <form class="newsletter" data-form="newsletter" data-chiave="${esc((SITO.chiaviModuli || {}).generale || '')}"><input type="hidden" name="subject" value="Nuova iscrizione alla newsletter dal sito"><input type="email" name="email" placeholder="La tua email" required aria-label="Email"><button class="btn">Iscriviti</button>
       <label class="check"><input type="checkbox" required><span>Accetto la <a href="${SITO.privacy}">privacy policy</a></span></label><p class="form-esito" hidden></p></form></div>
   </div>
   <div class="wrap copyright">© ${new Date().getFullYear()} ${SITO.ragioneSociale} · P. IVA ${SITO.piva} · ${esc(SITO.indirizzo)}</div>
