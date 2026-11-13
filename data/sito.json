@@ -1,0 +1,72 @@
+{
+  "nome": "Evol Group",
+  "ragioneSociale": "Evol Group Srl",
+  "piva": "13504310965",
+  "indirizzo": "Viale Regina Giovanna 7, 20129 Milano",
+  "email": "info@evolgroup.it",
+  "telefoni": [
+    "02 8974 3880"
+  ],
+  "dominio": "https://evolgroup.it",
+  "uploads": "https://evolgroup.it/wp-content/uploads/",
+  "logoChiaro": "2024/05/Logo-Evol-colori-bianco.png",
+  "logoColori": "2024/05/logo-evol-a-colori-1320x412.webp",
+  "favicon": "2026/02/favicon-evol.png",
+  "hero": "2026/02/m-285.jpg",
+  "chiSiamoImg": "2024/07/XWR_9753.jpg",
+  "privacy": "https://www.iubenda.com/privacy-policy/73783731",
+  "cookie": "https://www.iubenda.com/privacy-policy/73783731/cookie-policy",
+  "mailContatti": {
+    "generale": "info@evolgroup.it",
+    "vendere": "vittorio.maviglia@evolgroup.it"
+  },
+  "slogan": "Il tuo futuro, la nostra visione",
+  "sottotitolo": "Professionalità, rispetto e fiducia. Tre valori che guidano ogni nostra consulenza immobiliare a Milano.",
+  "chiSiamo": "Evol Group nasce dall’idea di tre consulenti immobiliari che, dopo una pluriennale esperienza nel settore immobiliare, decidono di unire le forze per esprimere al meglio quella che è, secondo loro, la migliore visione dell’agente immobiliare ponendo le basi su aspetti morali come professionalità, rispetto, sincerità e fiducia nei confronti dei propri clienti, con l’obiettivo di emergere in un contesto sempre più competitivo e frenetico.",
+  "team": [
+    {
+      "nome": "Pietro Torcia",
+      "foto": "2024/07/Pietro-Torcia-e1771926767257-780x780.png"
+    },
+    {
+      "nome": "Vittorio Maviglia",
+      "foto": "2024/07/Vittorio-780x780.png"
+    },
+    {
+      "nome": "Daniele",
+      "foto": "2024/07/Daniele-780x780.png"
+    }
+  ],
+  "blog": [
+    {
+      "data": "2026-05-19",
+      "slug": "successione-donazione-trust-parte-3-3",
+      "titolo": "Successione – Donazione – Trust – Parte 3/3",
+      "estratto": "Con questo articolo si conclude il percorso di approfondimento dedicato alla tutela patrimoniale e al passaggio di beni.",
+      "img": "2026/05/copertine-blog-2-1.png"
+    },
+    {
+      "data": "2026-05-05",
+      "slug": "donazione-immobiliare-rischi-legge-2025",
+      "titolo": "Successione – Donazione – Trust – Parte 2/3",
+      "estratto": "La donazione è un atto notarile con cui si trasferisce la proprietà di un bene da un soggetto a un altro a titolo gratuito.",
+      "img": "2026/05/copertine-blog-1.png"
+    },
+    {
+      "data": "2026-04-21",
+      "slug": "successione-donazione-trust-parte-1-3",
+      "titolo": "Successione – Donazione – Trust – Parte 1/3",
+      "estratto": "Nell’articolo di oggi e nelle prossime due uscite vedremo alcune casistiche che si possono riscontrare quando ci apprestiamo ad acquistare un immobile.",
+      "img": "2026/04/copertine-blog.png"
+    },
+    {
+      "data": "2026-04-07",
+      "slug": "immobili-a-milano-dopo-le-olimpiadi-2026-trend-opportunita-e-sviluppi",
+      "titolo": "Milano dopo le olimpiadi Milano Cortina 2026",
+      "estratto": "Le Olimpiadi Invernali Milano-Cortina 2026 stanno trasformando la città con investimenti di circa 6 miliardi di euro.",
+      "img": "2026/04/copertine-blog-3.jpg"
+    }
+  ],
+  "cellulare": "+39 350 132 9301",
+  "mostraCivico": true
+}
