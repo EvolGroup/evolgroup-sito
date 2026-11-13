@@ -123,6 +123,7 @@ async function main() {
     im.slug = slugs[im.id];
   }
   fs.writeFileSync(SLUGS, JSON.stringify(slugs, null, 1));
+  if (JSON.stringify(precedenti) === JSON.stringify(immobili)) { console.log(`Getrix: nessuna novità (${immobili.length} immobili)`); return; }
   fs.writeFileSync(DEST, JSON.stringify({ _fonte: 'Flusso Getrix, aggiornato il ' + new Date().toISOString(), immobili }, null, 1));
   console.log(`Getrix: ${immobili.length} immobili (${immobili.filter((i) => i.contratto === 'A').length} in affitto)`);
 }
