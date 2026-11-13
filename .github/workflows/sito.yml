@@ -44,6 +44,15 @@ jobs:
         if: github.event_name != 'schedule' || steps.getrix.outputs.cambiato == 'si'
         run: node src/build.mjs
 
+      - name: Crea il progetto su Cloudflare (solo la prima volta)
+        if: github.event_name != 'schedule'
+        continue-on-error: true
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages project create evolgroup --production-branch=main
+
       - name: Pubblica su Cloudflare Pages
         if: github.event_name != 'schedule' || steps.getrix.outputs.cambiato == 'si'
         uses: cloudflare/wrangler-action@v3
