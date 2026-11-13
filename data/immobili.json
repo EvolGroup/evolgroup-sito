@@ -1,12 +1,19 @@
 {
- "_fonte": "Flusso Getrix di Evol Group, letto il 13/11/2026. In produzione questo file viene rigenerato ogni ora dallo script scripts/getrix.mjs.",
+ "_fonte": "Flusso Getrix, aggiornato il 2026-11-13T22:05:02.386Z",
  "immobili": [
   {
    "id": "193431666",
-   "slug": "piazza-della-repubblica-32-negozio-bar-in-vendita",
    "rif": "OD32",
    "titolo": "PIAZZA DELLA REPUBBLICA 32 NEGOZIO / BAR IN VENDITA",
    "testo": "In una delle zone più centrali e strategiche di Milano, all’interno del prestigioso Grattacielo Torre Breda, proponiamo in vendita negozio/bar di 70 mq, situato al piano rialzato di un elegante contesto condominiale. L’immobile si presenta in buone condizioni interne ed è libero da subito, pronto per essere utilizzato senza necessità di lavori. La collocazione interna al condominio, non direttamente affacciata su strada, garantisce un ambiente riservato e tranquillo, ideale per attività di somministrazione, negozio, showroom o spazio professionale. La posizione in Piazza della Repubblica, a pochi passi da Stazione Centrale, Porta Nuova e dai principali collegamenti cittadini, rende la soluzione particolarmente interessante sia per utilizzo diretto sia come investimento. La richiesta è di € 309.000, con spese condominiali pari a € 2.500 annui. Soluzione rara in contesto iconico e di rappresentanza, nel cuore della Milano direzionale e commerciale.",
+   "lingue": {
+    "en": {
+     "testo": "In one of Milan's most central and strategic areas, within the prestigious Torre Breda skyscraper, we offer for sale a 70 sq m shop/bar, located on the mezzanine floor of an elegant condominium. The property is in good internal condition and is available immediately, ready for occupancy with no work required. Its location within the condominium, not directly overlooking the street, ensures a private and quiet environment, ideal for a catering business, shop, showroom, or professional space. Its location in Piazza della Repubblica, just steps from Central Station, Porta Nuova, and the city's main transport links, makes this property particularly attractive both for direct use and as an investment. The asking price is €309,000, with annual condominium fees of €2,500. A rare solution in an iconic and prestigious setting, in the heart of Milan's business and commercial district."
+    },
+    "ru": {
+     "testo": "В одном из самых центральных и стратегически важных районов Милана, в престижном небоскребе Torre Breda, мы предлагаем к продаже магазин/бар площадью 70 кв. м, расположенный на антресольном этаже элегантного кондоминиума. Помещение находится в хорошем внутреннем состоянии и готово к немедленному заселению без необходимости проведения ремонтных работ. Расположение внутри кондоминиума, без прямого выхода на улицу, обеспечивает приватную и тихую обстановку, идеально подходящую для предприятия общественного питания, магазина, выставочного зала или офисного пространства. Расположение на площади Пьяцца делла Репубблика, всего в нескольких шагах от Центрального вокзала, Порта Нуова и основных транспортных узлов города, делает это помещение особенно привлекательным как для непосредственного использования, так и в качестве инвестиции. Цена составляет 309 000 евро, с ежегодными коммунальными платежами в размере 2500 евро. Редкое решение в знаковом и престижном месте, в самом сердце делового и коммерческого района Милана."
+    }
+   },
    "contratto": "V",
    "categoria": "2",
    "tipologia": "Negozio",
@@ -15,6 +22,7 @@
    "quartiere": "Repubblica, Stazione Centrale",
    "strada": "piazza",
    "indirizzo": "della Repubblica",
+   "civico": "32",
    "lat": 45.48020172,
    "lng": 9.19939995,
    "prezzo": 275000,
@@ -41,33 +49,37 @@
      "Facciata",
      "Facciata",
      "Ingresso",
-     "Interno",
-     "Interno",
-     "Interno",
-     "Interno",
-     "Interno",
-     "Interno",
+     "Interno non residenziale",
+     "Interno non residenziale",
+     "Interno non residenziale",
+     "Interno non residenziale",
+     "Interno non residenziale",
+     "Interno non residenziale",
      "Cucina",
-     "Interno",
-     "Interno",
-     "Interno",
-     "Interno",
-     "Interno",
+     "Interno non residenziale",
+     "Interno non residenziale",
+     "Interno non residenziale",
+     "Interno non residenziale",
+     "Interno non residenziale",
      "Interno palazzo",
-     "Interno",
+     "Interno non residenziale",
      "Bagno",
      "Interno palazzo",
      "Interno palazzo"
     ]
    },
-   "civico": "32"
+   "slug": "piazza-della-repubblica-32-negozio-bar-in-vendita"
   },
   {
    "id": "193658558",
-   "slug": "monolocale-ristrutturato-mm-villa-s-g",
    "rif": "FR21.B",
    "titolo": "MONOLOCALE RISTRUTTURATO - MM VILLA S.G.",
    "testo": "EVOL GROUP propone in ESCLUSIVA monolocale di 42mq, ideale per una giovane coppia o per uso investimento. La disposizione degli ambienti è semplice e razionale, entrando troviamo la zona giorno con cucina a vista, zona notte dotata di letto matrimoniale e bagno finestrato con box doccia. L'immobile è stato completamente ristrutturato nel 2022. Riscaldamento autonomo, spese condominiali annue €338,00. Il contesto si trova a pochissimi passi dai principali servizi commerciali tra cui vari supermercati, farmacie, bar e scuole (materne, elementari, medie e superiori) e dista solo 2 km dall’ Università Bicocca. La zona è ben servita anche dai servizi pubblici: a 300 m troviamo la fermata MM1 Villa S.G. e la fermata dell’autobus delle linee 51 direzione Cimiano, 81 direzione Lambrate e 174. Inoltre in pochi minuti di auto si possono raggiungere tutte le tangenziali e le autostrade. Se desiderate ricevere ulteriori informazioni o fissare un appuntamento, contattateci al numero 0259647813, 0297131189 o al 3335961118.",
+   "lingue": {
+    "en": {
+     "testo": "EVOL GROUP offers exclusively a studio apartment of 42 sqm, ideal for a young couple or for investment purposes. The layout of the spaces is simple and rational; upon entering, we find the living area with an open kitchen, a sleeping area equipped with a double bed, and a windowed bathroom with a shower box. The property was completely renovated in 2022. Independent heating, annual condominium fees €338.00. The context is just a few steps away from the main commercial services, including various supermarkets, pharmacies, bars, and schools (kindergarten, elementary, middle, and high schools) and is only 2 km from Bicocca University. The area is also well served by public transport: 300 m away is the MM1 Villa S.G. stop and the bus stop for lines 51 towards Cimiano, 81 towards Lambrate, and 174. Additionally, in just a few minutes by car, you can reach all the ring roads and highways. If you would like to receive further information or schedule an appointment, please contact us at 0259647813, 0297131189, or 3335961118.--f69895aacd8aa7010968b393c442cc30!"
+    }
+   },
    "contratto": "V",
    "categoria": "1",
    "tipologia": "Appartamento",
@@ -76,6 +88,7 @@
    "quartiere": "Bicocca, Greco, Monza, Palmanova",
    "strada": "via",
    "indirizzo": "Fortezza",
+   "civico": "21",
    "lat": 45.51990128,
    "lng": 9.22329998,
    "prezzo": 135000,
@@ -108,7 +121,7 @@
    "foto": {
     "ad": "129424436",
     "titoli": [
-     "Interno",
+     "Interno non residenziale",
      "Cortile interno",
      "Salone",
      "Cucina",
@@ -125,11 +138,10 @@
      "Cortile interno"
     ]
    },
-   "civico": "21"
+   "slug": "monolocale-ristrutturato-mm-villa-s-g"
   },
   {
    "id": "193757668",
-   "slug": "box-autorimessa-introvabile",
    "rif": "BOX PONTE NUOVO 26",
    "titolo": "BOX AUTORIMESSA INTROVABILE!!!",
    "testo": "In Via Ponte Nuovo 26, in una zona dove trovare un parcheggio è veramente un impresa e chi possiede un box autorimessa se lo tiene ben stretto, proponiamo in vendita una soluzione imperdibile! Direttamente nel cortile condominiale Box Autorimessa completamente autonomo ad un prezzo decisamente OTTIMO!!! Per maggiori informazioni o per visionare il box contattare il 389.647.60.65",
@@ -140,6 +152,7 @@
    "zona": "Cimiano, Crescenzago, Adriano",
    "strada": "via",
    "indirizzo": "Ponte Nuovo",
+   "civico": "26",
    "lat": 45.50680161,
    "lng": 9.23719978,
    "prezzo": 29000,
@@ -166,11 +179,10 @@
      "Box auto"
     ]
    },
-   "civico": "26"
+   "slug": "box-autorimessa-introvabile"
   },
   {
    "id": "193795815",
-   "slug": "bilocale-con-cucina-abitabile-ristrutturato-mm-villa-s-g",
    "rif": "F21.B4",
    "titolo": "BILOCALE CON CUCINA ABITABILE RISTRUTTURATO - MM VILLA S.G.",
    "testo": "EVOL GROUP propone in ESCLUSIVA bilocale di 55mq ideale per una giovane coppia o per uso investimento. La disposizione degli ambienti è semplice e razionale, entrando troviamo un disimpegno dal quale si accede a tutti gli ambienti: zona giorno con cucina a vista, bagno con box doccia, camera singola ed infine la camera da letto matrimoniale! L'immobile è stato completamente ristrutturato ed pronto all'uso. Completa la soluzione un solaio di pertinenza. Il contesto si trova a pochissimi passi dai principali servizi commerciali tra cui vari supermercati, farmacie, bar e scuole (materne, elementari, medie e superiori) e dista solo 2 km dall’ Università Bicocca. La zona è ben servita anche dai servizi pubblici: a 550 m troviamo la fermata MM1 Villa S.G. e la fermata dell’autobus delle linee 51 direzione Cimiano, 81 direzione Lambrate e 174. Inoltre in pochi minuti di auto si possono raggiungere tutte le tangenziali e le autostrade. Se desiderate ricevere ulteriori informazioni o fissare un appuntamento, contattateci al numero 0259647813 o al 3335961118.",
@@ -182,6 +194,7 @@
    "quartiere": "Bicocca, Greco, Monza, Palmanova",
    "strada": "via",
    "indirizzo": "Fortezza",
+   "civico": "21",
    "lat": 45.51990128,
    "lng": 9.22329998,
    "prezzo": 229000,
@@ -241,11 +254,10 @@
      "Facciata"
     ]
    },
-   "civico": "21"
+   "slug": "bilocale-con-cucina-abitabile-ristrutturato-mm-villa-s-g"
   },
   {
    "id": "193795715",
-   "slug": "bilocale-ristrutturato-2",
    "rif": "FA12",
    "titolo": "Bilocale ristrutturato",
    "testo": "In un affascinante contesto d’epoca dei primi del ’900, proponiamo in vendita grazioso bilocale posto al secondo piano, completamente ristrutturato nel 2020. L’appartamento è così composto: ingresso su luminoso soggiorno con cucina a vista, disimpegno che conduce al comodo bagno e ampia camera da letto. Attualmente l’immobile è adibito a B&B con una RENDITA AL LORDO DI IMPOSTA DI CIRCA 30.000€. Sarà possibile proseguire con l'attività o avere l'immobile libero al rogito La zona è ottimamente servita: nelle immediate vicinanze si trovano la stazione metropolitana M2 e M3 Centrale, oltre alla stazione ferroviaria. A circa 100 metri sono presenti le linee tram 9 e 10. Nelle vicinanze sono inoltre presenti numerosi servizi, tra cui ristoranti, supermercati e attività commerciali. Per concordare un appuntamento, contattaci al numero 388.1882754 oppure tramite e-mail all’indirizzo pietro.torcia@evolgroup.it",
@@ -257,6 +269,7 @@
    "quartiere": "Repubblica, Stazione Centrale",
    "strada": "via",
    "indirizzo": "Generale Gustavo Fara",
+   "civico": "12",
    "lat": 45.48279953,
    "lng": 9.19810009,
    "prezzo": 349000,
@@ -319,11 +332,10 @@
      "Facciata"
     ]
    },
-   "civico": "12"
+   "slug": "bilocale-ristrutturato-2"
   },
   {
    "id": "193795669",
-   "slug": "ampio-bilocale-luminoso-mm-villa-s-g",
    "rif": "G.27A",
    "titolo": "AMPIO BILOCALE LUMINOSO - MM VILLA S.G.",
    "testo": "EVOL GROUP propone in ESCLUSIVA un grazioso bilocale di 70 mq situato in uno stabile signorile con servizio di portineria per l'intera giornata. L’appartamento si distingue per una distribuzione interna razionale e funzionale: dall'ingresso si accede a un corridoio che disimpegna tutti gli ambienti. Sulla sinistra troviamo la cucina abitabile con accesso al balcone; proseguendo si sviluppano il bagno finestrato con box doccia, la camera matrimoniale, un comodo ripostiglio e infine l'ampio soggiorno. Pavimentazione uniforme in tutti gli ambienti. L’immobile è dotato di riscaldamento centralizzato e impianto di aria condizionata sia nella zona giorno sia nella zona notte. La doppia esposizione Sud/Nord garantisce un’ottima luminosità durante tutto l’arco della giornata. Completa la proprietà un solaio di pertinenza. Possibilità di acquistare un box doppio di 28mq al prezzo di € 49.000. Il contesto è tranquillo e ben servito, a pochi passi dai principali servizi commerciali (supermercati, farmacie, bar, scuole di ogni ordine e grado) e a soli 2 km dall’Università degli Studi di Milano-Bicocca. Ottimi i collegamenti con i mezzi pubblici: fermata M1 Villa San Giovanni a 550 m e linee autobus 51 (direzione Cimiano), 81 (direzione Lambrate) e 174. In pochi minuti d’auto si raggiungono le principali tangenziali e autostrade. Per ulteriori informazioni o per fissare un appuntamento: 02 59647813 – 333 5961118.",
@@ -335,6 +347,7 @@
    "quartiere": "Bicocca, Greco, Monza, Palmanova",
    "strada": "via",
    "indirizzo": "Galeno",
+   "civico": "27",
    "lat": 45.51990128,
    "lng": 9.22369957,
    "prezzo": 339000,
@@ -397,11 +410,10 @@
      "Facciata"
     ]
    },
-   "civico": "27"
+   "slug": "ampio-bilocale-luminoso-mm-villa-s-g"
   },
   {
    "id": "193795830",
-   "slug": "ampio-bilocale-mm-sesto-rondo",
    "rif": "SM02",
    "titolo": "AMPIO BILOCALE - MM SESTO RONDO'",
    "testo": "EVOL GROUP propone in ESCLUSIVA un ampio bilocale di 70 mq, situato in uno stabile con ampio giardino condominiale. L'appartamento si distingue per una distribuzione interna razionale e funzionale: dall'ingresso si accede a un corridoio che disimpegna tutti gli ambienti. Sulla sinistra troviamo la cucina abitabile con accesso al balcone e un soggiorno di generose dimensioni, dove è possibile ricavare una seconda camera da letto. Sulla destra si sviluppano il bagno finestrato con box doccia e la camera matrimoniale. La doppia esposizione est/ovest garantisce un'ottima luminosità durante tutto l'arco della giornata. Il riscaldamento è centralizzato. Completa la proprietà una cantina di pertinenza. Ottimi i collegamenti: metropolitana M1 Sesto Rondò a 200 m, linee autobus 701 (Cologno Sud M2), 708 (Bresso / Niguarda Parco Nord), 713 (Bignami M5 / viale Rimembranze) e linea notturna NM1. In pochi minuti d'auto si raggiungono le principali tangenziali e autostrade. Per ulteriori informazioni o per fissare un appuntamento potete contattarci al numero 350 132 9301.",
@@ -412,6 +424,7 @@
    "zona": "Centro",
    "strada": "via",
    "indirizzo": "Gustavo Modena",
+   "civico": "2",
    "lat": 45.53250122,
    "lng": 9.23330021,
    "prezzo": 219000,
@@ -473,11 +486,10 @@
      "Facciata"
     ]
    },
-   "civico": "2"
+   "slug": "ampio-bilocale-mm-sesto-rondo"
   },
   {
    "id": "193795925",
-   "slug": "4-locali-con-box-doppio",
    "rif": "IN24",
    "titolo": "4 LOCALI CON BOX DOPPIO",
    "testo": "Nel cuore del quartiere Bicocca, in Via dell’Innovazione 24 a pochi passi da Università degli Studi di Milano-Bicocca, proponiamo in vendita un luminoso appartamento di quattro locali posto al quarto piano di un contesto residenziale edificato nei primi anni 2000, ben mantenuto e in buone condizioni interne. L’immobile si sviluppa con ingresso su spazioso soggiorno, ambiente accogliente e ben distribuito, con accesso diretto a un comodo terrazzo vivibile, ideale per momenti di relax all’aperto. Il terrazzo è inoltre collegato alla cucina abitabile, offrendo praticità e continuità tra gli spazi interni ed esterni. La zona notte, ben separata dalla zona giorno, è composta da tre camere da letto e doppi servizi, di cui uno padronale a servizio della camera principale. La soluzione rappresenta un’ottima opportunità sia per chi è alla ricerca di una prima casa spaziosa e funzionale, sia per chi desidera effettuare un investimento immobiliare in una delle zone più richieste di Milano per locazioni studentesche. Completano la proprietà: cantina di pertinenza box auto di 21 mq, acquistabile al prezzo di € 35.000, oltre al prezzo di vendita dell’appartamento. La zona è ottimamente servita dai mezzi pubblici, con la fermata del tram 7 e dell’autobus 87 nelle immediate vicinanze, oltre alla presenza del rinomato Teatro degli Arcimboldi, punto di riferimento culturale della zona. Per concordare un appuntamento, contattaci al 388.1882754, o tramite e-mail all’indirizzo pietro.torcia@evolgroup.it",
@@ -488,6 +500,7 @@
    "zona": "Bicocca, Niguarda",
    "strada": "viale",
    "indirizzo": "dell'Innovazione",
+   "civico": "24",
    "lat": 45.51689911,
    "lng": 9.21440029,
    "prezzo": 440000,
@@ -554,11 +567,10 @@
      "Cortile interno"
     ]
    },
-   "civico": "24"
+   "slug": "4-locali-con-box-doppio"
   },
   {
    "id": "193795946",
-   "slug": "trilocale-ristrutturato",
    "rif": "MC",
    "titolo": "TRILOCALE RISTRUTTURATO",
    "testo": "In via Mincio 24, all’interno di un contesto civile degli anni ’70 dotato di servizio di portineria mezza giornata, proponiamo in vendita appartamento posto al piano rialzato, completamente ristrutturato e ottimizzato per uso investimento. L’immobile si sviluppa con un ingresso su disimpegno che conduce alla prima camera con bagno privato. Proseguendo troviamo due ulteriori camere da letto, di cui una doppia, un secondo bagno di servizio e una cucina abitabile separata. La disposizione angolare all’interno dello stabile garantisce una buona luminosità grazie ai numerosi punti luce presenti. Completa la proprietà un solaio di pertinenza posto all’ultimo piano (settimo). La zona è strategica e ben servita: a pochi passi dalla fermata della metropolitana linea gialla M3 Corvetto / Brenta. e dalle linee di superficie 34 e 65, oltre alla presenza di tutti i principali servizi di quartiere. Soluzione ideale per chi è alla ricerca di un investimento pronto all’uso, o libero al rogito per chi cerca la prima casa. Per concordare un appuntamento, contattami oppure al 388.1882754, o tramite e-mail all’indirizzo pietro.torcia@evolgroup.it",
@@ -570,6 +582,7 @@
    "quartiere": "Corvetto, Lodi, Forlanini",
    "strada": "via",
    "indirizzo": "Mincio",
+   "civico": "24",
    "lat": 45.43870163,
    "lng": 9.21819973,
    "prezzo": 349000,
@@ -645,8 +658,7 @@
      "Facciata"
     ]
    },
-   "civico": "24"
+   "slug": "trilocale-ristrutturato"
   }
- ],
- "_nota_civico": "In Getrix il civico è impostato come 'non pubblicare'; su richiesta dell'agenzia il sito lo mostra comunque (impostazione mostraCivico in data/sito.json)."
+ ]
 }
