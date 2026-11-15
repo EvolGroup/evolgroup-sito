@@ -12,7 +12,7 @@
   "logoChiaro": "2024/05/Logo-Evol-colori-bianco.png",
   "logoColori": "2024/05/logo-evol-a-colori-1320x412.webp",
   "favicon": "2026/02/favicon-evol.png",
-  "hero": "2026/02/m-285.jpg",
+  "hero": "2026/02/IMG_0883-copia-2.jpg",
   "chiSiamoImg": "2024/07/XWR_9753.jpg",
   "privacy": "https://www.iubenda.com/privacy-policy/73783731",
   "cookie": "https://www.iubenda.com/privacy-policy/73783731/cookie-policy",
@@ -33,7 +33,7 @@
       "foto": "2024/07/Vittorio-780x780.png"
     },
     {
-      "nome": "Daniele",
+      "nome": "Daniele Orsini",
       "foto": "2024/07/Daniele-780x780.png"
     }
   ],
@@ -71,5 +71,13 @@
   "mostraCivico": true,
   "chiaviModuli": {
     "generale": "ad32d959-7e1d-41ab-972b-d29003f21fc9"
+  },
+  "fiducia": {
+    "_nota": "Dati da aggiornare a mano (fonte: Google e pagina agenzia su immobiliare.it). Il numero di annunci attivi è invece automatico, da Getrix.",
+    "googleVoto": "5,0",
+    "googleRecensioni": 72,
+    "googleUrl": "https://share.google/5Bp2ncTEobKOpODlb",
+    "vendutiAffittati": 54,
+    "fimaa": true
   }
 }

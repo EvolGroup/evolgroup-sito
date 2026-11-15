@@ -183,24 +183,49 @@ function moduloContatto({ oggetto = '', destinatario = 'generale', titolo = 'Scr
 
 // ---------- pagine ----------
 function paginaHome() {
-  const recenti = IMMOBILI.filter((i) => i.contratto !== 'A').sort((a, b) => b.mod.localeCompare(a.mod)).slice(0, 6);
-  return `<section class="hero" style="background-image:linear-gradient(rgba(10,20,30,.45),rgba(10,20,30,.55)),url('${up(SITO.hero)}')">
+  const vendita = IMMOBILI.filter((i) => i.contratto !== 'A');
+  const recenti = [...vendita].sort((a, b) => b.mod.localeCompare(a.mod)).slice(0, 6);
+  const F = SITO.fiducia || {};
+  const stelle = '<span class="stelle" aria-hidden="true">★★★★★</span>';
+  const chiave = (SITO.chiaviModuli || {}).vendere || (SITO.chiaviModuli || {}).generale || '';
+  return `<section class="hero" style="background-image:linear-gradient(90deg,rgba(10,20,30,.78) 0%,rgba(10,20,30,.55) 45%,rgba(10,20,30,.15) 100%),url('${up(SITO.hero)}')">
   <div class="wrap hero-testo"><h1>${esc(SITO.slogan)}</h1><p>${esc(SITO.sottotitolo)}</p>
-  <div class="azioni"><a class="btn" href="${link('contatti/')}">Contattaci</a><a class="btn btn-chiaro" href="${link('immobili/')}">Gli immobili</a></div></div>
-</section>
-<section class="wrap chi-siamo-home">
-  <div><p class="occhiello">Chi siamo</p><h2>Tre consulenti, una visione</h2><p>${esc(SITO.chiSiamo)}</p><a class="link-freccia" href="${link('chi-siamo/')}">Scopri di più →</a></div>
-  <div class="team">${SITO.team.map((t) => `<figure><img src="${up(t.foto)}" alt="${esc(t.nome)}" loading="lazy"><figcaption>${esc(t.nome)}</figcaption></figure>`).join('')}</div>
+  <div class="azioni"><a class="btn" href="${link('immobili/')}">Gli immobili</a><a class="btn btn-chiaro" href="#valutazione">Valuta la tua casa</a></div></div>
 </section>
 <section class="fascia"><div class="wrap">
   <div class="titolo-sezione"><div><p class="occhiello">Gli immobili</p><h2>In vendita ora</h2></div><a class="link-freccia" href="${link('immobili/')}">Vedi tutti (${IMMOBILI.length}) →</a></div>
   <div class="griglia">${recenti.map(scheda).join('')}</div>
 </div></section>
-<section class="wrap">
+<section class="fiducia"><div class="wrap fiducia-griglia">
+  ${F.googleVoto ? `<a class="fiducia-voce" href="${F.googleUrl}" target="_blank" rel="noopener"><strong>${F.googleVoto} ${stelle}</strong><span>${F.googleRecensioni} recensioni su Google</span><em>Leggi le recensioni →</em></a>` : ''}
+  ${F.vendutiAffittati ? `<div class="fiducia-voce"><strong>${F.vendutiAffittati}</strong><span>immobili venduti o affittati</span></div>` : ''}
+  <div class="fiducia-voce"><strong>${IMMOBILI.length}</strong><span>immobili disponibili oggi</span></div>
+  ${F.fimaa ? `<div class="fiducia-voce"><strong>FIMAA</strong><span>agenzia associata alla Federazione Italiana Mediatori Agenti d’Affari</span></div>` : ''}
+</div></section>
+<section class="valutazione" id="valutazione"><div class="wrap valutazione-griglia">
+  <div><p class="occhiello">Vendere casa</p><h2>Quanto vale la tua casa?</h2>
+    <p>Richiedi una valutazione gratuita e senza impegno: analizziamo il mercato della tua zona, gli immobili venduti e quelli in vendita, e ti ricontattiamo con una stima realistica.</p>
+    <ul class="vantaggi"><li>Valutazione gratuita e senza impegno</li><li>Sopralluogo e analisi di mercato</li><li>Ti seguiamo fino al rogito</li></ul></div>
+  <form class="contatto mini-valutazione" data-form="valutazione" data-chiave="${esc(chiave)}">
+    <input type="hidden" name="subject" value="Richiesta di valutazione dal sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
+    <label>Indirizzo dell’immobile<input name="indirizzo" required placeholder="Via, numero civico, città" autocomplete="street-address"></label>
+    <div class="campi2"><label>Tipologia<select name="tipologia"><option>Appartamento</option><option>Villa / casa indipendente</option><option>Negozio / ufficio</option><option>Box</option><option>Altro</option></select></label>
+    <label>Superficie (m²)<input name="superficie" type="number" min="1" inputmode="numeric" placeholder="es. 80"></label></div>
+    <div class="campi2"><label>Nome<input name="nome" required autocomplete="name"></label>
+    <label>Telefono<input name="telefono" type="tel" required autocomplete="tel"></label></div>
+    <label class="check"><input type="checkbox" required><span>Ho letto la <a href="${SITO.privacy}">privacy policy</a> e acconsento a essere ricontattato.</span></label>
+    <button class="btn">Richiedi la valutazione gratuita</button>
+    <p class="form-esito" hidden></p>
+  </form>
+</div></section>
+<section class="wrap chi-siamo-home">
+  <div><p class="occhiello">Chi siamo</p><h2>Tre consulenti, una visione</h2><p>${esc(SITO.chiSiamo)}</p><a class="link-freccia" href="${link('chi-siamo/')}">Scopri di più →</a></div>
+  <div class="team">${SITO.team.map((t) => `<figure><img src="${up(t.foto)}" alt="${esc(t.nome)}" loading="lazy"><figcaption>${esc(t.nome)}</figcaption></figure>`).join('')}</div>
+</section>
+<section class="fascia"><div class="wrap">
   <div class="titolo-sezione"><div><p class="occhiello">Il blog</p><h2>Il blog di Pietro Torcia</h2></div><a class="link-freccia" href="${link('blog/')}">Tutti gli articoli →</a></div>
   <div class="griglia blog">${anteprimeBlog().slice(0, 3).map(cardArticolo).join('')}</div>
-</section>
-<section class="cta"><div class="wrap"><h2>Vuoi vendere casa?</h2><p>Valutiamo il tuo immobile gratuitamente e ti seguiamo fino al rogito.</p><a class="btn" href="${link('vendere-casa/')}">Richiedi una valutazione</a></div></section>`;
+</div></section>`;
 }
 
 function paginaImmobili() {

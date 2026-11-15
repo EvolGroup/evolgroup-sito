@@ -138,3 +138,18 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-size:.85rem;font-we
 .planimetria-btn{display:inline-block;position:relative;border:0;padding:0;background:none;cursor:zoom-in}
 .planimetria-btn span{position:absolute;right:12px;bottom:12px;background:rgba(16,22,28,.75);color:#fff;font-size:.78rem;font-weight:600;padding:6px 10px;border-radius:4px}
 .lightbox img{background:#fff}
+
+.hero{background-position:center right}
+.fiducia{background:var(--scuro);color:#fff;padding:44px 0}
+.fiducia-griglia{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+.fiducia-voce{display:flex;flex-direction:column;gap:4px;color:#fff;text-decoration:none;padding:8px}
+.fiducia-voce strong{font-family:"Source Serif 4",Georgia,serif;font-size:2.2rem;line-height:1.1}
+.fiducia-voce span{color:rgba(255,255,255,.78);font-size:.92rem}
+.fiducia-voce em{font-style:normal;color:var(--accento);font-weight:600;font-size:.88rem;margin-top:4px}
+a.fiducia-voce:hover em{text-decoration:underline}
+.stelle{color:#fbbc04;font-size:1.1rem;letter-spacing:2px;vertical-align:middle}
+.valutazione{padding:72px 0}
+.valutazione-griglia{display:grid;grid-template-columns:1fr 480px;gap:56px;align-items:center}
+.vantaggi{list-style:none;padding:0;margin:20px 0 0}.vantaggi li{padding:6px 0 6px 30px;position:relative;font-weight:600}
+.vantaggi li:before{content:"✓";position:absolute;left:0;color:var(--accento-scuro);font-weight:700}
+@media (max-width:900px){.fiducia-griglia{grid-template-columns:1fr 1fr}.valutazione-griglia{grid-template-columns:1fr}}
