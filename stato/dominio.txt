@@ -1,0 +1,9 @@
+Controllo: 2026-11-15 18:17 UTC
+NS pubblici (8.8.8.8): ns1.register.it. ns2.register.it. 
+NS registro .it: 
+Zona Cloudflare: [true,null,null]
+Domini Pages (prima): [true,[],null]
+Nameserver non ancora propagati: nessuna azione.
+HTTP https://evolgroup.it/: 200 
+HTTP https://www.evolgroup.it/: 301 https://evolgroup.it/
+A evolgroup.it (1.1.1.1): 213.158.93.0 
