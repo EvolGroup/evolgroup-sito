@@ -81,7 +81,7 @@
     var foto = JSON.parse(lb.dataset.foto); var i = 0; if (!foto.length) return;
     var img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
     function vai(n) { i = (n + foto.length) % foto.length; img.src = foto[i][0]; img.alt = foto[i][1]; cap.textContent = (foto[i][1] ? foto[i][1] + ' · ' : '') + (i + 1) + ' di ' + foto.length; }
-    g.querySelectorAll('[data-apri]').forEach(function (b) { b.addEventListener('click', function () { vai(+b.dataset.apri); lb.hidden = false; }); });
+    g.parentElement.querySelectorAll('[data-apri]').forEach(function (b) { b.addEventListener('click', function () { vai(+b.dataset.apri); lb.hidden = false; }); });
     lb.querySelector('.lb-chiudi').onclick = function () { lb.hidden = true; };
     lb.querySelector('.lb-prec').onclick = function () { vai(i - 1); };
     lb.querySelector('.lb-succ').onclick = function () { vai(i + 1); };

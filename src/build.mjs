@@ -42,7 +42,7 @@ const ANTEPRIMA = process.argv.includes('--anteprima');
 // ---------- utilità ----------
 const esc = (s = '') => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const up = (p) => (/^(https?:)?\//.test(p) ? p : SITO.uploads + p);
-const euro = (n) => '€ ' + Math.round(n).toLocaleString('it-IT');
+const euro = (n) => '€ ' + String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 const prezzoIm = (im) => im.riservata ? 'Trattativa riservata' : euro(im.prezzo) + (im.contratto === 'A' ? ' / mese' : '');
 const tel = (t) => t.replace(/[^+\d]/g, '');
 const capitalizza = (s = '') => s.charAt(0).toUpperCase() + s.slice(1);
@@ -158,7 +158,7 @@ function piede(testoWa = 'Buongiorno, vi contatto dal sito evolgroup.it') {
     <div><h4>Pagine utili</h4>${[['', 'Home'], ['chi-siamo/', 'Chi siamo'], ['servizi/', 'Servizi'], ['immobili/', 'Immobili'], ['blog/', 'Blog'], ['contatti/', 'Contatti']].map(([u, t]) => `<a href="${link(u)}">${t}</a>`).join('')}</div>
     <div><h4>Contatti</h4><p>${esc(SITO.indirizzo)}</p><p><a href="mailto:${SITO.email}">${SITO.email}</a></p><p>Tel. <a href="tel:${tel(SITO.telefoni[0])}">${SITO.telefoni[0]}</a></p><p>Cell. <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a></p>
       <p><a href="${SITO.privacy}" rel="noopener">Privacy policy</a> · <a href="${SITO.cookie}" rel="noopener">Cookie policy</a></p></div>
-    <div><h4>Newsletter</h4><p>Novità sul mercato immobiliare di Milano e nuovi immobili, una volta al mese.</p>
+    <div><h4>Newsletter</h4><p>Iscriviti alla newsletter per rimanere aggiornato sui nuovi articoli.</p>
       <form class="newsletter" data-form="newsletter" data-chiave="${esc((SITO.chiaviModuli || {}).generale || '')}"><input type="hidden" name="subject" value="Nuova iscrizione alla newsletter dal sito"><input type="email" name="email" placeholder="La tua email" required aria-label="Email"><button class="btn">Iscriviti</button>
       <label class="check"><input type="checkbox" required><span>Accetto la <a href="${SITO.privacy}">privacy policy</a></span></label><p class="form-esito" hidden></p></form></div>
   </div>
@@ -183,7 +183,7 @@ function moduloContatto({ oggetto = '', destinatario = 'generale', titolo = 'Scr
 
 // ---------- pagine ----------
 function paginaHome() {
-  const recenti = [...IMMOBILI].sort((a, b) => b.mod.localeCompare(a.mod)).slice(0, 6);
+  const recenti = IMMOBILI.filter((i) => i.contratto !== 'A').sort((a, b) => b.mod.localeCompare(a.mod)).slice(0, 6);
   return `<section class="hero" style="background-image:linear-gradient(rgba(10,20,30,.45),rgba(10,20,30,.55)),url('${up(SITO.hero)}')">
   <div class="wrap hero-testo"><h1>${esc(SITO.slogan)}</h1><p>${esc(SITO.sottotitolo)}</p>
   <div class="azioni"><a class="btn" href="${link('contatti/')}">Contattaci</a><a class="btn btn-chiaro" href="${link('immobili/')}">Gli immobili</a></div></div>
@@ -207,7 +207,7 @@ function paginaImmobili() {
   const tipologie = [...new Set(IMMOBILI.map((i) => i.tipologia))].sort();
   const comuni = [...new Set(IMMOBILI.map((i) => i.comune))].sort();
   const opt = (arr) => arr.map((v) => `<option>${esc(v)}</option>`).join('');
-  return `<section class="pagina-titolo"><div class="wrap"><h1>Immobili</h1><p>Tutti gli immobili di Evol Group, aggiornati ogni ora da Getrix.</p></div></section>
+  return `<section class="pagina-titolo"><div class="wrap"><h1>Immobili</h1><p>I nostri annunci di immobili in vendita o in affitto.</p></div></section>
 <section class="wrap">
   <div class="schede-contratto" role="tablist">
     <button role="tab" data-contratto="vendita" aria-selected="true">In vendita <span>${IMMOBILI.filter((i) => i.contratto !== 'A').length}</span></button>
@@ -249,13 +249,13 @@ function paginaImmobile(im) {
       <h2>Descrizione</h2>${paragrafi}
       <h2>Caratteristiche</h2><dl class="caratteristiche">${righe.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>
       ${dotazioni.length ? `<h2>Dotazioni</h2><ul class="dotazioni">${dotazioni.map((x) => `<li>${x}</li>`).join('')}</ul>` : ''}
-      ${plan ? `<h2>Planimetria</h2><img class="planimetria" src="${plan}" alt="Planimetria" loading="lazy">` : ''}
+      ${plan ? `<h2>Planimetria</h2><button type="button" class="planimetria-btn" data-apri="${im.foto.titoli.length}" aria-label="Ingrandisci la planimetria"><img class="planimetria" src="${plan.replace('http://', 'https://')}" alt="Planimetria" loading="lazy"><span>Clicca per ingrandire</span></button>` : ''}
       ${im.lat ? `<h2>Posizione</h2><div class="mappa-box"><div class="mappa" data-mappa data-lat="${im.lat}" data-lng="${im.lng}" data-etichetta="${esc(tit + ' · ' + indirizzo(im))}"></div><button type="button" class="btn btn-centra" data-centra>${ICONE.pin} Centra sull’immobile</button></div>` : ''}
     </div>
     <aside class="laterale">${moduloContatto({ titolo: 'Ti interessa questo immobile?', oggetto: `Buongiorno, vorrei ricevere informazioni sull’immobile rif. ${im.rif} (${tit}, ${indirizzo(im)}).` })}
       <p class="nota">Oppure chiamaci: <a href="tel:${tel(SITO.telefoni[0])}">${SITO.telefoni[0]}</a> · <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a></p></aside>
   </div>
-  <div class="lightbox" hidden data-lightbox data-foto='${esc(JSON.stringify(im.foto.titoli.map((t, i) => [foto(im, i + 1, 'xxl'), t])))}'>
+  <div class="lightbox" hidden data-lightbox data-foto='${esc(JSON.stringify(im.foto.titoli.map((t, i) => [foto(im, i + 1, 'xxl'), t]).concat(plan ? [[plan.replace('http://', 'https://'), 'Planimetria']] : [])))}'>
     <button class="lb-chiudi" aria-label="Chiudi">×</button><button class="lb-prec" aria-label="Foto precedente">‹</button>
     <figure><img alt=""><figcaption></figcaption></figure><button class="lb-succ" aria-label="Foto successiva">›</button></div>
 </section>`;
@@ -282,7 +282,7 @@ function anteprimeBlog() {
 const cardArticolo = (b) => `<article class="post"><a href="${b.href}">${b.img ? `<img src="${up(b.img)}" alt="" loading="lazy">` : '<span class="post-vuoto"></span>'}</a><p class="data">${b.data ? dataIt(b.data) : ''}</p><h3><a href="${b.href}">${esc(b.titolo)}</a></h3><p>${esc(b.estratto)}</p></article>`;
 function paginaBlog() {
   const elenco = anteprimeBlog();
-  return `<section class="pagina-titolo"><div class="wrap"><h1>Il blog di Pietro Torcia</h1><p>Mercato immobiliare di Milano, compravendita, successioni e consigli pratici.</p></div></section>
+  return `<section class="pagina-titolo"><div class="wrap"><h1>Il blog di Pietro Torcia</h1><p>Aggiornamenti sul mercato immobiliare e preziosi approfondimenti sulle tendenze del settore secondo Pietro Torcia.</p></div></section>
 <section class="wrap"><div class="griglia blog">${elenco.map(cardArticolo).join('')}</div>
 ${ARTICOLI.length ? '' : '<p class="nota">Nell’anteprima compaiono solo gli ultimi articoli: tutti i 61 articoli vengono trasferiti automaticamente al passaggio.</p>'}</section>`;
 }
@@ -292,7 +292,7 @@ function paginaArticolo(a) {
   <p class="data">${dataIt(a.data)}${a.autore ? ' · ' + esc(a.autore) : ''}</p><h1>${esc(a.titolo)}</h1>
   ${a.immagine ? `<img class="articolo-copertina" src="${up(a.immagine)}" alt="">` : ''}
   <div class="articolo-testo">${markdown(a.corpo)}</div>
-  <div class="articolo-cta"><p><strong>Hai domande su questo argomento?</strong> Scrivici o chiamaci: ti rispondiamo volentieri.</p><a class="btn" href="${link('contatti/')}">Contattaci</a></div></article>
+  <div class="articolo-cta"><p><strong>Hai domande su questo argomento?</strong> Contattaci per maggiori informazioni.</p><a class="btn" href="${link('contatti/')}">Contattaci</a></div></article>
 ${altri.length ? `<section class="fascia"><div class="wrap"><h2>Leggi anche</h2><div class="griglia blog">${altri.map(cardArticolo).join('')}</div></div></section>` : ''}`;
 }
 
@@ -304,7 +304,7 @@ const fasciaContatti = () => `<section class="fascia"><div class="wrap contatti"
   <div>${moduloContatto({ titolo: 'Scrivici' })}</div></div></section>`;
 
 function paginaChiSiamo() {
-  return `<section class="pagina-titolo"><div class="wrap"><h1>Chi siamo</h1><p>${esc(SITO.sottotitolo)}</p></div></section>
+  return `<section class="pagina-titolo"><div class="wrap"><h1>Chi siamo</h1><p>Professionalità, rispetto e fiducia.</p></div></section>
 ${sezione('L’agenzia', [SITO.chiSiamo], '2026/02/team-evol.jpg')}
 <section class="fascia"><div class="wrap due-colonne">
   <div><p class="occhiello">La mission</p><p class="grande">Essere il partner di fiducia per acquirenti e venditori, offrendo supporto personalizzato e soluzioni innovative per raggiungere i loro obiettivi immobiliari con successo e serenità.</p></div>
