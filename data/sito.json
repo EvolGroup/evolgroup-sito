@@ -17,8 +17,8 @@
   "privacy": "https://www.iubenda.com/privacy-policy/73783731",
   "cookie": "https://www.iubenda.com/privacy-policy/73783731/cookie-policy",
   "mailContatti": {
-    "generale": "info@evolgroup.it",
-    "vendere": "vittorio.maviglia@evolgroup.it"
+    "tutti": "info@evolgroup.it",
+    "_nota": "Tutti i moduli (contatti, schede immobile, valutazione, newsletter) inviano a info@evolgroup.it tramite la chiave Web3Forms \"generale\"."
   },
   "slogan": "Il tuo futuro, la nostra visione",
   "sottotitolo": "Professionalità, rispetto e fiducia.",
