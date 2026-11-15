@@ -132,7 +132,7 @@ async function main() {
     if (attivi.has(p.id) || archivio.immobili.some((x) => x.id === p.id)) continue;
     const n = p.foto && p.foto.ad ? p.foto.titoli.length : 0;
     archivio.immobili.unshift({
-      id: p.id, stato: 'da confermare', proposta: p.contratto === 'A' ? 'affittato' : 'venduto', rif: p.rif,
+      id: p.id, stato: 'da confermare', proposta: p.contratto === 'A' ? 'affittato' : 'venduto', rif: p.rif, slug: p.slug,
       tipologia: p.tipologia, locali: +p.locali > 0 ? String(p.locali) : '', bagni: (p.det && p.det.NrBagni) || '', mq: p.mq || null,
       indirizzo: [p.strada ? p.strada.charAt(0).toUpperCase() + p.strada.slice(1) : '', p.indirizzo, p.civico].filter(Boolean).join(' '),
       comune: p.comune, data: new Date().toISOString().slice(0, 10),

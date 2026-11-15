@@ -465,6 +465,14 @@ if (ANTEPRIMA) {
   }
   const pub = path.join(ROOT, 'public');
   if (fs.existsSync(pub)) fs.cpSync(pub, dist, { recursive: true });
+  // annunci usciti da Getrix: il vecchio indirizzo porta ai venduti (se confermato) o all'elenco immobili
+  try {
+    const arch = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/venduti.json'), 'utf8')).immobili.filter((v) => v.slug && !IMMOBILI.some((i) => i.slug === v.slug));
+    if (arch.length) fs.appendFileSync(path.join(dist, '_redirects'), '\n# Annunci non più attivi\n' + arch.map((v) => `/property/${v.slug}/ ${v.stato === 'venduto' || v.stato === 'affittato' ? '/venduti-e-affittati/' : '/immobili/'} 301`).join('\n') + '\n');
+  } catch (e) { console.warn('redirect archivio:', e.message); }
+  // pagina 404
+  fs.writeFileSync(path.join(dist, '404.html'), documento({ titolo: `Pagina non trovata – ${SITO.nome}`, descrizione: '', url: '404' }, `${intestazione('', false)}<main><section class="pagina-titolo"><div class="wrap"><h1>Pagina non trovata</h1><p>La pagina che cerchi non esiste più o è stata spostata.</p></div></section>
+<section class="wrap in-arrivo"><p>Forse l’immobile è stato venduto o affittato.</p><p><a class="btn" href="/immobili/">Vedi gli immobili disponibili</a> <a class="btn btn-chiaro-scuro" href="/">Torna alla home</a></p></section></main>${piede()}`));
   fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${PAGINE.map((p) => `  <url><loc>${SITO.dominio}/${p.url}</loc></url>`).join('\n')}\n</urlset>\n`);
   fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITO.dominio}/sitemap.xml\n`);
   console.log('Sito scritto in dist/ —', PAGINE.length, 'pagine');
