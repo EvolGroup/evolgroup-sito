@@ -88,6 +88,17 @@
     document.addEventListener('keydown', function (e) { if (lb.hidden) return; if (e.key === 'Escape') lb.hidden = true; if (e.key === 'ArrowLeft') vai(i - 1); if (e.key === 'ArrowRight') vai(i + 1); });
   });
 
+  // --- foto dei venduti/affittati ---
+  document.querySelectorAll('[data-lightbox-venduti]').forEach(function (lb) {
+    var foto = [], i = 0, img = lb.querySelector('img'), cap = lb.querySelector('figcaption');
+    function vai(n) { i = (n + foto.length) % foto.length; img.src = foto[i][0]; img.alt = foto[i][1]; cap.textContent = (i + 1) + ' di ' + foto.length; lb.querySelector('.lb-prec').hidden = lb.querySelector('.lb-succ').hidden = foto.length < 2; }
+    document.querySelectorAll('[data-galleria-venduto]').forEach(function (b) { b.addEventListener('click', function () { foto = JSON.parse(b.dataset.galleriaVenduto); vai(0); lb.hidden = false; }); });
+    lb.querySelector('.lb-chiudi').onclick = function () { lb.hidden = true; };
+    lb.querySelector('.lb-prec').onclick = function () { vai(i - 1); };
+    lb.querySelector('.lb-succ').onclick = function () { vai(i + 1); };
+    document.addEventListener('keydown', function (e) { if (lb.hidden) return; if (e.key === 'Escape') lb.hidden = true; if (e.key === 'ArrowLeft') vai(i - 1); if (e.key === 'ArrowRight') vai(i + 1); });
+  });
+
   // --- moduli: inviati a Web3Forms (email a info@ o a Vittorio); in anteprima non partono ---
   document.querySelectorAll('form[data-form]').forEach(function (f) {
     f.addEventListener('submit', function (e) {

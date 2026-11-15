@@ -53,8 +53,11 @@ content:
         fields:
           - { name: stato, label: Stato, type: select, options: { values: ["da confermare", "venduto", "affittato", "nascondi"] } }
           - { name: tipologia, label: Tipologia, type: string }
+          - { name: locali, label: Locali, type: string }
+          - { name: mq, label: Superficie (m²), type: number }
+          - { name: bagni, label: Bagni, type: string }
+          - { name: indirizzo, label: Indirizzo, type: string }
           - { name: comune, label: Comune, type: string }
-          - { name: zona, label: Zona, type: string }
           - { name: data, label: Data, type: date }
           - { name: foto, label: Foto, type: string }
           - { name: id, label: Codice, type: string }

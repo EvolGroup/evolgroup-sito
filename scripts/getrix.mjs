@@ -127,15 +127,17 @@ async function main() {
   const ARCH = path.join(ROOT, 'data/venduti.json');
   const archivio = fs.existsSync(ARCH) ? JSON.parse(fs.readFileSync(ARCH, 'utf8')) : { immobili: [] };
   const attivi = new Set(immobili.map((i) => i.id));
-  const nomi = { 1: 'Monolocale', 2: 'Bilocale', 3: 'Trilocale', 4: 'Quadrilocale', 5: 'Pentalocale' };
   let nuoviArchiviati = 0;
   for (const p of precedenti) {
     if (attivi.has(p.id) || archivio.immobili.some((x) => x.id === p.id)) continue;
+    const n = p.foto && p.foto.ad ? p.foto.titoli.length : 0;
     archivio.immobili.unshift({
-      id: p.id, stato: 'da confermare', proposta: p.contratto === 'A' ? 'affittato' : 'venduto',
-      tipologia: p.tipologia === 'Appartamento' ? (nomi[+p.locali] || (+p.locali > 5 ? 'Plurilocale' : 'Appartamento')) : p.tipologia,
-      comune: p.comune, zona: p.zona, data: new Date().toISOString().slice(0, 10),
-      foto: p.foto && p.foto.ad ? `https://res.getrix.it/media/ad/${p.foto.ad}/1/l.jpg` : '', rif: p.rif,
+      id: p.id, stato: 'da confermare', proposta: p.contratto === 'A' ? 'affittato' : 'venduto', rif: p.rif,
+      tipologia: p.tipologia, locali: +p.locali > 0 ? String(p.locali) : '', bagni: (p.det && p.det.NrBagni) || '', mq: p.mq || null,
+      indirizzo: [p.strada ? p.strada.charAt(0).toUpperCase() + p.strada.slice(1) : '', p.indirizzo, p.civico].filter(Boolean).join(' '),
+      comune: p.comune, data: new Date().toISOString().slice(0, 10),
+      foto: n ? `https://res.getrix.it/media/ad/${p.foto.ad}/1/l.jpg` : '',
+      galleria: Array.from({ length: n }, (_, k) => `https://res.getrix.it/media/ad/${p.foto.ad}/${k + 1}/l.jpg`),
     });
     nuoviArchiviati++;
   }

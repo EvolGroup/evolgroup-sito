@@ -8,15 +8,25 @@ const dati = JSON.parse(fs.readFileSync(FILE, 'utf8'));
 const cartella = path.join(ROOT, 'public/media/venduti');
 fs.mkdirSync(cartella, { recursive: true });
 let copiate = 0;
+async function copia(url, dest) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.writeFileSync(dest, Buffer.from(await r.arrayBuffer()));
+  copiate++;
+}
 for (const v of dati.immobili) {
-  if (!/^https?:/.test(v.foto || '')) continue;
-  const nome = String(v.id).replace(/[^\w-]/g, '') + '.jpg';
+  const id = String(v.id).replace(/[^\w-]/g, '');
   try {
-    const r = await fetch(v.foto);
-    if (!r.ok) { console.warn('foto non disponibile', v.id, r.status); continue; }
-    fs.writeFileSync(path.join(cartella, nome), Buffer.from(await r.arrayBuffer()));
-    v.foto = '/media/venduti/' + nome; copiate++;
-  } catch (e) { console.warn('errore foto', v.id, e.message); }
+    if (/^https?:/.test(v.foto || '')) { await copia(v.foto, path.join(cartella, id + '.jpg')); v.foto = '/media/venduti/' + id + '.jpg'; }
+    if (Array.isArray(v.galleria)) {
+      for (let k = 0; k < v.galleria.length; k++) {
+        if (!/^https?:/.test(v.galleria[k])) continue;
+        await copia(v.galleria[k], path.join(cartella, id, (k + 1) + '.jpg'));
+        v.galleria[k] = `/media/venduti/${id}/${k + 1}.jpg`;
+      }
+    }
+  } catch (e) { console.warn('foto non disponibile per', v.id, e.message); }
 }
 if (copiate) fs.writeFileSync(FILE, JSON.stringify(dati, null, 1));
 console.log('Foto dei venduti copiate:', copiate);

@@ -259,12 +259,22 @@ function paginaImmobili() {
 }
 
 function paginaVenduti() {
-  const card = (v) => `<article class="card venduto"><div class="card-img">${v.foto ? `<img src="${up(v.foto)}" alt="${esc(v.tipologia)}" loading="lazy">` : ''}<span class="badge badge-scuro">${v.stato === 'affittato' ? 'Affittato' : 'Venduto'}</span></div>
-    <div class="card-body"><h3>${esc(v.tipologia)}</h3><p class="card-luogo">${ICONE.pin}${esc([v.zona, v.comune].filter(Boolean).join(' · '))}</p></div></article>`;
+  const card = (v, i) => {
+    const im = { tipologia: v.tipologia, locali: v.locali, det: {} };
+    const tit = titoloUniforme(im);
+    const foto = (v.galleria && v.galleria.length ? v.galleria : v.foto ? [v.foto] : []).map((f, k) => [up(f), `${tit} – foto ${k + 1}`]);
+    const voci = [v.mq ? `<span>${ICONE.mq}${v.mq} m²</span>` : '', +v.bagni ? `<span>${ICONE.bagno}${v.bagni}</span>` : ''].join('');
+    const luogo = [v.indirizzo, v.comune].filter(Boolean).join(', ');
+    return `<article class="card venduto">
+  <button type="button" class="card-img"${foto.length ? ` data-galleria-venduto='${esc(JSON.stringify(foto))}'` : ''} aria-label="Guarda le foto">${v.foto ? `<img src="${up(v.foto)}" alt="${esc(tit + ', ' + luogo)}" loading="lazy">` : ''}<span class="badge badge-scuro">${v.stato === 'affittato' ? 'Affittato' : 'Venduto'}</span>${foto.length > 1 ? `<span class="n-foto">${foto.length} foto</span>` : ''}</button>
+  <div class="card-body"><h3>${esc(tit)}</h3><p class="card-luogo">${ICONE.pin}${esc(luogo)}</p>
+    <div class="card-voci">${voci}<span class="card-tipo">${esc(v.tipologia)}</span></div></div></article>`;
+  };
   const blocco = (stato, titolo) => { const l = VENDUTI.filter((v) => v.stato === stato); return l.length ? `<h2 class="sezione-venduti">${titolo} <span>${l.length}</span></h2><div class="griglia griglia-venduti">${l.map(card).join('')}</div>` : ''; };
   return `<section class="pagina-titolo"><div class="wrap"><h1>Venduti e affittati</h1><p>Alcuni degli immobili che abbiamo venduto o affittato per i nostri clienti.</p></div></section>
 <section class="wrap">${blocco('venduto', 'Venduti')}${blocco('affittato', 'Affittati')}
-<div class="articolo-cta"><p><strong>Vuoi vendere o affittare il tuo immobile?</strong> Richiedi una valutazione gratuita.</p><a class="btn" href="${link('vendere-casa/')}">Richiedi una valutazione</a></div></section>`;
+<div class="articolo-cta"><p><strong>Vuoi vendere o affittare il tuo immobile?</strong> Richiedi una valutazione gratuita.</p><a class="btn" href="${link('vendere-casa/')}">Richiedi una valutazione</a></div>
+<div class="lightbox" hidden data-lightbox-venduti><button class="lb-chiudi" aria-label="Chiudi">×</button><button class="lb-prec" aria-label="Foto precedente">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="lb-succ" aria-label="Foto successiva">›</button></div></section>`;
 }
 
 function paginaImmobile(im) {
