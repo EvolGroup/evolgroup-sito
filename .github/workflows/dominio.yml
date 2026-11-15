@@ -37,14 +37,14 @@ jobs:
           {
             echo "Controllo: $(date -u '+%Y-%m-%d %H:%M UTC')"
             echo "NS pubblici (8.8.8.8): $(dig +short NS evolgroup.it @8.8.8.8 | sort | tr '\n' ' ')"
-            echo "NS registro .it: $(dig +short NS evolgroup.it @dns.nic.it | sort | tr '\n' ' ')"
+            echo "NS registro .it: $(dig +norec NS evolgroup.it @a.dns.it | awk '$4=="NS"{print $5}' | sort | tr '\n' ' ')"
             echo "Zona Cloudflare: $(curl -s "${H[@]}" "$API/zones?name=evolgroup.it" | jq -c '[.success, (.result[0].status // null), (.errors[0].message // null)]')"
           } > stato/dominio.txt
 
           DOMINI=$(curl -s "${H[@]}" "$API/accounts/$CF_ACCOUNT/pages/projects/evolgroup/domains")
           echo "Domini Pages (prima): $(echo "$DOMINI" | jq -c '[.success, [.result[]? | {name, status}], (.errors[0].message // null)]')" >> stato/dominio.txt
 
-          if dig +short NS evolgroup.it @dns.nic.it | grep -qi cloudflare; then
+          if dig +norec NS evolgroup.it @a.dns.it | grep -qi cloudflare; then
             for D in evolgroup.it www.evolgroup.it; do
               if ! echo "$DOMINI" | jq -e --arg d "$D" '.result[]? | select(.name==$d)' > /dev/null; then
                 R=$(curl -s -X POST "${H[@]}" "$API/accounts/$CF_ACCOUNT/pages/projects/evolgroup/domains" -d "{\"name\":\"$D\"}")
