@@ -153,3 +153,5 @@ a.fiducia-voce:hover em{text-decoration:underline}
 .vantaggi{list-style:none;padding:0;margin:20px 0 0}.vantaggi li{padding:6px 0 6px 30px;position:relative;font-weight:600}
 .vantaggi li:before{content:"✓";position:absolute;left:0;color:var(--accento-scuro);font-weight:700}
 @media (max-width:900px){.fiducia-griglia{grid-template-columns:1fr 1fr}.valutazione-griglia{grid-template-columns:1fr}}
+
+.facoltativo{font-weight:400;color:var(--grigio)}

@@ -209,10 +209,13 @@ function paginaHome() {
   <form class="contatto mini-valutazione" data-form="valutazione" data-chiave="${esc(chiave)}">
     <input type="hidden" name="subject" value="Richiesta di valutazione dal sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
     <label>Indirizzo dell’immobile<input name="indirizzo" required placeholder="Via, numero civico, città" autocomplete="street-address"></label>
-    <div class="campi2"><label>Tipologia<select name="tipologia"><option>Appartamento</option><option>Villa / casa indipendente</option><option>Negozio / ufficio</option><option>Box</option><option>Altro</option></select></label>
-    <label>Superficie (m²)<input name="superficie" type="number" min="1" inputmode="numeric" placeholder="es. 80"></label></div>
+    <div class="campi2"><label>Tipologia<select name="tipologia" required><option value="">Seleziona…</option><option>Appartamento</option><option>Villa / casa indipendente</option><option>Negozio / ufficio</option><option>Box</option><option>Altro</option></select></label>
+    <label>Superficie (m²)<input name="superficie" type="number" min="1" inputmode="numeric" placeholder="es. 80" required></label></div>
+    <label>Condizioni<select name="condizioni" required><option value="">Seleziona…</option><option>Da ristrutturare</option><option>Buone condizioni</option><option>Ristrutturato</option><option>Nuovo</option></select></label>
     <div class="campi2"><label>Nome<input name="nome" required autocomplete="name"></label>
     <label>Telefono<input name="telefono" type="tel" required autocomplete="tel"></label></div>
+    <label>Email<input name="email" type="email" required autocomplete="email"></label>
+    <label><span>Maggiori informazioni <span class="facoltativo">(facoltativo)</span></span><textarea name="note" rows="3" placeholder="Piano, ascensore, box, cantina, tempi di vendita…"></textarea></label>
     <label class="check"><input type="checkbox" required><span>Ho letto la <a href="${SITO.privacy}">privacy policy</a> e acconsento a essere ricontattato.</span></label>
     <button class="btn">Richiedi la valutazione gratuita</button>
     <p class="form-esito" hidden></p>
