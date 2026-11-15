@@ -3,7 +3,7 @@ name: Collega il dominio evolgroup.it
 # Temporaneo: controlla la propagazione dei nameserver e, appena la zona
 # Cloudflare è attiva, collega evolgroup.it e www.evolgroup.it al progetto Pages.
 # Scrive l'esito in stato/dominio.txt. Da rimuovere a dominio attivo.
-# (avvio manuale tramite push)
+# (avvio manuale tramite push) 2
 
 on:
   push:
