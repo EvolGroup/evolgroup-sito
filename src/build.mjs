@@ -431,6 +431,7 @@ function documento({ titolo, descrizione, immagine, url }, corpoHtml) {
   const canonical = SITO.dominio + '/' + url;
   return `<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+${SITO.iubendaWidget && !ANTEPRIMA ? `<script src="${SITO.iubendaWidget}"></script>` : ''}
 <title>${esc(titolo)}</title><meta name="description" content="${esc(descrizione)}">
 <link rel="canonical" href="${canonical}"><link rel="icon" href="${up(SITO.favicon)}">
 <meta property="og:title" content="${esc(titolo)}"><meta property="og:description" content="${esc(descrizione)}"><meta property="og:url" content="${canonical}">${immagine ? `<meta property="og:image" content="${immagine}">` : ''}

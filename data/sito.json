@@ -14,8 +14,8 @@
   "favicon": "2026/02/favicon-evol.png",
   "hero": "https://images.unsplash.com/photo-1742148237723-5f91f6ec2725?w=2000&q=80&auto=format",
   "chiSiamoImg": "2024/07/XWR_9753.jpg",
-  "privacy": "https://www.iubenda.com/privacy-policy/73783731",
-  "cookie": "https://www.iubenda.com/privacy-policy/73783731/cookie-policy",
+  "privacy": "https://www.iubenda.com/privacy-policy/53531353",
+  "cookie": "https://www.iubenda.com/privacy-policy/53531353/cookie-policy",
   "mailContatti": {
     "tutti": "info@evolgroup.it",
     "_nota": "Tutti i moduli (contatti, schede immobile, valutazione, newsletter) inviano a info@evolgroup.it tramite la chiave Web3Forms \"generale\"."
@@ -80,5 +80,6 @@
     "vendutiAffittati": "+100",
     "fimaa": true
   },
-  "heroCredito": "Foto di @onnos su Unsplash (licenza Unsplash, uso libero)"
+  "heroCredito": "Foto di @onnos su Unsplash (licenza Unsplash, uso libero)",
+  "iubendaWidget": "https://embeds.iubenda.com/widgets/3b9ace6e-17af-4f2a-8c8d-42537f02b250.js"
 }
