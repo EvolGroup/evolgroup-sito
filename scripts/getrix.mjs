@@ -123,6 +123,23 @@ async function main() {
     im.slug = slugs[im.id];
   }
   fs.writeFileSync(SLUGS, JSON.stringify(slugs, null, 1));
+  // annunci usciti dal flusso: probabilmente venduti o affittati -> archivio da confermare dal pannello
+  const ARCH = path.join(ROOT, 'data/venduti.json');
+  const archivio = fs.existsSync(ARCH) ? JSON.parse(fs.readFileSync(ARCH, 'utf8')) : { immobili: [] };
+  const attivi = new Set(immobili.map((i) => i.id));
+  const nomi = { 1: 'Monolocale', 2: 'Bilocale', 3: 'Trilocale', 4: 'Quadrilocale', 5: 'Pentalocale' };
+  let nuoviArchiviati = 0;
+  for (const p of precedenti) {
+    if (attivi.has(p.id) || archivio.immobili.some((x) => x.id === p.id)) continue;
+    archivio.immobili.unshift({
+      id: p.id, stato: 'da confermare', proposta: p.contratto === 'A' ? 'affittato' : 'venduto',
+      tipologia: p.tipologia === 'Appartamento' ? (nomi[+p.locali] || (+p.locali > 5 ? 'Plurilocale' : 'Appartamento')) : p.tipologia,
+      comune: p.comune, zona: p.zona, data: new Date().toISOString().slice(0, 10),
+      foto: p.foto && p.foto.ad ? `https://res.getrix.it/media/ad/${p.foto.ad}/1/l.jpg` : '', rif: p.rif,
+    });
+    nuoviArchiviati++;
+  }
+  if (nuoviArchiviati) { fs.writeFileSync(ARCH, JSON.stringify(archivio, null, 1)); console.log('Usciti dal flusso e messi in archivio da confermare:', nuoviArchiviati); }
   if (JSON.stringify(precedenti) === JSON.stringify(immobili)) { console.log(`Getrix: nessuna novità (${immobili.length} immobili)`); return; }
   fs.writeFileSync(DEST, JSON.stringify({ _fonte: 'Flusso Getrix, aggiornato il ' + new Date().toISOString(), immobili }, null, 1));
   console.log(`Getrix: ${immobili.length} immobili (${immobili.filter((i) => i.contratto === 'A').length} in affitto)`);

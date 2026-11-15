@@ -37,6 +37,7 @@ function markdown(md) {
   }).join('\n');
 }
 const ARTICOLI = leggiArticoli();
+const VENDUTI = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data/venduti.json'), 'utf8')).immobili.filter((v) => v.stato === 'venduto' || v.stato === 'affittato'); } catch { return []; } })();
 const ANTEPRIMA = process.argv.includes('--anteprima');
 
 // ---------- utilità ----------
@@ -198,7 +199,7 @@ function paginaHome() {
 </div></section>
 <section class="fiducia"><div class="wrap fiducia-griglia">
   ${F.googleVoto ? `<a class="fiducia-voce" href="${F.googleUrl}" target="_blank" rel="noopener"><strong>${F.googleVoto} ${stelle}</strong><span>${F.googleRecensioni} recensioni su Google</span><em>Leggi le recensioni →</em></a>` : ''}
-  ${F.vendutiAffittati ? `<div class="fiducia-voce"><strong>${F.vendutiAffittati}</strong><span>immobili venduti o affittati</span></div>` : ''}
+  ${F.vendutiAffittati ? `<a class="fiducia-voce" href="${link('venduti-e-affittati/')}"><strong>${F.vendutiAffittati}</strong><span>immobili venduti o affittati</span><em>Guarda i venduti →</em></a>` : ''}
   <div class="fiducia-voce"><strong>${IMMOBILI.length}</strong><span>immobili disponibili oggi</span></div>
   ${F.fimaa ? `<div class="fiducia-voce"><strong>FIMAA</strong><span>agenzia associata alla Federazione Italiana Mediatori Agenti d’Affari</span></div>` : ''}
 </div></section>
@@ -252,8 +253,18 @@ function paginaImmobili() {
   <p class="conteggio" aria-live="polite"></p>
   <div class="griglia" data-elenco>${[...IMMOBILI].sort((a, b) => b.mod.localeCompare(a.mod)).map(scheda).join('')}</div>
   <p class="nessuno" hidden>Nessun immobile corrisponde ai filtri scelti.</p>
+  ${VENDUTI.length ? `<p class="link-venduti"><a class="link-freccia" href="${link('venduti-e-affittati/')}">Guarda gli immobili che abbiamo già venduto o affittato →</a></p>` : ''}
   <p class="nessuno-affitto" hidden>Al momento non abbiamo immobili in affitto. <a href="${link('contatti/')}">Scrivici</a> e ti avvisiamo appena ne arriva uno adatto a te.</p>
 </section>`;
+}
+
+function paginaVenduti() {
+  const card = (v) => `<article class="card venduto"><div class="card-img">${v.foto ? `<img src="${up(v.foto)}" alt="${esc(v.tipologia)}" loading="lazy">` : ''}<span class="badge badge-scuro">${v.stato === 'affittato' ? 'Affittato' : 'Venduto'}</span></div>
+    <div class="card-body"><h3>${esc(v.tipologia)}</h3><p class="card-luogo">${ICONE.pin}${esc([v.zona, v.comune].filter(Boolean).join(' · '))}</p></div></article>`;
+  const blocco = (stato, titolo) => { const l = VENDUTI.filter((v) => v.stato === stato); return l.length ? `<h2 class="sezione-venduti">${titolo} <span>${l.length}</span></h2><div class="griglia griglia-venduti">${l.map(card).join('')}</div>` : ''; };
+  return `<section class="pagina-titolo"><div class="wrap"><h1>Venduti e affittati</h1><p>Alcuni degli immobili che abbiamo venduto o affittato per i nostri clienti.</p></div></section>
+<section class="wrap">${blocco('venduto', 'Venduti')}${blocco('affittato', 'Affittati')}
+<div class="articolo-cta"><p><strong>Vuoi vendere o affittare il tuo immobile?</strong> Richiedi una valutazione gratuita.</p><a class="btn" href="${link('vendere-casa/')}">Richiedi una valutazione</a></div></section>`;
 }
 
 function paginaImmobile(im) {
@@ -388,6 +399,7 @@ function paginaInArrivo(titolo, url) {
 PAGINE.push({ id: 'home', url: '', titolo: `${SITO.nome} – Agenzia immobiliare a Milano`, descrizione: SITO.sottotitolo, attiva: '', trasparente: true, corpo: paginaHome });
 PAGINE.push({ id: 'immobili', url: 'immobili/', titolo: `Immobili in vendita a Milano – ${SITO.nome}`, descrizione: 'Appartamenti, negozi e box in vendita a Milano e Sesto San Giovanni.', attiva: 'immobili/', corpo: paginaImmobili });
 for (const im of IMMOBILI) PAGINE.push({ wa: `Buongiorno, vorrei informazioni sull’immobile rif. ${im.rif} (${titoloUniforme(im)}, ${indirizzo(im)})`, id: 'p-' + im.slug, url: 'property/' + im.slug + '/', titolo: `${titoloUniforme(im)} in ${im.contratto === 'A' ? 'affitto' : 'vendita'} – ${indirizzo(im)} – ${SITO.nome}`, descrizione: im.testo.slice(0, 155), attiva: 'immobili/', immagine: foto(im, 1, 'l'), corpo: () => paginaImmobile(im) });
+PAGINE.push({ id: 'venduti', url: 'venduti-e-affittati/', titolo: `Immobili venduti e affittati – ${SITO.nome}`, descrizione: 'Alcuni degli immobili venduti e affittati da Evol Group a Milano e dintorni.', attiva: 'immobili/', corpo: paginaVenduti });
 PAGINE.push({ id: 'contatti', url: 'contatti/', titolo: `Contatti – ${SITO.nome}`, descrizione: `${SITO.indirizzo} · ${SITO.email}`, attiva: 'contatti/', corpo: paginaContatti });
 PAGINE.push({ id: 'chi-siamo', url: 'chi-siamo/', titolo: `Chi siamo – ${SITO.nome}`, descrizione: SITO.chiSiamo.slice(0, 155), attiva: 'chi-siamo/', corpo: paginaChiSiamo });
 PAGINE.push({ id: 'servizi', url: 'servizi/', titolo: `Servizi – ${SITO.nome}`, descrizione: 'Intermediazione e consulenza immobiliare, consulenza finanziaria e property finding a Milano.', attiva: 'servizi/', corpo: paginaServizi });

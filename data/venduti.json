@@ -1,0 +1,491 @@
+{
+ "_nota": "Immobili venduti e affittati. Storico importato da Getrix il 15/11/2026; da qui in poi gli annunci che escono dal flusso Getrix vengono aggiunti con stato 'da confermare' e si confermano dal pannello.",
+ "immobili": [
+  {
+   "id": "getrix-foto-1965181246",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2026-07-21",
+   "foto": "https://ppr.im-cdn.it/image/1965181246/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1931543642",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Udine, Lambrate",
+   "data": "2026-07-02",
+   "foto": "https://ppr.im-cdn.it/image/1931543642/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1927437840",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Quadronno, Palestro, Guastalla",
+   "data": "2026-06-22",
+   "foto": "https://ppr.im-cdn.it/image/1927437840/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1914901970",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2026-05-25",
+   "foto": "https://ppr.im-cdn.it/image/1914901970/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1926791836",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2026-05-25",
+   "foto": "https://ppr.im-cdn.it/image/1926791836/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1761448692",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "San Siro, Trenno",
+   "data": "2026-04-14",
+   "foto": "https://ppr.im-cdn.it/image/1761448692/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1782361223",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2026-04-10",
+   "foto": "https://ppr.im-cdn.it/image/1782361223/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1866179255",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2026-04-10",
+   "foto": "https://ppr.im-cdn.it/image/1866179255/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1881750787",
+   "stato": "affittato",
+   "tipologia": "Box",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2026-04-07",
+   "foto": "https://ppr.im-cdn.it/image/1881750787/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1683263598",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bande Nere, Inganni",
+   "data": "2026-02-12",
+   "foto": "https://ppr.im-cdn.it/image/1683263598/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1789853007",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2026-02-12",
+   "foto": "https://ppr.im-cdn.it/image/1789853007/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1643262131",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2026-02-12",
+   "foto": "https://ppr.im-cdn.it/image/1643262131/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1824684215",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Sesto San Giovanni",
+   "zona": "Cascina Gatti",
+   "data": "2026-02-12",
+   "foto": "https://ppr.im-cdn.it/image/1824684215/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1743373650",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Lissone",
+   "zona": "Stazione",
+   "data": "2026-02-12",
+   "foto": "https://ppr.im-cdn.it/image/1743373650/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1828706405",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Corvetto, Rogoredo",
+   "data": "2026-02-12",
+   "foto": "https://ppr.im-cdn.it/image/1828706405/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1833846599",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Gorgonzola",
+   "zona": "",
+   "data": "2026-02-12",
+   "foto": "https://ppr.im-cdn.it/image/1833846599/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1850850765",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bicocca, Niguarda",
+   "data": "2026-02-10",
+   "foto": "https://ppr.im-cdn.it/image/1850850765/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1823968901",
+   "stato": "venduto",
+   "tipologia": "Box",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2026-01-07",
+   "foto": "https://ppr.im-cdn.it/image/1823968901/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1830307585",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Città Studi, Susa",
+   "data": "2025-12-23",
+   "foto": "https://ppr.im-cdn.it/image/1830307585/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1722708088",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bisceglie, Baggio, Olmi",
+   "data": "2025-12-19",
+   "foto": "https://ppr.im-cdn.it/image/1722708088/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1785762481",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2025-12-05",
+   "foto": "https://ppr.im-cdn.it/image/1785762481/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1758801972",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bande Nere, Inganni",
+   "data": "2025-11-29",
+   "foto": "https://ppr.im-cdn.it/image/1758801972/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1743204456",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2025-11-04",
+   "foto": "https://ppr.im-cdn.it/image/1743204456/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1775151336",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bande Nere, Inganni",
+   "data": "2025-10-03",
+   "foto": "https://ppr.im-cdn.it/image/1775151336/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1737849696",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2025-09-18",
+   "foto": "https://ppr.im-cdn.it/image/1737849696/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1709660320",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2025-09-17",
+   "foto": "https://ppr.im-cdn.it/image/1709660320/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1713606250",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Bresso",
+   "zona": "",
+   "data": "2025-09-15",
+   "foto": "https://ppr.im-cdn.it/image/1713606250/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1580257603",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Cologno Monzese",
+   "zona": "Centro",
+   "data": "2025-05-02",
+   "foto": "https://ppr.im-cdn.it/image/1580257603/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1658538993",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2025-03-27",
+   "foto": "https://ppr.im-cdn.it/image/1658538993/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1591125657",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bande Nere, Inganni",
+   "data": "2024-10-29",
+   "foto": "https://ppr.im-cdn.it/image/1591125657/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1573447429",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2024-10-09",
+   "foto": "https://ppr.im-cdn.it/image/1573447429/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1536119019",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Maggiolina, Istria",
+   "data": "2024-07-29",
+   "foto": "https://ppr.im-cdn.it/image/1536119019/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1528086737",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bande Nere, Inganni",
+   "data": "2024-06-18",
+   "foto": "https://ppr.im-cdn.it/image/1528086737/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1507787929",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Bande Nere, Inganni",
+   "data": "2024-06-04",
+   "foto": "https://ppr.im-cdn.it/image/1507787929/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1408065883",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2024-06-03",
+   "foto": "https://ppr.im-cdn.it/image/1408065883/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1491772061",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2024-05-09",
+   "foto": "https://ppr.im-cdn.it/image/1491772061/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1432333013",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2024-05-09",
+   "foto": "https://ppr.im-cdn.it/image/1432333013/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1462525743",
+   "stato": "venduto",
+   "tipologia": "Villa a schiera",
+   "comune": "Monte Cremasco",
+   "zona": "",
+   "data": "2024-04-15",
+   "foto": "https://ppr.im-cdn.it/image/1462525743/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1484000735",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2024-04-11",
+   "foto": "https://ppr.im-cdn.it/image/1484000735/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1477921727",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2024-04-08",
+   "foto": "https://ppr.im-cdn.it/image/1477921727/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1477561345",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2024-03-21",
+   "foto": "https://ppr.im-cdn.it/image/1477561345/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1483492055",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2024-03-19",
+   "foto": "https://ppr.im-cdn.it/image/1483492055/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1443830071",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Affori, Bovisa",
+   "data": "2024-01-15",
+   "foto": "https://ppr.im-cdn.it/image/1443830071/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1422814335",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2023-12-09",
+   "foto": "https://ppr.im-cdn.it/image/1422814335/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1406174923",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Sesto San Giovanni",
+   "zona": "Centro",
+   "data": "2023-12-01",
+   "foto": "https://ppr.im-cdn.it/image/1406174923/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1419946101",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Cinisello Balsamo",
+   "zona": "Robecco, Balsamo, Fulvio Testi",
+   "data": "2023-12-01",
+   "foto": "https://ppr.im-cdn.it/image/1419946101/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1374615251",
+   "stato": "affittato",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Centro",
+   "data": "2023-12-01",
+   "foto": "https://ppr.im-cdn.it/image/1374615251/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1415796165",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Uptown, Cascina Merlata, Viale Certosa",
+   "data": "2023-12-01",
+   "foto": "https://ppr.im-cdn.it/image/1415796165/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1370531643",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2023-12-01",
+   "foto": "https://ppr.im-cdn.it/image/1370531643/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1431519597",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2023-11-11",
+   "foto": "https://ppr.im-cdn.it/image/1431519597/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1410391879",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Cimiano, Crescenzago, Adriano",
+   "data": "2023-11-03",
+   "foto": "https://ppr.im-cdn.it/image/1410391879/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1357640285",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Quadronno, Palestro, Guastalla",
+   "data": "2023-09-25",
+   "foto": "https://ppr.im-cdn.it/image/1357640285/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1357981509",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Città Studi, Susa",
+   "data": "2023-07-20",
+   "foto": "https://ppr.im-cdn.it/image/1357981509/print.jpg"
+  },
+  {
+   "id": "getrix-foto-1332858468",
+   "stato": "venduto",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Precotto, Turro",
+   "data": "2023-06-11",
+   "foto": "https://ppr.im-cdn.it/image/1332858468/print.jpg"
+  }
+ ]
+}

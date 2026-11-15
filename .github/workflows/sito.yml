@@ -29,14 +29,15 @@ jobs:
           GETRIX_CODICE: ${{ secrets.GETRIX_CODICE }}
         run: |
           node scripts/getrix.mjs || echo "Getrix non raggiungibile: uso gli ultimi dati salvati"
-          if git diff --quiet -- data/; then echo "cambiato=no" >> "$GITHUB_OUTPUT"; else echo "cambiato=si" >> "$GITHUB_OUTPUT"; fi
+          node scripts/foto-venduti.mjs || echo "Foto dei venduti: riprovo alla prossima esecuzione"
+          if git diff --quiet -- data/ && [ -z "$(git status --porcelain public/)" ]; then echo "cambiato=no" >> "$GITHUB_OUTPUT"; else echo "cambiato=si" >> "$GITHUB_OUTPUT"; fi
 
       - name: Salva gli immobili aggiornati
         if: steps.getrix.outputs.cambiato == 'si'
         run: |
           git config user.name "aggiornamento-automatico"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ public/
           git commit -m "Immobili aggiornati da Getrix"
           git push
 

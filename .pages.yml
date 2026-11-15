@@ -40,3 +40,21 @@ content:
       - name: body
         label: Testo dell'articolo
         type: rich-text
+  - name: venduti
+    label: Venduti e affittati
+    type: file
+    path: data/venduti.json
+    format: json
+    fields:
+      - name: immobili
+        label: Immobili (quelli "da confermare" sono usciti da Getrix: scegli Venduto, Affittato o Nascondi)
+        type: object
+        list: true
+        fields:
+          - { name: stato, label: Stato, type: select, options: { values: ["da confermare", "venduto", "affittato", "nascondi"] } }
+          - { name: tipologia, label: Tipologia, type: string }
+          - { name: comune, label: Comune, type: string }
+          - { name: zona, label: Zona, type: string }
+          - { name: data, label: Data, type: date }
+          - { name: foto, label: Foto, type: string }
+          - { name: id, label: Codice, type: string }
