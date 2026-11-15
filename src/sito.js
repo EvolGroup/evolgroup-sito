@@ -88,6 +88,17 @@
     document.addEventListener('keydown', function (e) { if (lb.hidden) return; if (e.key === 'Escape') lb.hidden = true; if (e.key === 'ArrowLeft') vai(i - 1); if (e.key === 'ArrowRight') vai(i + 1); });
   });
 
+  // --- filtro Tutti / Venduti / Affittati ---
+  document.querySelectorAll('[data-filtro-venduti]').forEach(function (barra) {
+    var tab = barra.querySelectorAll('[data-stato]');
+    tab.forEach(function (b) {
+      b.addEventListener('click', function () {
+        tab.forEach(function (x) { x.setAttribute('aria-selected', x === b ? 'true' : 'false'); });
+        document.querySelectorAll('.card.venduto').forEach(function (c) { c.hidden = !!b.dataset.stato && c.dataset.stato !== b.dataset.stato; });
+      });
+    });
+  });
+
   // --- foto dei venduti/affittati ---
   document.querySelectorAll('[data-lightbox-venduti]').forEach(function (lb) {
     var foto = [], i = 0, img = lb.querySelector('img'), cap = lb.querySelector('figcaption');

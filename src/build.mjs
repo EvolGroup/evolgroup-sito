@@ -265,14 +265,20 @@ function paginaVenduti() {
     const foto = (v.galleria && v.galleria.length ? v.galleria : v.foto ? [v.foto] : []).map((f, k) => [up(f), `${tit} – foto ${k + 1}`]);
     const voci = [v.mq ? `<span>${ICONE.mq}${v.mq} m²</span>` : '', +v.bagni ? `<span>${ICONE.bagno}${v.bagni}</span>` : ''].join('');
     const luogo = [v.indirizzo, v.comune].filter(Boolean).join(', ');
-    return `<article class="card venduto">
+    return `<article class="card venduto" data-stato="${v.stato}">
   <button type="button" class="card-img"${foto.length ? ` data-galleria-venduto='${esc(JSON.stringify(foto))}'` : ''} aria-label="Guarda le foto">${v.foto ? `<img src="${up(v.foto)}" alt="${esc(tit + ', ' + luogo)}" loading="lazy">` : ''}<span class="badge badge-scuro">${v.stato === 'affittato' ? 'Affittato' : 'Venduto'}</span>${foto.length > 1 ? `<span class="n-foto">${foto.length} foto</span>` : ''}</button>
   <div class="card-body"><h3>${esc(tit)}</h3><p class="card-luogo">${ICONE.pin}${esc(luogo)}</p>
     <div class="card-voci">${voci}<span class="card-tipo">${esc(v.tipologia)}</span></div></div></article>`;
   };
-  const blocco = (stato, titolo) => { const l = VENDUTI.filter((v) => v.stato === stato); return l.length ? `<h2 class="sezione-venduti">${titolo} <span>${l.length}</span></h2><div class="griglia griglia-venduti">${l.map(card).join('')}</div>` : ''; };
-  return `<section class="pagina-titolo"><div class="wrap"><h1>Venduti e affittati</h1><p>Alcuni degli immobili che abbiamo venduto o affittato per i nostri clienti.</p></div></section>
-<section class="wrap">${blocco('venduto', 'Venduti')}${blocco('affittato', 'Affittati')}
+  const nV = VENDUTI.filter((v) => v.stato === 'venduto').length, nA = VENDUTI.length - nV;
+  return `<section class="pagina-titolo"><div class="wrap"><h1>Venduti e Affittati</h1><p>Alcuni degli immobili che abbiamo venduto o affittato per i nostri clienti.</p></div></section>
+<section class="wrap">
+  <div class="schede-contratto" role="tablist" data-filtro-venduti>
+    <button role="tab" data-stato="" aria-selected="true">Tutti <span>${VENDUTI.length}</span></button>
+    <button role="tab" data-stato="venduto" aria-selected="false">Venduti <span>${nV}</span></button>
+    <button role="tab" data-stato="affittato" aria-selected="false">Affittati <span>${nA}</span></button>
+  </div>
+  <div class="griglia griglia-venduti">${VENDUTI.map(card).join('')}</div>
 <div class="articolo-cta"><p><strong>Vuoi vendere o affittare il tuo immobile?</strong> Richiedi una valutazione gratuita.</p><a class="btn" href="${link('vendere-casa/')}">Richiedi una valutazione</a></div>
 <div class="lightbox" hidden data-lightbox-venduti><button class="lb-chiudi" aria-label="Chiudi">×</button><button class="lb-prec" aria-label="Foto precedente">‹</button><figure><img alt=""><figcaption></figcaption></figure><button class="lb-succ" aria-label="Foto successiva">›</button></div></section>`;
 }
@@ -409,7 +415,7 @@ function paginaInArrivo(titolo, url) {
 PAGINE.push({ id: 'home', url: '', titolo: `${SITO.nome} – Agenzia immobiliare a Milano`, descrizione: SITO.sottotitolo, attiva: '', trasparente: true, corpo: paginaHome });
 PAGINE.push({ id: 'immobili', url: 'immobili/', titolo: `Immobili in vendita a Milano – ${SITO.nome}`, descrizione: 'Appartamenti, negozi e box in vendita a Milano e Sesto San Giovanni.', attiva: 'immobili/', corpo: paginaImmobili });
 for (const im of IMMOBILI) PAGINE.push({ wa: `Buongiorno, vorrei informazioni sull’immobile rif. ${im.rif} (${titoloUniforme(im)}, ${indirizzo(im)})`, id: 'p-' + im.slug, url: 'property/' + im.slug + '/', titolo: `${titoloUniforme(im)} in ${im.contratto === 'A' ? 'affitto' : 'vendita'} – ${indirizzo(im)} – ${SITO.nome}`, descrizione: im.testo.slice(0, 155), attiva: 'immobili/', immagine: foto(im, 1, 'l'), corpo: () => paginaImmobile(im) });
-PAGINE.push({ id: 'venduti', url: 'venduti-e-affittati/', titolo: `Immobili venduti e affittati – ${SITO.nome}`, descrizione: 'Alcuni degli immobili venduti e affittati da Evol Group a Milano e dintorni.', attiva: 'immobili/', corpo: paginaVenduti });
+PAGINE.push({ id: 'venduti', url: 'venduti-e-affittati/', titolo: `Venduti e Affittati – ${SITO.nome}`, descrizione: 'Alcuni degli immobili venduti e affittati da Evol Group a Milano e dintorni.', attiva: 'immobili/', corpo: paginaVenduti });
 PAGINE.push({ id: 'contatti', url: 'contatti/', titolo: `Contatti – ${SITO.nome}`, descrizione: `${SITO.indirizzo} · ${SITO.email}`, attiva: 'contatti/', corpo: paginaContatti });
 PAGINE.push({ id: 'chi-siamo', url: 'chi-siamo/', titolo: `Chi siamo – ${SITO.nome}`, descrizione: SITO.chiSiamo.slice(0, 155), attiva: 'chi-siamo/', corpo: paginaChiSiamo });
 PAGINE.push({ id: 'servizi', url: 'servizi/', titolo: `Servizi – ${SITO.nome}`, descrizione: 'Intermediazione e consulenza immobiliare, consulenza finanziaria e property finding a Milano.', attiva: 'servizi/', corpo: paginaServizi });
