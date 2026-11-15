@@ -5,7 +5,8 @@ Aggiornato al 15/11/2026.
 ## Prima del passaggio del dominio
 - [ ] **iubenda: scegliere il piano a pagamento** (Essentials). Il piano gratuito non permette altri servizi e copre poche visite al mese.
 - [ ] **iubenda: aggiungere alla policy** Cloudflare (categoria "Ottimizzazione e distribuzione del traffico") e OpenStreetMap Widget ("Visualizzazione di contenuti da piattaforme esterne"). Il sito li usa già.
-- [ ] **Google Analytics 4**: creare la proprietà con pietro.torcia@evolgroup.it e inserire l'ID "G-…" nel sito (collegato al consenso iubenda).
+- [x] **Google Analytics 4**: proprietà "evolgroup.it" (pietro.torcia@evolgroup.it), ID G-ZPP99CYYXT, installato con Consent Mode v2.
+- [ ] **Google Analytics: segnare "generate_lead" come evento chiave** (Amministrazione → Eventi), dopo il primo invio di un modulo.
 - [ ] **Google Search Console**: verificare evolgroup.it con l'account dell'agenzia.
 - [ ] **Invio di prova** dei moduli (contatti, valutazione, scheda immobile, newsletter) e controllo dell'arrivo a info@evolgroup.it.
 - [ ] **Passaggio del dominio** evolgroup.it su Cloudflare Pages, mantenendo i record MX di Google Workspace.
