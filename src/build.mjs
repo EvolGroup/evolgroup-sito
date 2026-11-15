@@ -262,7 +262,7 @@ function paginaImmobile(im) {
 }
 
 function paginaContatti() {
-  return `<section class="pagina-titolo"><div class="wrap"><h1>Contatti</h1><p>Passa a trovarci o scrivici: ti rispondiamo entro un giorno lavorativo.</p></div></section>
+  return `<section class="pagina-titolo"><div class="wrap"><h1>Contatti</h1></div></section>
 <section class="wrap contatti">
   <div><h2>Contatti diretti</h2>
     <p><strong>Email</strong><br><a href="mailto:${SITO.email}">${SITO.email}</a></p>
