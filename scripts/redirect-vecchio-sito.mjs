@@ -25,7 +25,8 @@ const esiste = (p) => fs.existsSync(path.join(ROOT, 'dist', p, p.endsWith('/') ?
 // 3) dove mandare ciò che non esiste più
 function destinazione(p) {
   if (/^\/property\//.test(p)) return '/immobili/';
-  if (/^\/(property_type|property_status|property_city|property_area|property_state|property_feature|property_label)\//.test(p)) return '/immobili/';
+  if (/^\/(property_type|property-type|property_status|status|property_city|city|property_area|area|property_state|state|property_feature|feature|property_label|label)\//.test(p)) return '/immobili/';
+  if (/^\/(compare-properties|search-result-page)\//.test(p)) return '/immobili/';
   if (/^\/(agent|agency|houzez_agent|agent_category)\//.test(p)) return '/chi-siamo/';
   if (/^\/(category|tag|author)\//.test(p) || /^\/blog\/page\//.test(p)) return '/blog/';
   if (/vendere/.test(p)) return '/vendere-casa/';
@@ -39,7 +40,7 @@ for (const p of [...vecchi].sort()) {
 }
 // regole generali per indirizzi non presenti nelle sitemap (pagine 2, 3… degli archivi, feed, ecc.)
 const generali = [
-  '/property_type/* /immobili/ 301', '/property_status/* /immobili/ 301', '/property_city/* /immobili/ 301', '/property_area/* /immobili/ 301',
+  '/property_type/* /immobili/ 301', '/property-type/* /immobili/ 301', '/property_status/* /immobili/ 301', '/status/* /immobili/ 301', '/property_city/* /immobili/ 301', '/city/* /immobili/ 301', '/property_area/* /immobili/ 301', '/area/* /immobili/ 301', '/houzez-studio/* / 301',
   '/agent/* /chi-siamo/ 301', '/houzez_agent/* /chi-siamo/ 301', '/agent_category/* /chi-siamo/ 301',
   '/category/* /blog/ 301', '/tag/* /blog/ 301', '/author/* /blog/ 301', '/blog/page/* /blog/ 301',
   '/feed/ /blog/ 301', '/comments/feed/ /blog/ 301', '/wp-admin/* / 301', '/wp-login.php / 301',
