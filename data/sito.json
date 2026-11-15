@@ -12,7 +12,7 @@
   "logoChiaro": "2024/05/Logo-Evol-colori-bianco.png",
   "logoColori": "2024/05/logo-evol-a-colori-1320x412.webp",
   "favicon": "2026/02/favicon-evol.png",
-  "hero": "2026/02/IMG_0883-copia-2.jpg",
+  "hero": "https://images.unsplash.com/photo-1742148237723-5f91f6ec2725?w=2000&q=80&auto=format",
   "chiSiamoImg": "2024/07/XWR_9753.jpg",
   "privacy": "https://www.iubenda.com/privacy-policy/73783731",
   "cookie": "https://www.iubenda.com/privacy-policy/73783731/cookie-policy",
@@ -21,7 +21,7 @@
     "vendere": "vittorio.maviglia@evolgroup.it"
   },
   "slogan": "Il tuo futuro, la nostra visione",
-  "sottotitolo": "Professionalità, rispetto e fiducia. Tre valori che guidano ogni nostra consulenza immobiliare a Milano.",
+  "sottotitolo": "Professionalità, rispetto e fiducia.",
   "chiSiamo": "Evol Group nasce dall’idea di tre consulenti immobiliari che, dopo una pluriennale esperienza nel settore immobiliare, decidono di unire le forze per esprimere al meglio quella che è, secondo loro, la migliore visione dell’agente immobiliare ponendo le basi su aspetti morali come professionalità, rispetto, sincerità e fiducia nei confronti dei propri clienti, con l’obiettivo di emergere in un contesto sempre più competitivo e frenetico.",
   "team": [
     {
@@ -77,7 +77,8 @@
     "googleVoto": "5,0",
     "googleRecensioni": 72,
     "googleUrl": "https://share.google/5Bp2ncTEobKOpODlb",
-    "vendutiAffittati": 54,
+    "vendutiAffittati": "+100",
     "fimaa": true
-  }
+  },
+  "heroCredito": "Foto di @onnos su Unsplash (licenza Unsplash, uso libero)"
 }
