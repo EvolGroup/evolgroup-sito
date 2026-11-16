@@ -1,8 +1,8 @@
-Sito: 1 annunci usciti da Getrix da confermare
+1 annunci usciti da Getrix da confermare
 ANNUNCI USCITI DA GETRIX (da confermare):
 • 2 locali – 60 m² – PROVA – Via di prova 1, Milano – rif. PROVA → proposta: venduto
 
 Apri il pannello e scegli per ciascuno Venduto, Affittato o Nascondi: https://app.pagescms.org/EvolGroup/evolgroup-sito/main/file/venduti
 Finché non scegli, l’annuncio non compare tra i venduti.
 
-Avviso email: 403 non inviato
+Avviso: 201 creato
