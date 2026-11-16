@@ -9,9 +9,9 @@ Aggiornato al 16/11/2026.
 - [ ] **iubenda: scegliere il piano a pagamento** (Essentials). Il piano gratuito non permette altri servizi e copre poche visite al mese.
 - [ ] **iubenda: aggiungere alla policy** Cloudflare (categoria "Ottimizzazione e distribuzione del traffico") e OpenStreetMap Widget ("Visualizzazione di contenuti da piattaforme esterne"). Il sito li usa già.
 - [x] **Google Analytics 4**: proprietà "evolgroup.it" (pietro.torcia@evolgroup.it), ID G-ZPP99CYYXT, installato con Consent Mode v2.
-- [ ] **Google Analytics: segnare "generate_lead" come evento chiave** (Amministrazione → Eventi), dopo il primo invio di un modulo.
-- [ ] **Google Search Console**: verificare evolgroup.it con l'account dell'agenzia.
-- [ ] **Invio di prova** dei moduli (contatti, valutazione, scheda immobile, newsletter) e controllo dell'arrivo a info@evolgroup.it.
+- [ ] **Google Analytics: segnare come eventi chiave** generate_lead, contatto_telefono, contatto_email (Amministrazione → Eventi → Eventi recenti → stellina). contatto_whatsapp già segnato (16/11).
+- [x] **Google Search Console**: proprietà di dominio evolgroup.it verificata (pietro.torcia@evolgroup.it), sitemap inviata (85 pagine).
+- [x] **Invio di prova** dei 4 moduli: arrivano tutti a info@evolgroup.it (16/11).
 - [x] **Passaggio del dominio** evolgroup.it su Cloudflare Pages (16/11/2026). Eliminato il vecchio MX di verifica Google, che bloccava il registro .it.
 - [x] **Reindirizzare www.evolgroup.it → evolgroup.it** (Cloudflare → Regole → Redirect Rule), così il consenso cookie e Google vedono un solo indirizzo.
 - [x] **WordPress Business su Register: rinnovo automatico tolto** (16/11/2026). Resta pagato fino al 28/05/2027, poi si chiude da solo.
