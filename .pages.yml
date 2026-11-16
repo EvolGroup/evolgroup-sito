@@ -47,11 +47,13 @@ content:
     format: json
     fields:
       - name: immobili
-        label: Immobili (quelli "da confermare" sono usciti da Getrix: scegli Venduto, Affittato o Nascondi)
+        label: 'Immobili. Quelli "da confermare" sono usciti da Getrix, scegli Venduto, Affittato o Nascondi'
         type: object
         list: true
         fields:
           - { name: stato, label: Stato, type: select, options: { values: ["da confermare", "venduto", "affittato", "nascondi"] } }
+          - { name: proposta, label: "Proposta automatica (in base al contratto su Getrix)", type: string }
+          - { name: rif, label: Riferimento Getrix, type: string }
           - { name: tipologia, label: Tipologia, type: string }
           - { name: locali, label: Locali, type: string }
           - { name: mq, label: Superficie (m²), type: number }
@@ -61,3 +63,6 @@ content:
           - { name: data, label: Data, type: date }
           - { name: foto, label: Foto, type: string }
           - { name: id, label: Codice, type: string }
+          - { name: slug, label: Indirizzo della vecchia pagina, type: string, hidden: true }
+          - { name: reinseritoCome, label: Reinserito come, type: string, hidden: true }
+          - { name: galleria, label: Altre foto, type: string, list: true, hidden: true }
