@@ -5,7 +5,7 @@ Aggiornato al 16/11/2026.
 ## Prima del passaggio del dominio
 - [x] Reindirizzamenti dei vecchi indirizzi WordPress (public/_redirects, 37 indirizzi + regole generali) e pagina 404.
 - [x] **Email: correggere l'SPF** (oggi autorizza solo Register, non Google): `v=spf1 include:_spf.google.com ~all`.
-- [ ] **Email: attivare la firma DKIM**: record TXT pubblicato su Cloudflare; manca il clic su "Avvia autenticazione" in admin.google.com → App → Gmail → Autentica email.
+- [x] **Email: firma DKIM attiva** (record su Cloudflare, autenticazione avviata in Google Admin).
 - [ ] **iubenda: scegliere il piano a pagamento** (Essentials). Il piano gratuito non permette altri servizi e copre poche visite al mese.
 - [ ] **iubenda: aggiungere alla policy** Cloudflare (categoria "Ottimizzazione e distribuzione del traffico") e OpenStreetMap Widget ("Visualizzazione di contenuti da piattaforme esterne"). Il sito li usa già.
 - [x] **Google Analytics 4**: proprietà "evolgroup.it" (pietro.torcia@evolgroup.it), ID G-ZPP99CYYXT, installato con Consent Mode v2.
@@ -13,8 +13,9 @@ Aggiornato al 16/11/2026.
 - [ ] **Google Search Console**: verificare evolgroup.it con l'account dell'agenzia.
 - [ ] **Invio di prova** dei moduli (contatti, valutazione, scheda immobile, newsletter) e controllo dell'arrivo a info@evolgroup.it.
 - [x] **Passaggio del dominio** evolgroup.it su Cloudflare Pages (16/11/2026). Eliminato il vecchio MX di verifica Google, che bloccava il registro .it.
-- [ ] **Reindirizzare www.evolgroup.it → evolgroup.it** (Cloudflare → Regole → Redirect Rule), così il consenso cookie e Google vedono un solo indirizzo.
-- [ ] **Disattivare/disdire l'hosting WordPress Business su Register** e verificare il rinnovo automatico del solo dominio (scade il 05/04/2027).
+- [x] **Reindirizzare www.evolgroup.it → evolgroup.it** (Cloudflare → Regole → Redirect Rule), così il consenso cookie e Google vedono un solo indirizzo.
+- [x] **WordPress Business su Register: rinnovo automatico tolto** (16/11/2026). Resta pagato fino al 28/05/2027, poi si chiude da solo.
+- [ ] **Dominio su Register**: rinnovo automatico attivo (scade il 05/04/2027, prelievo ~20 giorni prima). Verificare che il metodo di pagamento salvato sia valido.
 - [ ] **Pages CMS**: collegare il pannello per blog e venduti/affittati.
 
 ## Quando si avvia la pubblicità
