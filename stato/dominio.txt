@@ -1,4 +1,4 @@
-Controllo: 2026-11-16 04:35 UTC
+Controllo: 2026-11-16 05:55 UTC
 NS pubblici (8.8.8.8): ns1.register.it. ns2.register.it. 
 NS registro .it: ns1.register.it. ns2.register.it. 
 Zona Cloudflare: [true,null,null]
