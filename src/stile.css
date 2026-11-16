@@ -119,6 +119,8 @@ fieldset{border:0;padding:0;margin:0;min-width:0}legend{font-size:.85rem;font-we
 .whatsapp svg{width:26px;height:26px;fill:#fff}
 .vista[hidden] .whatsapp{display:none}
 @media (max-width:560px){.whatsapp span{display:none}.whatsapp{padding:14px}}
+/* pulsante preferenze cookie di iubenda: in basso a sinistra, lontano da WhatsApp */
+html body .iubenda-tp-btn.iubenda-cs-preferences-link[data-tp-float]{right:auto!important;left:0!important;bottom:0!important}
 
 .blocco{display:grid;grid-template-columns:1.1fr 1fr;gap:56px;align-items:center}.blocco img{border-radius:var(--raggio);width:100%;aspect-ratio:4/3;object-fit:cover;background:#dfe5ea}
 .blocco.inverti>div{order:2}.blocco img.ritratto{aspect-ratio:auto;max-height:560px;object-fit:contain;background:none}

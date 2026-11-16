@@ -434,7 +434,8 @@ function documento({ titolo, descrizione, immagine, url }, corpoHtml) {
 ${SITO.googleAnalytics && !ANTEPRIMA ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
 gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',analytics_storage:'denied',functionality_storage:'granted',security_storage:'granted',wait_for_update:500});
 gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);</script>` : ''}
-${SITO.iubendaWidget && !ANTEPRIMA ? `<script src="${SITO.iubendaWidget}"></script>` : ''}
+${SITO.iubendaWidget && !ANTEPRIMA ? `<script>var _iub=window._iub=window._iub||[];_iub.csConfiguration=Object.assign(_iub.csConfiguration||{},{localConsentDomain:location.hostname,localConsentDomainExact:true});</script>
+<script src="${SITO.iubendaWidget}"></script>` : ''}
 ${SITO.googleAnalytics && !ANTEPRIMA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${SITO.googleAnalytics}"></script>
 <script>gtag('js',new Date());gtag('config','${SITO.googleAnalytics}');</script>` : ''}
 <title>${esc(titolo)}</title><meta name="description" content="${esc(descrizione)}">
