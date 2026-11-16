@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 concurrency:
   group: sito
@@ -27,6 +28,7 @@ jobs:
         id: getrix
         env:
           GETRIX_CODICE: ${{ secrets.GETRIX_CODICE }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           node scripts/getrix.mjs || echo "Getrix non raggiungibile: uso gli ultimi dati salvati"
           node scripts/foto-venduti.mjs || echo "Foto dei venduti: riprovo alla prossima esecuzione"

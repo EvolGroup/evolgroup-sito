@@ -1,7 +1,7 @@
 // Scarica il flusso Getrix e aggiorna data/immobili.json.
 // Gira ogni ora su GitHub Actions. Il codice del flusso arriva dal segreto GETRIX_CODICE.
 // Uso locale: GETRIX_CODICE=xxxx node scripts/getrix.mjs   (oppure --file percorso.xml|.zip per provare offline; --senza-email per non mandare l'avviso)
-// Annunci usciti dal flusso: vanno in data/venduti.json come "da confermare" e parte un'email a info@.
+// Annunci usciti dal flusso: vanno in data/venduti.json come "da confermare" e si apre un avviso (issue GitHub, arriva per email).
 // Se lo stesso annuncio torna, o ne compare uno con stesso indirizzo e m² entro 30 giorni, si sistema da solo.
 import fs from 'node:fs';
 import path from 'node:path';
@@ -101,7 +101,7 @@ function converti(i, mostraTutto) {
 
 const slugify = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
-// ---------- avviso email a info@ (Web3Forms, stessa chiave dei moduli) ----------
+// ---------- avviso: una issue su GitHub, che GitHub manda per email ----------
 const PANNELLO = 'https://app.pagescms.org/EvolGroup/evolgroup-sito/main/file/venduti';
 function descr(v) { return [v.tipologia === 'Appartamento' && v.locali ? v.locali + ' locali' : v.tipologia, v.mq ? v.mq + ' m²' : '', [v.indirizzo, v.comune].filter(Boolean).join(', '), v.rif ? 'rif. ' + v.rif : ''].filter(Boolean).join(' – '); }
 async function mandaAvviso(a, sito) {
@@ -112,16 +112,17 @@ async function mandaAvviso(a, sito) {
   }
   if (a.reinseriti.length) righe.push('RICONOSCIUTI COME REINSERITI (nascosti in automatico, nessuna azione):', ...a.reinseriti.map(({ v, nuovo }) => `• ${descr(v)} → ora online come rif. ${nuovo.rif || nuovo.id}`), '');
   if (a.tornati.length) righe.push('TORNATI ONLINE CON LO STESSO CODICE (tolti da “da confermare”, nessuna azione):', ...a.tornati.map((v) => `• ${descr(v)}`), '');
-  const chiave = (sito.chiaviModuli || {}).generale;
-  const oggetto = a.usciti.length ? `Sito: ${a.usciti.length} annunci usciti da Getrix da confermare` : 'Sito: annunci Getrix sistemati in automatico';
+  const oggetto = a.usciti.length ? `${a.usciti.length} annunci usciti da Getrix da confermare` : 'Annunci Getrix sistemati in automatico';
   console.log(oggetto + '\n' + righe.join('\n'));
-  if (!chiave || process.argv.includes('--senza-email')) return;
+  // l'avviso è una "issue" su GitHub: GitHub la manda per email a chi segue il repository
+  const token = process.env.GITHUB_TOKEN, repo = process.env.GITHUB_REPOSITORY;
+  if (!token || !repo || process.argv.includes('--senza-email')) return;
   try {
-    const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ access_key: chiave, subject: oggetto, from_name: 'Sito evolgroup.it', nome: 'Aggiornamento automatico annunci', messaggio: righe.join('\n') }) });
-    const j = await r.json().catch(() => ({}));
-    console.log('Avviso email:', r.status, j.success ? 'inviato' : (j.message || 'non inviato'));
-  } catch (e) { console.warn('Avviso email non inviato:', e.message); }
+    const r = await fetch(`https://api.github.com/repos/${repo}/issues`, { method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title: `${oggetto} (${new Date().toLocaleDateString('it-IT', { timeZone: 'Europe/Rome' })})`, body: righe.join('\n') + '\n\nQuando hai sistemato, puoi chiudere questo avviso (Close issue).', labels: ['annunci'] }) });
+    console.log('Avviso:', r.status, r.ok ? 'creato' : await r.text());
+  } catch (e) { console.warn('Avviso non inviato:', e.message); }
 }
 
 async function main() {
