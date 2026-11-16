@@ -1,15 +1,17 @@
-Controllo: 2026-11-16 07:51 UTC
-NS pubblici (8.8.8.8): ns1.register.it. ns2.register.it. 
-NS registro .it: ns1.register.it. ns2.register.it. 
+Controllo: 2026-11-16 08:28 UTC
+NS pubblici (8.8.8.8): craig.ns.cloudflare.com. cruz.ns.cloudflare.com. 
+NS registro .it: craig.ns.cloudflare.com. cruz.ns.cloudflare.com. 
 Zona Cloudflare: [true,null,null]
 Whois .it: Status: ok;--;Last Update: 2026-11-16 08:10:19;--;Nameservers;
 Whois NS: Nameservers  cruz.ns.cloudflare.com  craig.ns.cloudflare.com  
 Cloudflare risponde (NS @craig): craig.ns.cloudflare.com. cruz.ns.cloudflare.com.  SOA: craig.ns.cloudflare.com. dns.cloudflare.com. 2420297438 10000 2400 604800 1800
-[craig.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420297438 | IPv6 AAAA ns: 2a06:98c1:50::ac40:23c0 | MX: 1 smtp.google.com.,
-[cruz.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420297438 | IPv6 AAAA ns: 2a06:98c1:50::ac40:2058 | MX: 1 smtp.google.com.,
-MX smtp.google.com. -> A: 192.179.16.27 AAAA: 2607:f8b0:4001:c70::1a CNAME: 
+[craig.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420297438 | IPv6 AAAA ns: 2606:4700:58::a29f:2cc0 | MX: 1 smtp.google.com.,
+[cruz.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420297438 | IPv6 AAAA ns: 2606:4700:50::adf5:3a58 | MX: 1 smtp.google.com.,
+MX smtp.google.com. -> A: 192.179.18.27 AAAA: 2607:f8b0:4004:c07::1a CNAME: 
 Domini Pages (prima): [true,[],null]
-Nameserver non ancora propagati: nessuna azione.
-HTTP https://evolgroup.it/: 200 
-HTTP https://www.evolgroup.it/: 301 https://evolgroup.it/
-A evolgroup.it (1.1.1.1): 213.158.93.0 
+Aggiunta evolgroup.it: [true,"initializing",null]
+Aggiunta www.evolgroup.it: [true,"initializing",null]
+Domini Pages (dopo): [{"name":"evolgroup.it","status":"pending","err":"CNAME record not set"},{"name":"www.evolgroup.it","status":"pending","err":null}]
+HTTP https://evolgroup.it/: 000 
+HTTP https://www.evolgroup.it/: 000 
+A evolgroup.it (1.1.1.1): 172.66.45.13 172.66.46.243 
