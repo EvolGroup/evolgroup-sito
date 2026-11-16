@@ -131,7 +131,7 @@
       var dati = new FormData(f); dati.append('access_key', chiave); dati.append('pagina', location.href);
       fetch('https://api.web3forms.com/submit', { method: 'POST', body: dati })
         .then(function (r) { return r.json(); })
-        .then(function (j) { esito.textContent = j.success ? 'Grazie! Ti risponderemo al più presto.' : 'Invio non riuscito: scrivici a info@evolgroup.it.'; if (j.success) { traccia('generate_lead', { modulo: f.dataset.form, pagina: location.pathname }); f.reset(); } })
+        .then(function (j) { var nl = f.dataset.form === 'newsletter'; esito.textContent = j.success ? (nl ? 'Iscrizione completata, grazie!' : 'Grazie! Ti risponderemo al più presto.') : 'Invio non riuscito: scrivici a info@evolgroup.it.'; if (j.success) { traccia(nl ? 'iscrizione_newsletter' : 'generate_lead', { modulo: f.dataset.form, pagina: location.pathname }); f.reset(); } })
         .catch(function () { esito.textContent = 'Invio non riuscito: scrivici a info@evolgroup.it.'; });
     });
   });
