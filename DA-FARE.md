@@ -6,8 +6,8 @@ Aggiornato al 16/11/2026.
 - [x] Reindirizzamenti dei vecchi indirizzi WordPress (public/_redirects, 37 indirizzi + regole generali) e pagina 404.
 - [x] **Email: correggere l'SPF** (oggi autorizza solo Register, non Google): `v=spf1 include:_spf.google.com ~all`.
 - [x] **Email: firma DKIM attiva** (record su Cloudflare, autenticazione avviata in Google Admin).
-- [ ] **iubenda: scegliere il piano a pagamento** (Essentials). Il piano gratuito non permette altri servizi e copre poche visite al mese.
-- [ ] **iubenda: aggiungere alla policy** Cloudflare (categoria "Ottimizzazione e distribuzione del traffico") e OpenStreetMap Widget ("Visualizzazione di contenuti da piattaforme esterne"). Il sito li usa già.
+- [x] **iubenda Essentials** attivo dal 16/11/2026 (annuale, fino a 25.000 pagine viste/mese).
+- [x] **iubenda: policy completata** con Cloudflare, OpenStreetMap Widget, unpkg, Google Tag Manager, WhatsApp (oltre a GA4, Google Fonts, moduli, newsletter). Scansione: 86%.
 - [x] **Google Analytics 4**: proprietà "evolgroup.it" (pietro.torcia@evolgroup.it), ID G-ZPP99CYYXT, installato con Consent Mode v2.
 - [ ] **Google Analytics: segnare come eventi chiave** generate_lead, contatto_telefono, contatto_email (Amministrazione → Eventi → Eventi recenti → stellina). contatto_whatsapp già segnato (16/11).
 - [x] **Google Search Console**: proprietà di dominio evolgroup.it verificata (pietro.torcia@evolgroup.it), sitemap inviata (85 pagine).
