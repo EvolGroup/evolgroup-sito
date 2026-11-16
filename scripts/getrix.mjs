@@ -1,6 +1,8 @@
 // Scarica il flusso Getrix e aggiorna data/immobili.json.
 // Gira ogni ora su GitHub Actions. Il codice del flusso arriva dal segreto GETRIX_CODICE.
-// Uso locale: GETRIX_CODICE=xxxx node scripts/getrix.mjs   (oppure --file percorso.xml|.zip per provare offline)
+// Uso locale: GETRIX_CODICE=xxxx node scripts/getrix.mjs   (oppure --file percorso.xml|.zip per provare offline; --senza-email per non mandare l'avviso)
+// Annunci usciti dal flusso: vanno in data/venduti.json come "da confermare" e parte un'email a info@.
+// Se lo stesso annuncio torna, o ne compare uno con stesso indirizzo e m² entro 30 giorni, si sistema da solo.
 import fs from 'node:fs';
 import path from 'node:path';
 import zlib from 'node:zlib';
@@ -99,7 +101,34 @@ function converti(i, mostraTutto) {
 
 const slugify = (s) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+// ---------- avviso email a info@ (Web3Forms, stessa chiave dei moduli) ----------
+const PANNELLO = 'https://app.pagescms.org/EvolGroup/evolgroup-sito/main/file/venduti';
+function descr(v) { return [v.tipologia === 'Appartamento' && v.locali ? v.locali + ' locali' : v.tipologia, v.mq ? v.mq + ' m²' : '', [v.indirizzo, v.comune].filter(Boolean).join(', '), v.rif ? 'rif. ' + v.rif : ''].filter(Boolean).join(' – '); }
+async function mandaAvviso(a, sito) {
+  a = { ...a, usciti: a.usciti.filter((v) => v.stato === 'da confermare') };
+  const righe = [];
+  if (a.usciti.length) {
+    righe.push('ANNUNCI USCITI DA GETRIX (da confermare):', ...a.usciti.map((v) => `• ${descr(v)} → proposta: ${v.proposta}`), '', `Apri il pannello e scegli per ciascuno Venduto, Affittato o Nascondi: ${PANNELLO}`, 'Finché non scegli, l’annuncio non compare tra i venduti.', '');
+  }
+  if (a.reinseriti.length) righe.push('RICONOSCIUTI COME REINSERITI (nascosti in automatico, nessuna azione):', ...a.reinseriti.map(({ v, nuovo }) => `• ${descr(v)} → ora online come rif. ${nuovo.rif || nuovo.id}`), '');
+  if (a.tornati.length) righe.push('TORNATI ONLINE CON LO STESSO CODICE (tolti da “da confermare”, nessuna azione):', ...a.tornati.map((v) => `• ${descr(v)}`), '');
+  const chiave = (sito.chiaviModuli || {}).generale;
+  const oggetto = a.usciti.length ? `Sito: ${a.usciti.length} annunci usciti da Getrix da confermare` : 'Sito: annunci Getrix sistemati in automatico';
+  console.log(oggetto + '\n' + righe.join('\n'));
+  if (!chiave || process.argv.includes('--senza-email')) return;
+  try {
+    const r = await fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ access_key: chiave, subject: oggetto, from_name: 'Sito evolgroup.it', nome: 'Aggiornamento automatico annunci', messaggio: righe.join('\n') }) });
+    const j = await r.json().catch(() => ({}));
+    console.log('Avviso email:', r.status, j.success ? 'inviato' : (j.message || 'non inviato'));
+  } catch (e) { console.warn('Avviso email non inviato:', e.message); }
+}
+
 async function main() {
+  if (process.argv.includes('--prova-avviso')) {
+    const sito = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/sito.json'), 'utf8'));
+    return mandaAvviso({ usciti: [{ stato: 'da confermare', tipologia: 'Appartamento', locali: '2', mq: 60, indirizzo: 'PROVA – Via di prova 1', comune: 'Milano', rif: 'PROVA', proposta: 'venduto' }], reinseriti: [], tornati: [] }, sito);
+  }
   const sito = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/sito.json'), 'utf8'));
   const xml = estraiDalloZip(await scarica());
   const albero = leggiXml(xml);
@@ -127,21 +156,47 @@ async function main() {
   const ARCH = path.join(ROOT, 'data/venduti.json');
   const archivio = fs.existsSync(ARCH) ? JSON.parse(fs.readFileSync(ARCH, 'utf8')) : { immobili: [] };
   const attivi = new Set(immobili.map((i) => i.id));
-  let nuoviArchiviati = 0;
+  const avviso = { usciti: [], reinseriti: [], tornati: [] };
+  const oggi = new Date().toISOString().slice(0, 10);
+  const viaDi = (p) => [p.strada ? p.strada.charAt(0).toUpperCase() + p.strada.slice(1) : '', p.indirizzo, p.civico].filter(Boolean).join(' ');
   for (const p of precedenti) {
     if (attivi.has(p.id) || archivio.immobili.some((x) => x.id === p.id)) continue;
     const n = p.foto && p.foto.ad ? p.foto.titoli.length : 0;
-    archivio.immobili.unshift({
+    const voce = {
       id: p.id, stato: 'da confermare', proposta: p.contratto === 'A' ? 'affittato' : 'venduto', rif: p.rif, slug: p.slug,
       tipologia: p.tipologia, locali: +p.locali > 0 ? String(p.locali) : '', bagni: (p.det && p.det.NrBagni) || '', mq: p.mq || null,
-      indirizzo: [p.strada ? p.strada.charAt(0).toUpperCase() + p.strada.slice(1) : '', p.indirizzo, p.civico].filter(Boolean).join(' '),
-      comune: p.comune, data: new Date().toISOString().slice(0, 10),
+      indirizzo: viaDi(p), comune: p.comune, data: oggi,
       foto: n ? `https://res.getrix.it/media/ad/${p.foto.ad}/1/l.jpg` : '',
       galleria: Array.from({ length: n }, (_, k) => `https://res.getrix.it/media/ad/${p.foto.ad}/${k + 1}/l.jpg`),
-    });
-    nuoviArchiviati++;
+    };
+    archivio.immobili.unshift(voce);
+    avviso.usciti.push(voce);
   }
-  if (nuoviArchiviati) { fs.writeFileSync(ARCH, JSON.stringify(archivio, null, 1)); console.log('Usciti dal flusso e messi in archivio da confermare:', nuoviArchiviati); }
+  // stesso annuncio (stesso codice Getrix) tornato online: non è più da confermare
+  archivio.immobili = archivio.immobili.filter((v) => {
+    if (v.stato === 'da confermare' && attivi.has(v.id)) { avviso.tornati.push(v); return false; }
+    return true;
+  });
+  // annuncio reinserito con un nuovo codice: stesso indirizzo (o stessa zona, locali e tipologia) e m² simili, entro 30 giorni
+  const norm = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]/g, '');
+  const stesso = (v, im) => {
+    if (norm(v.comune) !== norm(im.comune) || !v.mq || !im.mq || Math.abs(v.mq - im.mq) > 3) return false;
+    const a = norm(v.indirizzo), b = norm(viaDi(im));
+    if (a && b) return a === b;
+    return norm(v.tipologia) === norm(im.tipologia) && String(v.locali || '') === String(+im.locali > 0 ? im.locali : '');
+  };
+  const limite = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+  for (const v of archivio.immobili) {
+    if (v.stato !== 'da confermare' || (v.data || '') < limite) continue;
+    const nuovo = immobili.find((im) => im.id !== v.id && stesso(v, im));
+    if (nuovo) { v.stato = 'nascondi'; v.reinseritoCome = nuovo.rif || nuovo.id; avviso.reinseriti.push({ v, nuovo }); }
+  }
+  const cambiato = avviso.usciti.length + avviso.reinseriti.length + avviso.tornati.length;
+  if (cambiato) {
+    fs.writeFileSync(ARCH, JSON.stringify(archivio, null, 1));
+    console.log(`Archivio: ${avviso.usciti.length} usciti, ${avviso.reinseriti.length} reinseriti, ${avviso.tornati.length} tornati online`);
+    await mandaAvviso(avviso, sito);
+  }
   if (JSON.stringify(precedenti) === JSON.stringify(immobili)) { console.log(`Getrix: nessuna novità (${immobili.length} immobili)`); return; }
   fs.writeFileSync(DEST, JSON.stringify({ _fonte: 'Flusso Getrix, aggiornato il ' + new Date().toISOString(), immobili }, null, 1));
   console.log(`Getrix: ${immobili.length} immobili (${immobili.filter((i) => i.contratto === 'A').length} in affitto)`);
