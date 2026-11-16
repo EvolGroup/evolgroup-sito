@@ -17,7 +17,7 @@ Aggiornato al 16/11/2026.
 - [x] **WordPress Business su Register: rinnovo automatico tolto** (16/11/2026). Resta pagato fino al 28/05/2027, poi si chiude da solo.
 - [ ] **Dominio su Register**: rinnovo automatico attivo (scade il 05/04/2027, prelievo ~20 giorni prima). Verificare che il metodo di pagamento salvato sia valido.
 - [x] **Pages CMS** collegato (app.pagescms.org → evolgroup-sito): blog e venduti/affittati.
-- [ ] **Avviso annunci usciti da Getrix** (issue GitHub, email a pietro.torcia@evolgroup.it): Watch → Custom → Issues attivato il 16/11; verificare l'arrivo al primo avviso reale e chiudere l'avviso di prova.
+- [ ] **Avviso annunci usciti da Getrix** (issue GitHub, email a info@evolgroup.it): Watch → Custom → Issues attivato il 16/11; verificare l'arrivo al primo avviso reale e chiudere l'avviso di prova.
 - [x] **Venduti: in pagina solo gli ultimi 20** (per data); gli altri restano nell'archivio e perdono la galleria, tenendo la foto principale.
 
 ## Quando si avvia la pubblicità
