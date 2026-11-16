@@ -1,18 +1,20 @@
 # Da fare – nuovo sito Evol Group
 
-Aggiornato al 15/11/2026.
+Aggiornato al 16/11/2026.
 
 ## Prima del passaggio del dominio
 - [x] Reindirizzamenti dei vecchi indirizzi WordPress (public/_redirects, 37 indirizzi + regole generali) e pagina 404.
-- [ ] **Email: correggere l'SPF** (oggi autorizza solo Register, non Google): `v=spf1 include:_spf.google.com ~all`.
-- [ ] **Email: attivare la firma DKIM** in Google Workspace (admin.google.com → App → Gmail → Autentica email) e pubblicare il record TXT.
+- [x] **Email: correggere l'SPF** (oggi autorizza solo Register, non Google): `v=spf1 include:_spf.google.com ~all`.
+- [ ] **Email: attivare la firma DKIM**: record TXT pubblicato su Cloudflare; manca il clic su "Avvia autenticazione" in admin.google.com → App → Gmail → Autentica email.
 - [ ] **iubenda: scegliere il piano a pagamento** (Essentials). Il piano gratuito non permette altri servizi e copre poche visite al mese.
 - [ ] **iubenda: aggiungere alla policy** Cloudflare (categoria "Ottimizzazione e distribuzione del traffico") e OpenStreetMap Widget ("Visualizzazione di contenuti da piattaforme esterne"). Il sito li usa già.
 - [x] **Google Analytics 4**: proprietà "evolgroup.it" (pietro.torcia@evolgroup.it), ID G-ZPP99CYYXT, installato con Consent Mode v2.
 - [ ] **Google Analytics: segnare "generate_lead" come evento chiave** (Amministrazione → Eventi), dopo il primo invio di un modulo.
 - [ ] **Google Search Console**: verificare evolgroup.it con l'account dell'agenzia.
 - [ ] **Invio di prova** dei moduli (contatti, valutazione, scheda immobile, newsletter) e controllo dell'arrivo a info@evolgroup.it.
-- [ ] **Passaggio del dominio** evolgroup.it su Cloudflare Pages, mantenendo i record MX di Google Workspace.
+- [x] **Passaggio del dominio** evolgroup.it su Cloudflare Pages (16/11/2026). Eliminato il vecchio MX di verifica Google, che bloccava il registro .it.
+- [ ] **Reindirizzare www.evolgroup.it → evolgroup.it** (Cloudflare → Regole → Redirect Rule), così il consenso cookie e Google vedono un solo indirizzo.
+- [ ] **Disattivare/disdire l'hosting WordPress Business su Register** e verificare il rinnovo automatico del solo dominio (scade il 05/04/2027).
 - [ ] **Pages CMS**: collegare il pannello per blog e venduti/affittati.
 
 ## Quando si avvia la pubblicità
