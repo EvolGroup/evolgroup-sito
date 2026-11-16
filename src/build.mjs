@@ -37,7 +37,9 @@ function markdown(md) {
   }).join('\n');
 }
 const ARTICOLI = leggiArticoli();
-const VENDUTI = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data/venduti.json'), 'utf8')).immobili.filter((v) => v.stato === 'venduto' || v.stato === 'affittato'); } catch { return []; } })();
+// in pagina solo gli ultimi N venduti/affittati (gli altri restano nell'archivio, nascosti)
+const MAX_VENDUTI = 20;
+const VENDUTI = (() => { try { return JSON.parse(fs.readFileSync(path.join(ROOT, 'data/venduti.json'), 'utf8')).immobili.filter((v) => v.stato === 'venduto' || v.stato === 'affittato').sort((a, b) => String(b.data || '').localeCompare(String(a.data || ''))).slice(0, MAX_VENDUTI); } catch { return []; } })();
 const ANTEPRIMA = process.argv.includes('--anteprima');
 
 // ---------- utilità ----------
@@ -253,7 +255,7 @@ function paginaImmobili() {
   <p class="conteggio" aria-live="polite"></p>
   <div class="griglia" data-elenco>${[...IMMOBILI].sort((a, b) => b.mod.localeCompare(a.mod)).map(scheda).join('')}</div>
   <p class="nessuno" hidden>Nessun immobile corrisponde ai filtri scelti.</p>
-  ${VENDUTI.length ? `<p class="link-venduti"><a class="link-freccia" href="${link('venduti-e-affittati/')}">Guarda gli immobili che abbiamo già venduto o affittato →</a></p>` : ''}
+  ${VENDUTI.length ? `<p class="link-venduti"><a class="link-freccia" href="${link('venduti-e-affittati/')}">Guarda gli ultimi immobili che abbiamo venduto o affittato →</a></p>` : ''}
   <p class="nessuno-affitto" hidden>Al momento non abbiamo immobili in affitto. <a href="${link('contatti/')}">Scrivici</a> e ti avvisiamo appena ne arriva uno adatto a te.</p>
 </section>`;
 }
@@ -271,7 +273,7 @@ function paginaVenduti() {
     <div class="card-voci">${voci}<span class="card-tipo">${esc(v.tipologia)}</span></div></div></article>`;
   };
   const nV = VENDUTI.filter((v) => v.stato === 'venduto').length, nA = VENDUTI.length - nV;
-  return `<section class="pagina-titolo"><div class="wrap"><h1>Venduti e Affittati</h1><p>Alcuni degli immobili che abbiamo venduto o affittato per i nostri clienti.</p></div></section>
+  return `<section class="pagina-titolo"><div class="wrap"><h1>Ultimi venduti e affittati</h1><p>Gli ultimi immobili che abbiamo venduto o affittato per i nostri clienti.</p></div></section>
 <section class="wrap">
   <div class="schede-contratto" role="tablist" data-filtro-venduti>
     <button role="tab" data-stato="" aria-selected="true">Tutti <span>${VENDUTI.length}</span></button>
@@ -415,7 +417,7 @@ function paginaInArrivo(titolo, url) {
 PAGINE.push({ id: 'home', url: '', titolo: `${SITO.nome} – Agenzia immobiliare a Milano`, descrizione: SITO.sottotitolo, attiva: '', trasparente: true, corpo: paginaHome });
 PAGINE.push({ id: 'immobili', url: 'immobili/', titolo: `Immobili in vendita a Milano – ${SITO.nome}`, descrizione: 'Appartamenti, negozi e box in vendita a Milano e Sesto San Giovanni.', attiva: 'immobili/', corpo: paginaImmobili });
 for (const im of IMMOBILI) PAGINE.push({ wa: `Buongiorno, vorrei informazioni sull’immobile rif. ${im.rif} (${titoloUniforme(im)}, ${indirizzo(im)})`, id: 'p-' + im.slug, url: 'property/' + im.slug + '/', titolo: `${titoloUniforme(im)} in ${im.contratto === 'A' ? 'affitto' : 'vendita'} – ${indirizzo(im)} – ${SITO.nome}`, descrizione: im.testo.slice(0, 155), attiva: 'immobili/', immagine: foto(im, 1, 'l'), corpo: () => paginaImmobile(im) });
-PAGINE.push({ id: 'venduti', url: 'venduti-e-affittati/', titolo: `Venduti e Affittati – ${SITO.nome}`, descrizione: 'Alcuni degli immobili venduti e affittati da Evol Group a Milano e dintorni.', attiva: 'immobili/', corpo: paginaVenduti });
+PAGINE.push({ id: 'venduti', url: 'venduti-e-affittati/', titolo: `Ultimi venduti e affittati – ${SITO.nome}`, descrizione: 'Gli ultimi immobili venduti e affittati da Evol Group a Milano e dintorni.', attiva: 'immobili/', corpo: paginaVenduti });
 PAGINE.push({ id: 'contatti', url: 'contatti/', titolo: `Contatti – ${SITO.nome}`, descrizione: `${SITO.indirizzo} · ${SITO.email}`, attiva: 'contatti/', corpo: paginaContatti });
 PAGINE.push({ id: 'chi-siamo', url: 'chi-siamo/', titolo: `Chi siamo – ${SITO.nome}`, descrizione: SITO.chiSiamo.slice(0, 155), attiva: 'chi-siamo/', corpo: paginaChiSiamo });
 PAGINE.push({ id: 'servizi', url: 'servizi/', titolo: `Servizi – ${SITO.nome}`, descrizione: 'Intermediazione e consulenza immobiliare, consulenza finanziaria e property finding a Milano.', attiva: 'servizi/', corpo: paginaServizi });

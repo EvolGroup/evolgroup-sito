@@ -28,5 +28,20 @@ for (const v of dati.immobili) {
     }
   } catch (e) { console.warn('foto non disponibile per', v.id, e.message); }
 }
-if (copiate) fs.writeFileSync(FILE, JSON.stringify(dati, null, 1));
+// alleggerimento: la galleria completa resta solo per gli ultimi 20 confermati (quelli in pagina) e per i "da confermare";
+// agli altri resta la foto principale. Stesso numero di src/build.mjs (MAX_VENDUTI).
+const MAX_VENDUTI = 20;
+const confermati = dati.immobili.filter((v) => v.stato === 'venduto' || v.stato === 'affittato').sort((a, b) => String(b.data || '').localeCompare(String(a.data || '')));
+const inPagina = new Set(confermati.slice(0, MAX_VENDUTI));
+const unMeseFa = new Date(Date.now() - 30 * 864e5).toISOString().slice(0, 10);
+let alleggeriti = 0;
+for (const v of dati.immobili) {
+  if (!Array.isArray(v.galleria) || !v.galleria.length || v.stato === 'da confermare' || inPagina.has(v)) continue;
+  if (v.stato === 'nascondi' && String(v.data || '') >= unMeseFa) continue; // appena nascosto: aspetto un mese, nel caso ci ripensi
+  fs.rmSync(path.join(cartella, String(v.id).replace(/[^\w-]/g, '')), { recursive: true, force: true });
+  v.galleria = [];
+  alleggeriti++;
+}
+if (alleggeriti) console.log('Gallerie alleggerite (fuori dagli ultimi ' + MAX_VENDUTI + '):', alleggeriti);
+if (copiate || alleggeriti) fs.writeFileSync(FILE, JSON.stringify(dati, null, 1));
 console.log('Foto dei venduti copiate:', copiate);
