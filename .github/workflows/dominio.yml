@@ -44,6 +44,10 @@ jobs:
             echo "Whois .it: $(whois -h whois.nic.it evolgroup.it 2>/dev/null | grep -Ei '^(Status|Last Update)|Nameservers' -A0 | tr -s ' ' | tr '\n' ';')"
             echo "Whois NS: $(whois -h whois.nic.it evolgroup.it 2>/dev/null | sed -n '/^Nameservers/,/^$/p' | tr -s ' ' | tr '\n' ' ')"
             echo "Cloudflare risponde (NS @craig): $(dig +norec NS evolgroup.it @craig.ns.cloudflare.com +short | tr '\n' ' ') SOA: $(dig +norec SOA evolgroup.it @craig.ns.cloudflare.com +short)"
+            for NS in craig.ns.cloudflare.com cruz.ns.cloudflare.com; do
+              echo "[$NS] flags SOA: $(dig +norec SOA evolgroup.it @$NS | grep -o 'flags:[^;]*' | head -1) | TCP: $(dig +tcp +norec +short SOA evolgroup.it @$NS | cut -d' ' -f3) | IPv6 AAAA ns: $(dig +short AAAA $NS | head -1) | MX: $(dig +norec +short MX evolgroup.it @$NS | tr '\n' ',')"
+            done
+            for MX in $(dig +short MX evolgroup.it @craig.ns.cloudflare.com | awk '{print $2}'); do echo "MX $MX -> A: $(dig +short A $MX | head -1) AAAA: $(dig +short AAAA $MX | head -1) CNAME: $(dig +short CNAME $MX)"; done
           } > stato/dominio.txt
 
           DOMINI=$(curl -s "${H[@]}" "$API/accounts/$CF_ACCOUNT/pages/projects/evolgroup/domains")
