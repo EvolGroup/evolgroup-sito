@@ -1,7 +1,10 @@
-Controllo: 2026-11-16 05:55 UTC
+Controllo: 2026-11-16 06:39 UTC
 NS pubblici (8.8.8.8): ns1.register.it. ns2.register.it. 
 NS registro .it: ns1.register.it. ns2.register.it. 
 Zona Cloudflare: [true,null,null]
+Whois .it: Status: pendingUpdate;--;Last Update: 2026-11-15 18:41:02;--;Nameservers;
+Whois NS: Nameservers  ns1.register.it  ns2.register.it  
+Cloudflare risponde (NS @craig): craig.ns.cloudflare.com. cruz.ns.cloudflare.com.  SOA: craig.ns.cloudflare.com. dns.cloudflare.com. 2420252965 10000 2400 604800 1800
 Domini Pages (prima): [true,[],null]
 Nameserver non ancora propagati: nessuna azione.
 HTTP https://evolgroup.it/: 200 
