@@ -25,6 +25,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - run: sudo apt-get install -y -qq whois > /dev/null || true
 
       - name: Controlla e collega
         env:
@@ -40,6 +41,9 @@ jobs:
             echo "NS pubblici (8.8.8.8): $(dig +short NS evolgroup.it @8.8.8.8 | sort | tr '\n' ' ')"
             echo "NS registro .it: $(dig +norec NS evolgroup.it @a.dns.it | awk '$4=="NS"{print $5}' | sort | tr '\n' ' ')"
             echo "Zona Cloudflare: $(curl -s "${H[@]}" "$API/zones?name=evolgroup.it" | jq -c '[.success, (.result[0].status // null), (.errors[0].message // null)]')"
+            echo "Whois .it: $(whois -h whois.nic.it evolgroup.it 2>/dev/null | grep -Ei '^(Status|Last Update)|Nameservers' -A0 | tr -s ' ' | tr '\n' ';')"
+            echo "Whois NS: $(whois -h whois.nic.it evolgroup.it 2>/dev/null | sed -n '/^Nameservers/,/^$/p' | tr -s ' ' | tr '\n' ' ')"
+            echo "Cloudflare risponde (NS @craig): $(dig +norec NS evolgroup.it @craig.ns.cloudflare.com +short | tr '\n' ' ') SOA: $(dig +norec SOA evolgroup.it @craig.ns.cloudflare.com +short)"
           } > stato/dominio.txt
 
           DOMINI=$(curl -s "${H[@]}" "$API/accounts/$CF_ACCOUNT/pages/projects/evolgroup/domains")
