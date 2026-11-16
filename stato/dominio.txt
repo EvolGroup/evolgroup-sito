@@ -1,14 +1,13 @@
-Controllo: 2026-11-16 06:45 UTC
+Controllo: 2026-11-16 07:51 UTC
 NS pubblici (8.8.8.8): ns1.register.it. ns2.register.it. 
 NS registro .it: ns1.register.it. ns2.register.it. 
 Zona Cloudflare: [true,null,null]
-Whois .it: Status: pendingUpdate;--;Last Update: 2026-11-15 18:41:02;--;Nameservers;
-Whois NS: Nameservers  ns1.register.it  ns2.register.it  
-Cloudflare risponde (NS @craig): craig.ns.cloudflare.com. cruz.ns.cloudflare.com.  SOA: craig.ns.cloudflare.com. dns.cloudflare.com. 2420252965 10000 2400 604800 1800
-[craig.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420252965 | IPv6 AAAA ns: 2a06:98c1:50::ac40:23c0 | MX: 1 smtp.google.com.,15 lxw2krkaxxovheqpku4shjbiy6wn7x2sjpt75z2yob2c2wupcd2a.mx-verification.google.com.,
-[cruz.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420252965 | IPv6 AAAA ns: 2606:4700:50::adf5:3a58 | MX: 1 smtp.google.com.,15 lxw2krkaxxovheqpku4shjbiy6wn7x2sjpt75z2yob2c2wupcd2a.mx-verification.google.com.,
-MX smtp.google.com. -> A: 142.251.188.27 AAAA: 2607:f8b0:400e:c0d::1a CNAME: 
-MX lxw2krkaxxovheqpku4shjbiy6wn7x2sjpt75z2yob2c2wupcd2a.mx-verification.google.com. -> A:  AAAA:  CNAME: 
+Whois .it: Status: ok;--;Last Update: 2026-11-16 08:10:19;--;Nameservers;
+Whois NS: Nameservers  cruz.ns.cloudflare.com  craig.ns.cloudflare.com  
+Cloudflare risponde (NS @craig): craig.ns.cloudflare.com. cruz.ns.cloudflare.com.  SOA: craig.ns.cloudflare.com. dns.cloudflare.com. 2420297438 10000 2400 604800 1800
+[craig.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420297438 | IPv6 AAAA ns: 2a06:98c1:50::ac40:23c0 | MX: 1 smtp.google.com.,
+[cruz.ns.cloudflare.com] flags SOA: flags: qr aa | TCP: 2420297438 | IPv6 AAAA ns: 2a06:98c1:50::ac40:2058 | MX: 1 smtp.google.com.,
+MX smtp.google.com. -> A: 192.179.16.27 AAAA: 2607:f8b0:4001:c70::1a CNAME: 
 Domini Pages (prima): [true,[],null]
 Nameserver non ancora propagati: nessuna azione.
 HTTP https://evolgroup.it/: 200 
