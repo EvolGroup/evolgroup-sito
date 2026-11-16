@@ -16,7 +16,8 @@ Aggiornato al 16/11/2026.
 - [x] **Reindirizzare www.evolgroup.it → evolgroup.it** (Cloudflare → Regole → Redirect Rule), così il consenso cookie e Google vedono un solo indirizzo.
 - [x] **WordPress Business su Register: rinnovo automatico tolto** (16/11/2026). Resta pagato fino al 28/05/2027, poi si chiude da solo.
 - [ ] **Dominio su Register**: rinnovo automatico attivo (scade il 05/04/2027, prelievo ~20 giorni prima). Verificare che il metodo di pagamento salvato sia valido.
-- [ ] **Pages CMS**: collegare il pannello per blog e venduti/affittati.
+- [x] **Pages CMS** collegato (app.pagescms.org → evolgroup-sito): blog e venduti/affittati.
+- [ ] **Avviso annunci usciti da Getrix** (issue GitHub inviata per email): verificare che l'email di prova sia arrivata all'indirizzo dell'account GitHub EvolGroup, poi chiudere l'avviso di prova.
 
 ## Quando si avvia la pubblicità
 - [ ] **Pixel di Meta**: creare il Meta Business e il Pixel, poi inserire l'ID nel sito e aggiungere "Monitoraggio conversioni di Meta ads (pixel di Meta)" in iubenda. Da fare 2–4 settimane prima delle campagne.
