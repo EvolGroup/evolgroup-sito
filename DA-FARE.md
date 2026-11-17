@@ -23,7 +23,9 @@ Aggiornato al 16/11/2026.
 ## Quando si avvia la pubblicità
 - [ ] **Pixel di Meta**: creare il Meta Business e il Pixel, poi inserire l'ID nel sito e aggiungere "Monitoraggio conversioni di Meta ads (pixel di Meta)" in iubenda. Da fare 2–4 settimane prima delle campagne.
 - [ ] **Pagine di atterraggio** dedicate alle campagne (chi vende, chi compra, per zona).
-- [ ] **Tracciamento della provenienza dei contatti** (UTM) nei moduli.
+- [x] **Provenienza dei contatti** nei moduli (UTM, gclid/fbclid, motori di ricerca, portali, diretto): arriva nell'email come "provenienza", "campagna", "annuncio", "pagina_di_arrivo".
+- [x] **Anteprime social/WhatsApp** (Open Graph completo: prezzo, locali, m², indirizzo e foto) e **dati strutturati** schema.org (agenzia, immobili, articoli).
+- [x] **Home: 3 anteprime** di immobili invece di 6.
 
 ## Più avanti
 - [ ] Aggiungere info@evolgroup.it come secondo utente su iubenda, Google Analytics e Cloudflare.

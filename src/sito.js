@@ -1,6 +1,29 @@
 (function () {
   var anteprima = document.body.classList.contains('modalita-anteprima');
   function traccia(nome, dati) { try { if (window.gtag && !anteprima) window.gtag('event', nome, dati || {}); } catch (e) {} }
+  // provenienza del visitatore (solo per questa visita, nessun dato personale): finisce nelle email dei moduli
+  var provenienza = (function () {
+    try { var salvata = sessionStorage.getItem('evol_provenienza'); if (salvata) return JSON.parse(salvata); } catch (e) {}
+    var q = new URLSearchParams(location.search), ref = document.referrer, host = '';
+    try { host = ref ? new URL(ref).hostname : ''; } catch (e) {}
+    if (host === location.hostname) host = '';
+    var p = { pagina_di_arrivo: location.pathname };
+    if (q.get('utm_source')) {
+      p.fonte = [q.get('utm_source'), q.get('utm_medium')].filter(Boolean).join(' / ');
+      if (q.get('utm_campaign')) p.campagna = q.get('utm_campaign');
+      if (q.get('utm_content')) p.annuncio = q.get('utm_content');
+    } else if (q.get('gclid') || q.get('gbraid') || q.get('wbraid')) p.fonte = 'Google Ads';
+    else if (q.get('fbclid')) p.fonte = /instagram/.test(host) ? 'Instagram' : 'Facebook';
+    else if (/google\./.test(host)) p.fonte = 'Google (ricerca)';
+    else if (/bing\.|duckduckgo|yahoo|ecosia/.test(host)) p.fonte = 'Altri motori di ricerca (' + host + ')';
+    else if (/facebook|fb\.com/.test(host)) p.fonte = 'Facebook';
+    else if (/instagram/.test(host)) p.fonte = 'Instagram';
+    else if (/immobiliare\.it|idealista|casa\.it|getrix/.test(host)) p.fonte = 'Portali (' + host + ')';
+    else if (host) p.fonte = 'Link da ' + host;
+    else p.fonte = 'Diretto (indirizzo digitato, preferiti, WhatsApp o email)';
+    try { sessionStorage.setItem('evol_provenienza', JSON.stringify(p)); } catch (e) {}
+    return p;
+  })();
   // clic su WhatsApp, telefono ed email: contano come contatti
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
@@ -129,6 +152,7 @@
       if (anteprima || !chiave) { esito.textContent = 'Questa è un’anteprima: nel sito definitivo il messaggio arriverà alla vostra email.'; return; }
       esito.textContent = 'Invio in corso…';
       var dati = new FormData(f); dati.append('access_key', chiave); dati.append('pagina', location.href);
+      if (provenienza) { dati.append('provenienza', provenienza.fonte || ''); if (provenienza.campagna) dati.append('campagna', provenienza.campagna); if (provenienza.annuncio) dati.append('annuncio', provenienza.annuncio); dati.append('pagina_di_arrivo', provenienza.pagina_di_arrivo || ''); }
       fetch('https://api.web3forms.com/submit', { method: 'POST', body: dati })
         .then(function (r) { return r.json(); })
         .then(function (j) { var nl = f.dataset.form === 'newsletter'; esito.textContent = j.success ? (nl ? 'Iscrizione completata, grazie!' : 'Grazie! Ti risponderemo al più presto.') : 'Invio non riuscito: scrivici a info@evolgroup.it.'; if (j.success) { traccia(nl ? 'iscrizione_newsletter' : 'generate_lead', { modulo: f.dataset.form, pagina: location.pathname }); f.reset(); } })

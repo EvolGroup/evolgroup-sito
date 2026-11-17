@@ -187,7 +187,7 @@ function moduloContatto({ oggetto = '', destinatario = 'generale', titolo = 'Scr
 // ---------- pagine ----------
 function paginaHome() {
   const vendita = IMMOBILI.filter((i) => i.contratto !== 'A');
-  const recenti = [...vendita].sort((a, b) => b.mod.localeCompare(a.mod)).slice(0, 6);
+  const recenti = [...vendita].sort((a, b) => b.mod.localeCompare(a.mod)).slice(0, 3);
   const F = SITO.fiducia || {};
   const stelle = '<span class="stelle" aria-hidden="true">★★★★★</span>';
   const chiave = (SITO.chiaviModuli || {}).vendere || (SITO.chiaviModuli || {}).generale || '';
@@ -416,7 +416,16 @@ function paginaInArrivo(titolo, url) {
 // ---------- elenco pagine ----------
 PAGINE.push({ id: 'home', url: '', titolo: `${SITO.nome} – Agenzia immobiliare a Milano`, descrizione: SITO.sottotitolo, attiva: '', trasparente: true, corpo: paginaHome });
 PAGINE.push({ id: 'immobili', url: 'immobili/', titolo: `Immobili in vendita a Milano – ${SITO.nome}`, descrizione: 'Appartamenti, negozi e box in vendita a Milano e Sesto San Giovanni.', attiva: 'immobili/', corpo: paginaImmobili });
-for (const im of IMMOBILI) PAGINE.push({ wa: `Buongiorno, vorrei informazioni sull’immobile rif. ${im.rif} (${titoloUniforme(im)}, ${indirizzo(im)})`, id: 'p-' + im.slug, url: 'property/' + im.slug + '/', titolo: `${titoloUniforme(im)} in ${im.contratto === 'A' ? 'affitto' : 'vendita'} – ${indirizzo(im)} – ${SITO.nome}`, descrizione: im.testo.slice(0, 155), attiva: 'immobili/', immagine: foto(im, 1, 'l'), corpo: () => paginaImmobile(im) });
+function riassuntoIm(im) { return [prezzoIm(im), +im.locali > 0 ? im.locali + ' locali' : '', im.mq ? im.mq + ' m²' : '', indirizzo(im)].filter(Boolean).join(' · '); }
+function datiImmobile(im) {
+  const n = im.foto && im.foto.ad ? Math.min(im.foto.titoli.length, 6) : 0;
+  return { '@context': 'https://schema.org', '@type': 'RealEstateListing', name: `${titoloUniforme(im)} in ${im.contratto === 'A' ? 'affitto' : 'vendita'} – ${indirizzo(im)}`,
+    url: SITO.dominio + '/property/' + im.slug + '/', description: im.testo.slice(0, 500), datePosted: im.mod || undefined,
+    image: n ? Array.from({ length: n }, (_, k) => foto(im, k + 1, 'l')) : undefined,
+    offers: im.riservata || !im.prezzo ? undefined : { '@type': 'Offer', price: im.prezzo, priceCurrency: 'EUR', businessFunction: im.contratto === 'A' ? 'http://purl.org/goodrelations/v1#LeaseOut' : 'http://purl.org/goodrelations/v1#Sell' },
+    provider: { '@id': SITO.dominio + '/#agenzia' } };
+}
+for (const im of IMMOBILI) PAGINE.push({ wa: `Buongiorno, vorrei informazioni sull’immobile rif. ${im.rif} (${titoloUniforme(im)}, ${indirizzo(im)})`, id: 'p-' + im.slug, url: 'property/' + im.slug + '/', titolo: `${titoloUniforme(im)} in ${im.contratto === 'A' ? 'affitto' : 'vendita'} – ${indirizzo(im)} – ${SITO.nome}`, descrizione: (riassuntoIm(im) + '. ' + im.testo).slice(0, 155), attiva: 'immobili/', immagine: foto(im, 1, 'l'), dati: [datiImmobile(im)], corpo: () => paginaImmobile(im) });
 PAGINE.push({ id: 'venduti', url: 'venduti-e-affittati/', titolo: `Ultimi venduti e affittati – ${SITO.nome}`, descrizione: 'Gli ultimi immobili venduti e affittati da Evol Group a Milano e dintorni.', attiva: 'immobili/', corpo: paginaVenduti });
 PAGINE.push({ id: 'contatti', url: 'contatti/', titolo: `Contatti – ${SITO.nome}`, descrizione: `${SITO.indirizzo} · ${SITO.email}`, attiva: 'contatti/', corpo: paginaContatti });
 PAGINE.push({ id: 'chi-siamo', url: 'chi-siamo/', titolo: `Chi siamo – ${SITO.nome}`, descrizione: SITO.chiSiamo.slice(0, 155), attiva: 'chi-siamo/', corpo: paginaChiSiamo });
@@ -424,13 +433,29 @@ PAGINE.push({ id: 'servizi', url: 'servizi/', titolo: `Servizi – ${SITO.nome}`
 PAGINE.push({ id: 'vendere-casa', url: 'vendere-casa/', titolo: `Vendere casa a Milano – ${SITO.nome}`, descrizione: 'Richiedi una valutazione gratuita del tuo immobile a Milano.', attiva: '', corpo: paginaVendereCasa });
 PAGINE.push({ id: 'vittorio-maviglia', url: 'agente-immobiliare-vittorio-maviglia/', titolo: `Vittorio Maviglia, agente immobiliare a Milano – ${SITO.nome}`, descrizione: 'Il mio unico obiettivo: diventare il tuo punto di riferimento se devi vendere o acquistare casa.', attiva: 'chi-siamo/', corpo: paginaVittorio });
 PAGINE.push({ id: 'blog', url: 'blog/', titolo: `Blog – ${SITO.nome}`, descrizione: 'Il blog di Pietro Torcia sul mercato immobiliare di Milano.', attiva: 'blog/', corpo: paginaBlog });
-for (const a of ARTICOLI) PAGINE.push({ id: 'b-' + a.slug, url: a.slug + '/', titolo: `${a.titolo} – ${SITO.nome}`, descrizione: a.estratto.slice(0, 155), immagine: a.immagine ? (a.immagine.startsWith('/') ? SITO.dominio + a.immagine : up(a.immagine)) : null, attiva: 'blog/', corpo: () => paginaArticolo(a) });
+for (const a of ARTICOLI) {
+  const img = a.immagine ? (a.immagine.startsWith('/') ? SITO.dominio + a.immagine : up(a.immagine)) : null;
+  PAGINE.push({ id: 'b-' + a.slug, url: a.slug + '/', titolo: `${a.titolo} – ${SITO.nome}`, descrizione: a.estratto.slice(0, 155), immagine: img, tipo: 'article', attiva: 'blog/',
+    dati: [{ '@context': 'https://schema.org', '@type': 'BlogPosting', headline: a.titolo.slice(0, 110), datePublished: a.data || undefined, image: img || undefined,
+      author: { '@type': 'Person', name: a.autore || 'Pietro Torcia' }, publisher: { '@id': SITO.dominio + '/#agenzia' }, mainEntityOfPage: SITO.dominio + '/' + a.slug + '/' }],
+    corpo: () => paginaArticolo(a) });
+}
 
 // ---------- script del browser (filtri, galleria, moduli, anteprima) ----------
 const JS = fs.readFileSync(path.join(ROOT, 'src/sito.js'), 'utf8');
 
-function documento({ titolo, descrizione, immagine, url }, corpoHtml) {
+// dati strutturati (schema.org) dell'agenzia, su tutte le pagine
+function datiAgenzia() {
+  const m = /^(.*?),\s*(\d{5})\s+(.+)$/.exec(SITO.indirizzo || '') || [];
+  return { '@context': 'https://schema.org', '@type': 'RealEstateAgent', '@id': SITO.dominio + '/#agenzia', name: SITO.nome, url: SITO.dominio + '/',
+    image: up(SITO.hero), email: SITO.email, telephone: (SITO.telefoni || [])[0] || SITO.cellulare, vatID: SITO.piva ? 'IT' + SITO.piva : undefined,
+    address: { '@type': 'PostalAddress', streetAddress: m[1] || SITO.indirizzo, postalCode: m[2], addressLocality: m[3], addressCountry: 'IT' },
+    areaServed: ['Milano', 'Sesto San Giovanni'] };
+}
+const jsonLd = (o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
+function documento({ titolo, descrizione, immagine, url, tipo = 'website', dati = [] }, corpoHtml) {
   const canonical = SITO.dominio + '/' + url;
+  const img = immagine || up(SITO.hero);
   return `<!DOCTYPE html>
 <html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 ${SITO.googleAnalytics && !ANTEPRIMA ? `<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
@@ -442,7 +467,9 @@ ${SITO.googleAnalytics && !ANTEPRIMA ? `<script async src="https://www.googletag
 <script>gtag('js',new Date());gtag('config','${SITO.googleAnalytics}');</script>` : ''}
 <title>${esc(titolo)}</title><meta name="description" content="${esc(descrizione)}">
 <link rel="canonical" href="${canonical}"><link rel="icon" href="${up(SITO.favicon)}">
-<meta property="og:title" content="${esc(titolo)}"><meta property="og:description" content="${esc(descrizione)}"><meta property="og:url" content="${canonical}">${immagine ? `<meta property="og:image" content="${immagine}">` : ''}
+<meta property="og:type" content="${tipo}"><meta property="og:site_name" content="${esc(SITO.nome)}"><meta property="og:locale" content="it_IT">
+<meta property="og:title" content="${esc(titolo)}"><meta property="og:description" content="${esc(descrizione)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${esc(img)}"><meta name="twitter:card" content="summary_large_image">
+${[datiAgenzia(), ...dati].map(jsonLd).join('')}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin>
