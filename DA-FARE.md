@@ -9,7 +9,7 @@ Aggiornato al 16/11/2026.
 - [x] **iubenda Essentials** attivo dal 16/11/2026 (annuale, fino a 25.000 pagine viste/mese).
 - [x] **iubenda: policy completata** con Cloudflare, OpenStreetMap Widget, unpkg, Google Tag Manager, WhatsApp (oltre a GA4, Google Fonts, moduli, newsletter). Scansione: 86%.
 - [x] **Google Analytics 4**: proprietà "evolgroup.it" (pietro.torcia@evolgroup.it), ID G-ZPP99CYYXT, installato con Consent Mode v2.
-- [ ] **Google Analytics: segnare come eventi chiave** generate_lead, contatto_telefono, contatto_email (Amministrazione → Eventi → Eventi recenti → stellina). contatto_whatsapp già segnato (16/11).
+- [x] **Google Analytics: eventi chiave** generate_lead, contatto_whatsapp, contatto_telefono, contatto_email (17/11).
 - [x] **Google Search Console**: proprietà di dominio evolgroup.it verificata (pietro.torcia@evolgroup.it), sitemap inviata (85 pagine).
 - [x] **Invio di prova** dei 4 moduli: arrivano tutti a info@evolgroup.it (16/11).
 - [x] **Passaggio del dominio** evolgroup.it su Cloudflare Pages (16/11/2026). Eliminato il vecchio MX di verifica Google, che bloccava il registro .it.
