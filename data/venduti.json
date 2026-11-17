@@ -2,6 +2,38 @@
  "_nota": "Immobili venduti e affittati. Storico importato da Getrix il 15/11/2026 (solo foto principale). Da qui in poi gli annunci che escono dal flusso Getrix vengono aggiunti con stato 'da confermare', con tutte le foto, e si confermano dal pannello.",
  "immobili": [
   {
+   "id": "193658558",
+   "stato": "da confermare",
+   "proposta": "venduto",
+   "rif": "FR21.B",
+   "slug": "monolocale-ristrutturato-mm-villa-s-g",
+   "tipologia": "Appartamento",
+   "locali": "1",
+   "bagni": "1",
+   "mq": 42,
+   "indirizzo": "Via Fortezza 21",
+   "comune": "Milano",
+   "data": "2026-11-17",
+   "foto": "/media/venduti/193658558.jpg",
+   "galleria": [
+    "/media/venduti/193658558/1.jpg",
+    "/media/venduti/193658558/2.jpg",
+    "/media/venduti/193658558/3.jpg",
+    "/media/venduti/193658558/4.jpg",
+    "/media/venduti/193658558/5.jpg",
+    "/media/venduti/193658558/6.jpg",
+    "/media/venduti/193658558/7.jpg",
+    "/media/venduti/193658558/8.jpg",
+    "/media/venduti/193658558/9.jpg",
+    "/media/venduti/193658558/10.jpg",
+    "/media/venduti/193658558/11.jpg",
+    "/media/venduti/193658558/12.jpg",
+    "/media/venduti/193658558/13.jpg",
+    "/media/venduti/193658558/14.jpg",
+    "/media/venduti/193658558/15.jpg"
+   ]
+  },
+  {
    "id": "130761116",
    "stato": "affittato",
    "tipologia": "Appartamento",

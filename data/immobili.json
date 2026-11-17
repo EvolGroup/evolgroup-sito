@@ -1,5 +1,5 @@
 {
- "_fonte": "Flusso Getrix, aggiornato il 2026-11-14T02:46:16.109Z",
+ "_fonte": "Flusso Getrix, aggiornato il 2026-11-17T02:09:03.662Z",
  "immobili": [
   {
    "id": "193848917",
@@ -152,76 +152,6 @@
     ]
    },
    "slug": "piazza-della-repubblica-32-negozio-bar-in-vendita"
-  },
-  {
-   "id": "193658558",
-   "rif": "FR21.B",
-   "titolo": "MONOLOCALE RISTRUTTURATO - MM VILLA S.G.",
-   "testo": "EVOL GROUP propone in ESCLUSIVA monolocale di 42mq, ideale per una giovane coppia o per uso investimento. La disposizione degli ambienti è semplice e razionale, entrando troviamo la zona giorno con cucina a vista, zona notte dotata di letto matrimoniale e bagno finestrato con box doccia. L'immobile è stato completamente ristrutturato nel 2022. Riscaldamento autonomo, spese condominiali annue €338,00. Il contesto si trova a pochissimi passi dai principali servizi commerciali tra cui vari supermercati, farmacie, bar e scuole (materne, elementari, medie e superiori) e dista solo 2 km dall’ Università Bicocca. La zona è ben servita anche dai servizi pubblici: a 300 m troviamo la fermata MM1 Villa S.G. e la fermata dell’autobus delle linee 51 direzione Cimiano, 81 direzione Lambrate e 174. Inoltre in pochi minuti di auto si possono raggiungere tutte le tangenziali e le autostrade. Se desiderate ricevere ulteriori informazioni o fissare un appuntamento, contattateci al numero 0259647813, 0297131189 o al 3335961118.",
-   "lingue": {
-    "en": {
-     "testo": "EVOL GROUP offers exclusively a studio apartment of 42 sqm, ideal for a young couple or for investment purposes. The layout of the spaces is simple and rational; upon entering, we find the living area with an open kitchen, a sleeping area equipped with a double bed, and a windowed bathroom with a shower box. The property was completely renovated in 2022. Independent heating, annual condominium fees €338.00. The context is just a few steps away from the main commercial services, including various supermarkets, pharmacies, bars, and schools (kindergarten, elementary, middle, and high schools) and is only 2 km from Bicocca University. The area is also well served by public transport: 300 m away is the MM1 Villa S.G. stop and the bus stop for lines 51 towards Cimiano, 81 towards Lambrate, and 174. Additionally, in just a few minutes by car, you can reach all the ring roads and highways. If you would like to receive further information or schedule an appointment, please contact us at 0259647813, 0297131189, or 3335961118.--f69895aacd8aa7010968b393c442cc30!"
-    }
-   },
-   "contratto": "V",
-   "categoria": "1",
-   "tipologia": "Appartamento",
-   "comune": "Milano",
-   "zona": "Precotto, Turro",
-   "quartiere": "Bicocca, Greco, Monza, Palmanova",
-   "strada": "via",
-   "indirizzo": "Fortezza",
-   "civico": "21",
-   "lat": 45.51990128,
-   "lng": 9.22329998,
-   "prezzo": 135000,
-   "mq": 42,
-   "locali": "1",
-   "spese": "33.0000",
-   "mod": "2026-06-10",
-   "det": {
-    "NrLivelli": "1",
-    "PianoFuoriTerra": "3",
-    "PianiEdificio": "5",
-    "NrCamereLetto": "1",
-    "NrBagni": "1",
-    "Cucina": "6",
-    "BoxAuto": "255",
-    "GiardinoPrivato": "2",
-    "Riscaldamento": "1",
-    "Arredamento": "2",
-    "CategoriaCatastale": "A/3",
-    "AnnoCostruzione": "1965",
-    "TipoCostruzione": "3",
-    "StatoManutenzione": "6",
-    "StatoCostruzione": "6",
-    "FibraOttica": "true",
-    "EsposizioneInterna": "true",
-    "LeggeClasseEnergetica": "1",
-    "ClasseEnergetica": "F",
-    "IPE": "178.80"
-   },
-   "foto": {
-    "ad": "129424436",
-    "titoli": [
-     "Interno non residenziale",
-     "Cortile interno",
-     "Salone",
-     "Cucina",
-     "Cucina",
-     "Cucina",
-     "Cucina",
-     "Camera da letto",
-     "Camera da letto",
-     "Camera da letto",
-     "Lavanderia",
-     "Bagno",
-     "Cortile interno",
-     "Ingresso",
-     "Cortile interno"
-    ]
-   },
-   "slug": "monolocale-ristrutturato-mm-villa-s-g"
   },
   {
    "id": "193757668",
@@ -515,7 +445,7 @@
    "locali": "2",
    "spese": "150.0000",
    "tour": "https://tour360.getrix.it/vrtours/2538623/",
-   "mod": "2026-11-02",
+   "mod": "2026-11-16",
    "det": {
     "StatoImmobile": "1",
     "NrLivelli": "1",
@@ -548,6 +478,7 @@
     "ad": "133179260",
     "plan": "135501176",
     "titoli": [
+     "Facciata",
      "Cucina",
      "Cucina",
      "Cucina",
@@ -565,8 +496,7 @@
      "Bagno",
      "Bagno",
      "Cortile interno",
-     "Cortile interno",
-     "Facciata"
+     "Cortile interno"
     ]
    },
    "slug": "ampio-bilocale-mm-sesto-rondo"
