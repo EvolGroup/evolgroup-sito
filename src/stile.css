@@ -166,3 +166,11 @@ button.card-img{display:block;border:0;padding:0;width:100%;aspect-ratio:3/2;ove
 .n-foto{position:absolute;right:12px;bottom:12px;background:rgba(16,22,28,.7);color:#fff;font-size:.75rem;font-weight:600;padding:3px 8px;border-radius:3px}
 
 .btn-chiaro-scuro{background:transparent;border:2px solid var(--accento);color:var(--accento-scuro)}
+
+/* modulo "Raccontaci cosa stai cercando" */
+.ricerca{max-width:760px;margin-left:auto;margin-right:auto}
+section.wrap.ricerca{padding-top:10px;padding-bottom:60px}
+.ricerca h2{text-align:center;margin-bottom:24px}
+.fascia-ricerca{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:32px;padding:22px;background:var(--sfondo);border-radius:var(--raggio);text-align:center}
+.fascia-ricerca p{margin:0;font-weight:600;font-size:1.1rem}
+.link-ricerca{margin-top:14px;font-size:.95rem}

@@ -184,6 +184,32 @@ function moduloContatto({ oggetto = '', destinatario = 'generale', titolo = 'Scr
 </form>`;
 }
 
+const TITOLO_RICERCA = 'Raccontaci cosa stai cercando';
+function moduloRicerca() {
+  const chiave = (SITO.chiaviModuli || {}).generale || '';
+  const sel = (nome, voci, req = true) => `<select name="${nome}"${req ? ' required' : ''}><option value="">Seleziona…</option>${voci.map((v) => `<option>${v}</option>`).join('')}</select>`;
+  return `<form class="contatto modulo-ricerca" data-form="ricerca" data-chiave="${esc(chiave)}">
+  <input type="hidden" name="subject" value="Ricerca immobile dal sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
+  <div class="campi2"><label>Cerco per${sel('cerco_per', ['Acquisto', 'Affitto'])}</label>
+  <label>Tipologia${sel('tipologia', ['Appartamento', 'Villa / casa indipendente', 'Negozio', 'Ufficio', 'Box / posto auto', 'Capannone / laboratorio', 'Terreno', 'Altro'])}</label></div>
+  <label>Zona o comuni<input name="zona" required placeholder="es. Città Studi, Bicocca, Sesto San Giovanni"></label>
+  <div class="campi2"><label>Budget massimo (€)<input name="budget_massimo" type="number" min="0" inputmode="numeric" required placeholder="es. 350000 oppure 1200 al mese"></label>
+  <label><span>Superficie minima (m²) <span class="facoltativo">(facoltativo)</span></span><input name="superficie_minima" type="number" min="1" inputmode="numeric" placeholder="es. 70"></label></div>
+  <label>Tempi${sel('tempi', ['Subito', 'Entro 6 mesi', 'Sto valutando'])}</label>
+  <div class="campi2"><label>Nome<input name="nome" required autocomplete="name"></label>
+  <label>Telefono<input name="telefono" type="tel" required autocomplete="tel"></label></div>
+  <label>Email<input name="email" type="email" required autocomplete="email"></label>
+  <label><span>Note <span class="facoltativo">(facoltativo)</span></span><textarea name="note" rows="3" placeholder="Piano, balcone, box, vicinanza alla metro, altre esigenze…"></textarea></label>
+  <label class="check"><input type="checkbox" required><span>Ho letto la <a href="${SITO.privacy}">privacy policy</a> e acconsento a essere ricontattato.</span></label>
+  <button class="btn">Invia la richiesta</button>
+  <p class="form-esito" hidden></p>
+</form>`;
+}
+function paginaRicerca() {
+  return `<section class="pagina-titolo"><div class="wrap"><h1>${TITOLO_RICERCA}</h1></div></section>
+<section class="wrap ricerca">${moduloRicerca()}</section>`;
+}
+
 // ---------- pagine ----------
 function paginaHome() {
   const vendita = IMMOBILI.filter((i) => i.contratto !== 'A');
@@ -198,6 +224,7 @@ function paginaHome() {
 <section class="fascia"><div class="wrap">
   <div class="titolo-sezione"><div><p class="occhiello">Gli immobili</p><h2>In vendita ora</h2></div><a class="link-freccia" href="${link('immobili/')}">Vedi tutti (${IMMOBILI.length}) →</a></div>
   <div class="griglia">${recenti.map(scheda).join('')}</div>
+  <div class="fascia-ricerca"><p>Non hai trovato quello che fa per te?</p><a class="btn" href="${link('cerco-immobile/')}">Scrivici cosa stai cercando</a></div>
 </div></section>
 <section class="fiducia"><div class="wrap fiducia-griglia">
   ${F.googleVoto ? `<a class="fiducia-voce" href="${F.googleUrl}" target="_blank" rel="noopener"><strong>${F.googleVoto} ${stelle}</strong><span>${F.googleRecensioni} recensioni su Google</span><em>Leggi le recensioni →</em></a>` : ''}
@@ -254,10 +281,11 @@ function paginaImmobili() {
   </form>
   <p class="conteggio" aria-live="polite"></p>
   <div class="griglia" data-elenco>${[...IMMOBILI].sort((a, b) => b.mod.localeCompare(a.mod)).map(scheda).join('')}</div>
-  <p class="nessuno" hidden>Nessun immobile corrisponde ai filtri scelti.</p>
+  <p class="nessuno" hidden>Nessun immobile corrisponde ai filtri scelti. <a href="#cerca">Raccontaci cosa stai cercando</a>: ti avvisiamo appena arriva quello giusto.</p>
   ${VENDUTI.length ? `<p class="link-venduti"><a class="link-freccia" href="${link('venduti-e-affittati/')}">Guarda gli ultimi immobili che abbiamo venduto o affittato →</a></p>` : ''}
-  <p class="nessuno-affitto" hidden>Al momento non abbiamo immobili in affitto. <a href="${link('contatti/')}">Scrivici</a> e ti avvisiamo appena ne arriva uno adatto a te.</p>
-</section>`;
+  <p class="nessuno-affitto" hidden>Al momento non abbiamo immobili in affitto. <a href="#cerca">Raccontaci cosa stai cercando</a> e ti avvisiamo appena ne arriva uno adatto a te.</p>
+</section>
+<section class="fascia" id="cerca"><div class="wrap ricerca"><h2>${TITOLO_RICERCA}</h2>${moduloRicerca()}</div></section>`;
 }
 
 function paginaVenduti() {
@@ -310,7 +338,8 @@ function paginaImmobile(im) {
       ${im.lat ? `<h2>Posizione</h2><div class="mappa-box"><div class="mappa" data-mappa data-lat="${im.lat}" data-lng="${im.lng}" data-etichetta="${esc(tit + ' · ' + indirizzo(im))}"></div><button type="button" class="btn btn-centra" data-centra>${ICONE.pin} Centra sull’immobile</button></div>` : ''}
     </div>
     <aside class="laterale">${moduloContatto({ titolo: 'Ti interessa questo immobile?', soggetto: `Richiesta info – ${tit}, rif. ${im.rif}`, oggetto: `Buongiorno, vorrei ricevere informazioni sull’immobile rif. ${im.rif} (${tit}, ${indirizzo(im)}).` })}
-      <p class="nota">Oppure chiamaci: <a href="tel:${tel(SITO.telefoni[0])}">${SITO.telefoni[0]}</a> · <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a></p></aside>
+      <p class="nota">Oppure chiamaci: <a href="tel:${tel(SITO.telefoni[0])}">${SITO.telefoni[0]}</a> · <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a></p>
+      <p class="link-ricerca">Non è quello giusto? <a href="${link('cerco-immobile/')}">Scrivici cosa stai cercando</a></p></aside>
   </div>
   <div class="lightbox" hidden data-lightbox data-foto='${esc(JSON.stringify(im.foto.titoli.map((t, i) => [foto(im, i + 1, 'xxl'), t]).concat(plan ? [[plan.replace('http://', 'https://'), 'Planimetria']] : [])))}'>
     <button class="lb-chiudi" aria-label="Chiudi">×</button><button class="lb-prec" aria-label="Foto precedente">‹</button>
@@ -426,6 +455,7 @@ function datiImmobile(im) {
     provider: { '@id': SITO.dominio + '/#agenzia' } };
 }
 for (const im of IMMOBILI) PAGINE.push({ wa: `Buongiorno, vorrei informazioni sull’immobile rif. ${im.rif} (${titoloUniforme(im)}, ${indirizzo(im)})`, id: 'p-' + im.slug, url: 'property/' + im.slug + '/', titolo: `${titoloUniforme(im)} in ${im.contratto === 'A' ? 'affitto' : 'vendita'} – ${indirizzo(im)} – ${SITO.nome}`, descrizione: (riassuntoIm(im) + '. ' + im.testo).slice(0, 155), attiva: 'immobili/', immagine: foto(im, 1, 'l'), dati: [datiImmobile(im)], corpo: () => paginaImmobile(im) });
+PAGINE.push({ id: 'cerco-immobile', url: 'cerco-immobile/', titolo: `${TITOLO_RICERCA} – ${SITO.nome}`, descrizione: 'Casa, negozio, ufficio o box a Milano e dintorni: raccontaci cosa cerchi e ti contattiamo appena arriva l’immobile giusto.', attiva: 'immobili/', corpo: paginaRicerca });
 PAGINE.push({ id: 'venduti', url: 'venduti-e-affittati/', titolo: `Ultimi venduti e affittati – ${SITO.nome}`, descrizione: 'Gli ultimi immobili venduti e affittati da Evol Group a Milano e dintorni.', attiva: 'immobili/', corpo: paginaVenduti });
 PAGINE.push({ id: 'contatti', url: 'contatti/', titolo: `Contatti – ${SITO.nome}`, descrizione: `${SITO.indirizzo} · ${SITO.email}`, attiva: 'contatti/', corpo: paginaContatti });
 PAGINE.push({ id: 'chi-siamo', url: 'chi-siamo/', titolo: `Chi siamo – ${SITO.nome}`, descrizione: SITO.chiSiamo.slice(0, 155), attiva: 'chi-siamo/', corpo: paginaChiSiamo });
