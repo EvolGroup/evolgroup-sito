@@ -61,3 +61,14 @@
 /user-dashboard/ / 301
 /compare-properties/ /immobili/ 301
 /search-result-page/ /immobili/ 301
+
+# Aggiunte il 19/11/2026 dopo l'avviso di Search Console:
+# vecchie schede WordPress di immobili non più in vendita (non erano nella sitemap del vecchio sito)
+/property/quadrilocale-di-130-mq-con-terrazzo-gigante-e-box/ /immobili/ 301
+/property/bilocale-con-balcone/ /immobili/ 301
+/property/bilocale-luminoso-piano-alto/ /immobili/ 301
+/property/bilocale-luminoso-mm-villa-s-g-2/ /immobili/ 301
+/property/box-singolo-2/ /immobili/ 301
+# link difettosi del vecchio tema ("micheletrombetta.com" scritto senza https, letto da Google come pagina)
+/:a/micheletrombetta.com /:a/ 301
+/:a/:b/micheletrombetta.com /:a/:b/ 301
