@@ -46,6 +46,12 @@
 /city/* /immobili/ 301
 /property_area/* /immobili/ 301
 /area/* /immobili/ 301
+/feature/* /immobili/ 301
+/property_feature/* /immobili/ 301
+/label/* /immobili/ 301
+/property_label/* /immobili/ 301
+/property_country/* /immobili/ 301
+/property_state/* /immobili/ 301
 /houzez-studio/* / 301
 /agent/* /chi-siamo/ 301
 /houzez_agent/* /chi-siamo/ 301
