@@ -1,6 +1,6 @@
 ---
 titolo: "Il peso dell’inflazione sugli affitti"
-data: 2024-08-02
+data: 2024-05-02
 immagine: "/media/2024/08/peso-inflazione-su-affitti.png"
 estratto: "Nel marzo 2024, l’inarrestabile fenomeno dell’inflazione ha lasciato il suo segno indelebile sul mercato immobiliare italiano, scatenando una serie di conseguenze tangibili. Nonostante il leggero calo dei prezzi al consu"
 categorie: "Il blog di Pietro Torcia"

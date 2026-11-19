@@ -1,6 +1,6 @@
 ---
 titolo: "La UE sulle case green: un impatto significativo sul mercato immobiliare italiano"
-data: 2024-08-02
+data: 2024-07-18
 immagine: "/media/2024/08/La-UE-sulle-case-green-un-impatto-significativo-sul-mercato-immobiliare-italiano-.png"
 estratto: "La normativa UE sulle Case Green sta già influenzando significativamente il mercato immobiliare italiano, spingendo sia i venditori sia gli acquirenti a rivedere le proprie strategie in risposta ai nuovi requisiti di eff"
 categorie: "Il blog di Pietro Torcia"

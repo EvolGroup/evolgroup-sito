@@ -1,6 +1,6 @@
 ---
 titolo: "Piano salva casa: il nuovo condono edilizio"
-data: 2024-08-02
+data: 2024-04-11
 immagine: "/media/2024/08/piano-salva-casa.png"
 estratto: "È in arrivo un nuovo intervento del Ministero delle Infrastrutture che punta ad agire sulle piccole difformità o le irregolarità strutturali che interessano l’80%% del patrimonio immobiliare italiano. Ma cosa ci dobbiamo"
 categorie: "Il blog di Pietro Torcia"
@@ -14,7 +14,7 @@ autore: "Pietro Torcia"
 
 <p>Il condono edilizio è <strong>una procedura legale</strong> attraverso la quale vengono regolarizzate opere edilizie realizzate in violazione delle normative urbanistiche e edilizie vigenti. Si tratta di un intervento straordinario che <strong>consente ai proprietari di immobili di sanare gli abusi commessi,</strong> evitando sanzioni più severe e permettendo il recupero della regolarità urbanistica.</p>
 
-<p>Precisamente, i benefici di questa normativa sono molteplici e possono avere un impatto positivo sia sulle famiglie che sui territori. In primo luogo<strong>, permette ai proprietari di immobili di regolarizzare la propria situazione senza dover demolire o subire pesanti sanzioni </strong><a href="http://economiche.il/">economiche.Il</a> condono edilizio può poi favorire il recupero di aree degradate o inutilizzate,<strong> incentivando la riqualificazione urbana e il miglioramento del paesaggio urbano</strong>. Le zone precedentemente occupate abusivamente possono infatti essere trasformate in spazi pubblici, parchi o nuove costruzioni conformi alle norme urbanistiche, <strong>contribuendo così alla valorizzazione del territorio.</strong></p>
+<p>Precisamente, i benefici di questa normativa sono molteplici e possono avere un impatto positivo sia sulle famiglie che sui territori. In primo luogo<strong>, permette ai proprietari di immobili di regolarizzare la propria situazione senza dover demolire o subire pesanti sanzioni </strong>economiche. Il condono edilizio può poi favorire il recupero di aree degradate o inutilizzate,<strong> incentivando la riqualificazione urbana e il miglioramento del paesaggio urbano</strong>. Le zone precedentemente occupate abusivamente possono infatti essere trasformate in spazi pubblici, parchi o nuove costruzioni conformi alle norme urbanistiche, <strong>contribuendo così alla valorizzazione del territorio.</strong></p>
 
 <p>Dal punto di vista sociale, il condono edilizio può inoltre rappresentare<strong> una soluzione per molte famiglie che vivono in abitazioni abusive</strong>, offrendo loro la possibilità di ottenere la regolarizzazione della propria casa e garantendo così il diritto ad un’abitazione dignitosa. Tuttavia, è importante sottolineare che il condono edilizio non<strong> risolve i problemi strutturali legati alla pianificazione urbana</strong> e alla tutela del territorio. Spesso, infatti, viene criticato per aver favorito la speculazione edilizia e per aver contribuito alla dispersione del territorio e al degrado ambientale.</p>
 

@@ -1,6 +1,6 @@
 ---
 titolo: "Lombardia: uno sguardo al mercato immobiliare"
-data: 2024-08-02
+data: 2024-05-16
 immagine: "/media/2024/08/Lombardia-uno-sguardo-al-mercato-immobiliare-.png"
 estratto: "Nel contesto economico italiano, il settore immobiliare ha sempre rappresentato un aspetto cruciale, riflettendo non solo le dinamiche economiche nazionali ma anche quelle regionali. In Lombardia, cuore economico del pae"
 categorie: "Il blog di Pietro Torcia"

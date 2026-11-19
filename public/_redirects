@@ -68,6 +68,21 @@
 /compare-properties/ /immobili/ 301
 /search-result-page/ /immobili/ 301
 
+# Articoli doppi del vecchio blog (stesso testo pubblicato due volte): resta l'indirizzo senza "-2"
+/acquistare-immobile-nuovo-o-da-ristrutturare-cosa-conviene-2/ /acquistare-immobile-nuovo-o-da-ristrutturare-cosa-conviene/ 301
+/caro-affitti-il-co-living-come-nuova-soluzione-per-gli-under-40-2/ /caro-affitti-il-co-living-come-nuova-soluzione-per-gli-under-40/ 301
+/case-allasta-pro-e-contro-2/ /case-allasta-pro-e-contro/ 301
+/case-green-agevolazioni-per-le-ristrutturazioni-2/ /case-green-agevolazioni-per-le-ristrutturazioni/ 301
+/fondi-immobiliari-una-crescita-resiliente-nonostante-le-turbolenze-globali-2/ /fondi-immobiliari-una-crescita-resiliente-nonostante-le-turbolenze-globali/ 301
+/il-peso-dellinflazione-sugli-affitti-2/ /il-peso-dellinflazione-sugli-affitti/ 301
+/la-ue-sulle-case-green-un-impatto-significativo-sul-mercato-immobiliare-italiano-2/ /la-ue-sulle-case-green-un-impatto-significativo-sul-mercato-immobiliare-italiano/ 301
+/lombardia-uno-sguardo-al-mercato-immobiliare-2/ /lombardia-uno-sguardo-al-mercato-immobiliare/ 301
+/nuovo-taglio-ai-tassi-dinteresse-2/ /nuovo-taglio-ai-tassi-dinteresse/ 301
+/osservatorio-del-mercato-immobiliare-2024-2/ /osservatorio-del-mercato-immobiliare-2024/ 301
+/piano-salva-casa-il-nuovo-condono-edilizio-2/ /piano-salva-casa-il-nuovo-condono-edilizio/ 301
+/rent-to-buy-cose-e-come-funziona-2/ /rent-to-buy-cose-e-come-funziona/ 301
+/taglio-ai-tassi-di-interesse-stop-alla-politica-restrittiva-della-bce-2/ /taglio-ai-tassi-di-interesse-stop-alla-politica-restrittiva-della-bce/ 301
+
 # Aggiunte il 19/11/2026 dopo l'avviso di Search Console:
 # vecchie schede WordPress di immobili non più in vendita (non erano nella sitemap del vecchio sito)
 /property/quadrilocale-di-130-mq-con-terrazzo-gigante-e-box/ /immobili/ 301

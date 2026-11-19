@@ -1,6 +1,6 @@
 ---
 titolo: "Case all’asta: pro e contro"
-data: 2024-08-02
+data: 2024-05-30
 immagine: "/media/2024/08/Case-allasta-pro-e-contro-.png"
 estratto: "Nel panorama immobiliare odierno, l’acquisto di una casa all’asta si configura come una scelta sempre più gettonata per chi è in cerca di un’occasione vantaggiosa come investimento. Tuttavia, rispetto alla tradizionale c"
 categorie: "Il blog di Pietro Torcia"

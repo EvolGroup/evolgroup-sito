@@ -1,6 +1,6 @@
 ---
 titolo: "Rent to buy: cos’è e come funziona"
-data: 2024-08-02
+data: 2024-04-25
 immagine: "/media/2024/08/rent-to-buy.png"
 estratto: "Il rent to buy, o locazione con patto di futura vendita, è un accordo contrattuale che consente a un individuo di affittare la propria proprietà con l’opzione di acquistarla in un momento successivo. Questo tipo di contr"
 categorie: "Il blog di Pietro Torcia"

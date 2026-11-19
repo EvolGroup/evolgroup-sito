@@ -370,7 +370,7 @@ function paginaBlog() {
   const elenco = anteprimeBlog();
   return `<section class="pagina-titolo"><div class="wrap"><h1>Il blog di Pietro Torcia</h1><p>Aggiornamenti sul mercato immobiliare e preziosi approfondimenti sulle tendenze del settore secondo Pietro Torcia.</p></div></section>
 <section class="wrap"><div class="griglia blog">${elenco.map(cardArticolo).join('')}</div>
-${ARTICOLI.length ? '' : '<p class="nota">Nell’anteprima compaiono solo gli ultimi articoli: tutti i 61 articoli vengono trasferiti automaticamente al passaggio.</p>'}</section>`;
+${ARTICOLI.length ? '' : '<p class="nota">Nell’anteprima compaiono solo gli ultimi articoli: tutti gli articoli vengono trasferiti automaticamente al passaggio.</p>'}</section>`;
 }
 function paginaArticolo(a) {
   const altri = ARTICOLI.filter((x) => x !== a).slice(0, 3).map((x) => ({ href: link(x.slug + '/'), img: x.immagine, data: x.data, titolo: x.titolo, estratto: x.estratto }));

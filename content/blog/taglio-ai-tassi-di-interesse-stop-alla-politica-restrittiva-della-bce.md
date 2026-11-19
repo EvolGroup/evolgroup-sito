@@ -1,6 +1,6 @@
 ---
 titolo: "Taglio ai tassi di interesse: stop alla politica restrittiva della BCE"
-data: 2024-08-02
+data: 2024-06-13
 immagine: "/media/2024/08/Taglio-ai-tassi-di-interesse-stop-alla-politica-restrittiva-della-BCE-.png"
 estratto: "Era atteso da tempo ed è finalmente arrivato: la Banca Centrale Europea ha deciso di tagliare i tassi d’interesse di 25 punti base. Una mossa che avrà un impatto positivo per chi ha un mutuo a tasso variabile, mentre per"
 categorie: "Il blog di Pietro Torcia"

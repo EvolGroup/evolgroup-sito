@@ -1,6 +1,6 @@
 ---
 titolo: "Acquistare immobile nuovo o da ristrutturare: cosa conviene?"
-data: 2024-08-02
+data: 2024-05-23
 immagine: "/media/2024/08/Acquistare-immobile-nuovo-o-da-ristrutturare-cosa-conviene-.png"
 estratto: "Il mercato immobiliare italiano è in costante evoluzione e, con la variazione dei prezzi degli immobili, cambiano anche le esigenze e la domanda dei diversi acquirenti. Ma in questa prima metà del 2024, come sono evoluti"
 categorie: "Il blog di Pietro Torcia"

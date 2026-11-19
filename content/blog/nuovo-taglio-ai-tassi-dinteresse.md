@@ -1,6 +1,6 @@
 ---
 titolo: "Nuovo taglio ai tassi d’interesse?"
-data: 2024-08-02
+data: 2024-05-09
 immagine: "/media/2024/08/nuovo-taglio-ai-tassi-di-interesse.png"
 estratto: "Nuovo taglio ai tassi d’interesse? Siamo vicini ad un prossimo taglio dei tassi di interesse nell’eurozona? Forse è presto dirlo, ma nelle ultime settimana la presidente della Banca Centrale Europea, Christine Lagarde, h"
 categorie: "Il blog di Pietro Torcia"

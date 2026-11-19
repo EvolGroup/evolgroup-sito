@@ -1,6 +1,6 @@
 ---
 titolo: "Case Green: agevolazioni per le ristrutturazioni"
-data: 2024-08-02
+data: 2024-04-18
 immagine: "/media/2024/08/case-green.png"
 estratto: "Con la pubblicazione della nuova direttiva Casa Green, le ristrutturazioni stanno diventando un obiettivo fondamentale per molti proprietari di abitazioni. Tuttavia, prima di intraprendere un progetto di questo genere, è"
 categorie: "Il blog di Pietro Torcia"

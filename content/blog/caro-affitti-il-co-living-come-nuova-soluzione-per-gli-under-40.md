@@ -1,6 +1,6 @@
 ---
 titolo: "Caro affitti: il co-living come nuova soluzione per gli under 40"
-data: 2024-08-02
+data: 2024-07-04
 immagine: "/media/2024/08/Caro-affitti-il-co-living-come-nuova-soluzione-per-gli-under-40-.png"
 estratto: "Gli italiani tra i 23 e i 40 anni si trovano ad affrontare una sfida sempre più pressante: l’accesso alla casa. I prezzi alle stelle degli immobili, uniti alla precarietà economica e lavorativa, rendono il sogno di una c"
 categorie: "Il blog di Pietro Torcia"

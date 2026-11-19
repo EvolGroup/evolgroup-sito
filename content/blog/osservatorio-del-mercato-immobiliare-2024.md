@@ -1,6 +1,6 @@
 ---
 titolo: "Osservatorio del mercato immobiliare 2024"
-data: 2024-08-02
+data: 2024-06-20
 immagine: "/media/2024/08/Osservatorio-del-mercato-immobiliare-2024-.png"
 estratto: "L’Agenzia delle Entrate ha reso noti i dati relativi all’andamento delle compravendite immobiliari in questi primi mesi 2024. Sono quasi 155 mila le abitazioni compravendute con una differenza del -7,2% rispetto al primo"
 categorie: "Il blog di Pietro Torcia"

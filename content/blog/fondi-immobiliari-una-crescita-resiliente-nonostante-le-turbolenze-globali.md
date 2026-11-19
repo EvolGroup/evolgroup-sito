@@ -1,6 +1,6 @@
 ---
 titolo: "Fondi immobiliari: una crescita resiliente nonostante le turbolenze globali"
-data: 2024-08-02
+data: 2024-07-11
 immagine: "/media/2024/08/Fondi-immobiliari-una-crescita-resiliente-nonostante-le-turbolenze-globali-.png"
 estratto: "Nel complesso ed incerto scenario socio-economico mondiale, caratterizzato da crisi politiche e conflitti tra Paesi, sorprende l’andamento positivo del mercato del risparmio gestito in immobili. Fondi immobiliari e REITs"
 categorie: "Il blog di Pietro Torcia"
