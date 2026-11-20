@@ -225,7 +225,7 @@ function moduloValutazione({ variante = 'home', id = '' } = {}) {
     <div class="campi2"><label>Tipologia di immobile<select name="tipologia" required><option value="">Seleziona…</option><option>Appartamento</option><option>Villa</option><option>Ufficio</option><option>Altro</option></select></label>
     <label>Superficie indicativa (m²)<input name="superficie" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="es. 80" required></label></div>
     <label>Nome e cognome<input name="nome" required maxlength="100" autocomplete="name"></label>
-    <div class="campi2"><label>Telefono<input name="telefono" type="tel" required autocomplete="tel" inputmode="tel" pattern="[+0-9][0-9 ./()-]{5,19}" title="Inserisci un numero di telefono valido, ad esempio 333 123 4567" placeholder="es. 333 123 4567"></label>
+    <div class="campi2"><label>Telefono<input name="telefono" type="tel" required autocomplete="tel" inputmode="tel" pattern="[+]?[0-9 ]{6,20}" title="Inserisci un numero di telefono valido, ad esempio 333 123 4567" placeholder="es. 333 123 4567"></label>
     <label>Email<input name="email" type="email" required autocomplete="email" placeholder="nome@esempio.it"></label></div>
     <label class="check"><input type="checkbox" required><span>Ho letto l’<a href="${SITO.privacy}" target="_blank" rel="noopener">informativa privacy</a> e acconsento a essere ricontattato per questa richiesta.</span></label>
     <button class="btn lp-invia">Richiedi la valutazione gratuita</button>

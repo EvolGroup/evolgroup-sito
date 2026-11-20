@@ -1,34 +1,3 @@
-  document.querySelectorAll('form[data-form]').forEach(function (f) {
-    var esitoBox = f.querySelector('.form-esito');
-    if (esitoBox) { esitoBox.setAttribute('role', 'status'); esitoBox.setAttribute('aria-live', 'polite'); }
-    f.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (f.dataset.inInvio === '1') return; // niente doppi invii con clic ripetuti
-      if (f.checkValidity && !f.checkValidity()) { if (f.reportValidity) f.reportValidity(); return; }
-      var esito = f.querySelector('.form-esito');
-      var chiave = f.dataset.chiave || window.EVOL_CHIAVE_NEWSLETTER || '';
-      esito.hidden = false;
-      if (anteprima || !chiave) { esito.textContent = 'Questa è un’anteprima: nel sito definitivo il messaggio arriverà alla vostra email.'; return; }
-      var pulsanti = f.querySelectorAll('button');
-      function blocca(si) { f.dataset.inInvio = si ? '1' : ''; for (var k = 0; k < pulsanti.length; k++) pulsanti[k].disabled = si; f.setAttribute('aria-busy', si ? 'true' : 'false'); }
-      blocca(true);
-      esito.textContent = 'Invio in corso…';
-      var dati = new FormData(f); dati.set('access_key', chiave); dati.append('pagina', location.href);
-      if (provenienza) { dati.append('provenienza', provenienza.fonte || ''); if (provenienza.campagna) dati.append('campagna', provenienza.campagna); if (provenienza.annuncio) dati.append('annuncio', provenienza.annuncio); if (provenienza.gclid) dati.append('gclid', provenienza.gclid); dati.append('pagina_di_arrivo', provenienza.pagina_di_arrivo || ''); }
-      fetch('https://api.web3forms.com/submit', { method: 'POST', body: dati, headers: { Accept: 'application/json' } })
-        .then(function (r) { return r.json(); })
-        .then(function (j) {
-          var nl = f.dataset.form === 'newsletter';
-          if (j && j.success) {
-            esito.textContent = nl ? 'Iscrizione completata, grazie!' : (f.dataset.successo || 'Grazie! Ti risponderemo al più presto.');
-            traccia(nl ? 'iscrizione_newsletter' : 'generate_lead', { modulo: f.dataset.form, pagina: location.pathname });
-            f.reset();
-          } else esito.textContent = 'Invio non riuscito: la richiesta non è arrivata. Riprova tra poco oppure scrivici a info@evolgroup.it.';
-          blocca(false);
-        })
-        .catch(function () { esito.textContent = 'Connessione non riuscita: la richiesta non è stata inviata. Controlla la connessione e riprova, oppure scrivici a info@evolgroup.it.'; blocca(false); });
-    });
-  });
 (function () {
   var anteprima = document.body.classList.contains('modalita-anteprima');
   function traccia(nome, dati) { try { if (window.gtag && !anteprima) window.gtag('event', nome, dati || {}); } catch (e) {} }
@@ -174,21 +143,36 @@
     document.addEventListener('keydown', function (e) { if (lb.hidden) return; if (e.key === 'Escape') lb.hidden = true; if (e.key === 'ArrowLeft') vai(i - 1); if (e.key === 'ArrowRight') vai(i + 1); });
   });
 
-  // --- moduli: inviati a Web3Forms (email a info@ o a Vittorio); in anteprima non partono ---
+  // --- moduli: inviati a Web3Forms (email a info@); in anteprima non partono ---
   document.querySelectorAll('form[data-form]').forEach(function (f) {
+    var esitoBox = f.querySelector('.form-esito');
+    if (esitoBox) { esitoBox.setAttribute('role', 'status'); esitoBox.setAttribute('aria-live', 'polite'); }
     f.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (f.dataset.inInvio === '1') return; // niente doppi invii con clic ripetuti
+      if (f.checkValidity && !f.checkValidity()) { if (f.reportValidity) f.reportValidity(); return; }
       var esito = f.querySelector('.form-esito');
       var chiave = f.dataset.chiave || window.EVOL_CHIAVE_NEWSLETTER || '';
       esito.hidden = false;
       if (anteprima || !chiave) { esito.textContent = 'Questa è un’anteprima: nel sito definitivo il messaggio arriverà alla vostra email.'; return; }
+      var pulsanti = f.querySelectorAll('button');
+      var blocca = function (si) { f.dataset.inInvio = si ? '1' : ''; for (var k = 0; k < pulsanti.length; k++) pulsanti[k].disabled = si; f.setAttribute('aria-busy', si ? 'true' : 'false'); };
+      blocca(true);
       esito.textContent = 'Invio in corso…';
-      var dati = new FormData(f); dati.append('access_key', chiave); dati.append('pagina', location.href);
-      if (provenienza) { dati.append('provenienza', provenienza.fonte || ''); if (provenienza.campagna) dati.append('campagna', provenienza.campagna); if (provenienza.annuncio) dati.append('annuncio', provenienza.annuncio); dati.append('pagina_di_arrivo', provenienza.pagina_di_arrivo || ''); }
-      fetch('https://api.web3forms.com/submit', { method: 'POST', body: dati })
+      var dati = new FormData(f); dati.set('access_key', chiave); dati.append('pagina', location.href);
+      if (provenienza) { dati.append('provenienza', provenienza.fonte || ''); if (provenienza.campagna) dati.append('campagna', provenienza.campagna); if (provenienza.annuncio) dati.append('annuncio', provenienza.annuncio); if (provenienza.gclid) dati.append('gclid', provenienza.gclid); dati.append('pagina_di_arrivo', provenienza.pagina_di_arrivo || ''); }
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: dati, headers: { Accept: 'application/json' } })
         .then(function (r) { return r.json(); })
-        .then(function (j) { var nl = f.dataset.form === 'newsletter'; esito.textContent = j.success ? (nl ? 'Iscrizione completata, grazie!' : 'Grazie! Ti risponderemo al più presto.') : 'Invio non riuscito: scrivici a info@evolgroup.it.'; if (j.success) { traccia(nl ? 'iscrizione_newsletter' : 'generate_lead', { modulo: f.dataset.form, pagina: location.pathname }); f.reset(); } })
-        .catch(function () { esito.textContent = 'Invio non riuscito: scrivici a info@evolgroup.it.'; });
+        .then(function (j) {
+          var nl = f.dataset.form === 'newsletter';
+          if (j && j.success) {
+            esito.textContent = nl ? 'Iscrizione completata, grazie!' : (f.dataset.successo || 'Grazie! Ti risponderemo al più presto.');
+            traccia(nl ? 'iscrizione_newsletter' : 'generate_lead', { modulo: f.dataset.form, pagina: location.pathname });
+            f.reset();
+          } else esito.textContent = 'Invio non riuscito: la richiesta non è arrivata. Riprova tra poco oppure scrivici a info@evolgroup.it.';
+          blocca(false);
+        })
+        .catch(function () { esito.textContent = 'Connessione non riuscita: la richiesta non è stata inviata. Controlla la connessione e riprova, oppure scrivici a info@evolgroup.it.'; blocca(false); });
     });
   });
 })();
