@@ -481,7 +481,6 @@ const LP_ICONE = {
 function intestazioneLanding() {
   return `<header class="site-header lp-header"><div class="wrap nav-wrap">
   <a href="${link('')}" class="logo"><img src="${up(SITO.logoChiaro)}" alt="${SITO.nome} – torna alla home" width="126" height="52"></a>
-  <a class="btn lp-header-cta" href="#richiesta">Valutazione gratuita</a>
 </div></header>`;
 }
 function piedeLanding() {
@@ -515,7 +514,6 @@ function paginaValutazioneMilano() {
     <p class="occhiello">Valutazione immobiliare a Milano</p>
     <h1>Vuoi vendere casa a Milano? Parti dal giusto valore.</h1>
     <p class="lp-sottotitolo">Scopri il valore di mercato del tuo immobile con una valutazione professionale, gratuita e senza impegno. Un consulente Evol Group ti aiuterà a capire come valorizzare la tua proprietà e affrontare la vendita con maggiore consapevolezza.</p>
-    <p class="lp-azioni"><a class="btn" href="#richiesta">Richiedi la tua valutazione gratuita</a></p>
     ${google}
   </div>
   ${moduloValutazione({ variante: 'landing', id: 'richiesta' })}
@@ -542,7 +540,18 @@ function paginaValutazioneMilano() {
 </div></section>
 <section class="cta lp-cta"><div class="wrap lp-stretta"><h2>Conoscere il valore della tua casa è il primo passo per venderla bene.</h2>
   <p>Richiedi una valutazione professionale e confrontati con un consulente Evol Group.</p>
-  <a class="btn" href="#richiesta">Richiedi la tua valutazione</a></div></section>`;
+  <a class="btn" href="#richiesta">Richiedi la tua valutazione</a></div></section>
+<script>/* solo landing: i link al modulo lo portano sempre in vista e mettono il cursore nel primo campo (anche da tastiera) */
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[href="#richiesta"]'); if (!a) return;
+  var m = document.getElementById('richiesta'); if (!m) return;
+  e.preventDefault();
+  var lento = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  m.scrollIntoView({ behavior: lento ? 'smooth' : 'auto', block: 'start' });
+  if (history.replaceState) history.replaceState(null, '', '#richiesta');
+  var primo = m.querySelector('input:not([type=hidden]):not(.trappola), select');
+  if (primo) setTimeout(function () { primo.focus({ preventScroll: true }); }, lento ? 600 : 0);
+});</script>`;
 }
 
 // ---------- elenco pagine ----------
