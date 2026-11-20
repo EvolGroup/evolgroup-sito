@@ -36,4 +36,4 @@
 .lp-cta h2{color:#fff}
 .lp-footer{padding-top:0}.lp-footer-riga{padding-top:26px;padding-bottom:26px;font-size:.85rem;color:var(--grigio)}.lp-footer-riga p{margin:0 0 6px}.lp-footer-riga a{color:var(--testo)}
 @media (max-width:900px){.lp-hero-griglia,.lp-team{grid-template-columns:1fr;gap:28px}.lp-vantaggi,.lp-passi{grid-template-columns:1fr}.lp-passi li{padding:0 0 0 58px}}
-@media (max-width:560px){.lp-hero{padding:28px 0 44px}.lp-sottotitolo{font-size:1rem}.lp-azioni{margin:18px 0 12px}.lp-azioni .btn{width:100%;justify-content:center}.lp-header-cta{display:none}}
+@media (max-width:560px){.lp-hero{padding:28px 0 44px}.lp-sottotitolo{font-size:1rem}.lp-azioni{margin:18px 0 12px}.lp-azioni .btn{width:100%;justify-content:center;text-align:center}.lp-header-cta{display:none}}

@@ -221,7 +221,7 @@ function moduloValutazione({ variante = 'home', id = '' } = {}) {
     return `<form class="contatto mini-valutazione lp-modulo" id="${id}" data-form="valutazione" data-successo="Richiesta inviata, grazie! Un consulente Evol Group ti contatterà per approfondire." data-chiave="${esc(chiave)}" method="post" action="https://api.web3forms.com/submit" aria-labelledby="${id}-titolo">
     <input type="hidden" name="access_key" value="${esc(chiave)}"><input type="hidden" name="subject" value="Richiesta di valutazione – landing Milano (evolgroup.it)"><input type="hidden" name="from_name" value="Sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off" aria-hidden="true">
     <h2 class="lp-modulo-titolo" id="${id}-titolo">Richiedi la valutazione gratuita</h2>
-    <label>Zona dell’immobile<input name="zona" required maxlength="120" placeholder="es. Città Studi, Milano · Sesto San Giovanni" autocomplete="address-level2"></label>
+    <label>Zona dell’immobile<input name="zona" required maxlength="120" placeholder="es. Città Studi, Milano" autocomplete="address-level2"></label>
     <div class="campi2"><label>Tipologia di immobile<select name="tipologia" required><option value="">Seleziona…</option><option>Appartamento</option><option>Villa</option><option>Ufficio</option><option>Altro</option></select></label>
     <label>Superficie indicativa (m²)<input name="superficie" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="es. 80" required></label></div>
     <label>Nome e cognome<input name="nome" required maxlength="100" autocomplete="name"></label>
