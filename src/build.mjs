@@ -169,9 +169,10 @@ function piede(testoWa = 'Buongiorno, vi contatto dal sito evolgroup.it') {
 </footer>`;
 }
 
-function moduloContatto({ oggetto = '', destinatario = 'generale', titolo = 'Scrivici', soggetto = 'Nuovo messaggio dal sito evolgroup.it' } = {}) {
+// tipo = nome del modulo in Google Analytics (dimensione "Tipo di modulo"): contatto, immobile, valutazione, ricerca
+function moduloContatto({ oggetto = '', destinatario = 'generale', titolo = 'Scrivici', soggetto = 'Nuovo messaggio dal sito evolgroup.it', tipo = 'contatto' } = {}) {
   const chiave = (SITO.chiaviModuli || {})[destinatario] || (SITO.chiaviModuli || {}).generale || '';
-  return `<form class="contatto" data-form="contatto" data-chiave="${esc(chiave)}" data-destinatario="${destinatario}">
+  return `<form class="contatto" data-form="${tipo}" data-chiave="${esc(chiave)}" data-destinatario="${destinatario}">
   <input type="hidden" name="subject" value="${esc(soggetto)}"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
   <h3>${titolo}</h3>
   <div class="campi2"><label>Nome e cognome<input name="nome" required autocomplete="name"></label>
@@ -337,7 +338,7 @@ function paginaImmobile(im) {
       ${plan ? `<h2>Planimetria</h2><button type="button" class="planimetria-btn" data-apri="${im.foto.titoli.length}" aria-label="Ingrandisci la planimetria"><img class="planimetria" src="${plan.replace('http://', 'https://')}" alt="Planimetria" loading="lazy"><span>Clicca per ingrandire</span></button>` : ''}
       ${im.lat ? `<h2>Posizione</h2><div class="mappa-box"><div class="mappa" data-mappa data-lat="${im.lat}" data-lng="${im.lng}" data-etichetta="${esc(tit + ' · ' + indirizzo(im))}"></div><button type="button" class="btn btn-centra" data-centra>${ICONE.pin} Centra sull’immobile</button></div>` : ''}
     </div>
-    <aside class="laterale">${moduloContatto({ titolo: 'Ti interessa questo immobile?', soggetto: `Richiesta info – ${tit}, rif. ${im.rif}`, oggetto: `Buongiorno, vorrei ricevere informazioni sull’immobile rif. ${im.rif} (${tit}, ${indirizzo(im)}).` })}
+    <aside class="laterale">${moduloContatto({ titolo: 'Ti interessa questo immobile?', tipo: 'immobile', soggetto: `Richiesta info – ${tit}, rif. ${im.rif}`, oggetto: `Buongiorno, vorrei ricevere informazioni sull’immobile rif. ${im.rif} (${tit}, ${indirizzo(im)}).` })}
       <p class="nota">Oppure chiamaci: <a href="tel:${tel(SITO.telefoni[0])}">${SITO.telefoni[0]}</a> · <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a></p>
       <p class="link-ricerca">Non è quello giusto? <a href="${link('cerco-immobile/')}">Scrivici cosa stai cercando</a></p></aside>
   </div>
@@ -418,7 +419,7 @@ function paginaVendereCasa() {
   <p>Sopralluogo all’interno dell’immobile, analisi dell’andamento di mercato, confronto con gli immobili in vendita e venduti, conoscenza della zona e relativi piani di sviluppo: così determiniamo il giusto prezzo di mercato.</p>
   <p>Con il nostro studio tecnico, notarile e legale verifichiamo conformità e documenti, e i nostri fotografi valorizzano il tuo immobile negli annunci.</p>
   <p><strong>Preferisci parlarne a voce?</strong><br><a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a> (anche WhatsApp)</p></div>
-  <div>${moduloContatto({ titolo: 'Richiedi una valutazione', destinatario: 'vendere', soggetto: 'Richiesta di valutazione dal sito evolgroup.it', oggetto: 'Vorrei una valutazione del mio immobile in via ' })}</div></section>`;
+  <div>${moduloContatto({ titolo: 'Richiedi una valutazione', destinatario: 'vendere', tipo: 'valutazione', soggetto: 'Richiesta di valutazione dal sito evolgroup.it', oggetto: 'Vorrei una valutazione del mio immobile in via ' })}</div></section>`;
 }
 
 function paginaVittorio() {
