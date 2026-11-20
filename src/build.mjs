@@ -9,6 +9,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/sito.json'), 'utf8'));
 const { immobili: IMMOBILI } = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/immobili.json'), 'utf8'));
 const CSS = fs.readFileSync(path.join(ROOT, 'src/stile.css'), 'utf8');
+const CSS_LANDING = fs.readFileSync(path.join(ROOT, 'src/landing.css'), 'utf8'); // solo per le pagine con intestazione ridotta
 
 // ---------- articoli del blog (content/blog/*.md, scritti anche dal pannello Pages CMS) ----------
 function leggiArticoli() {
@@ -211,13 +212,49 @@ function paginaRicerca() {
 <section class="wrap ricerca">${moduloRicerca()}</section>`;
 }
 
+// ---------- modulo di valutazione (home e landing) ----------
+// variante 'home': il modulo completo della home (indirizzo, condizioni, note).
+// variante 'landing': sei campi (zona, tipologia, superficie, nome, telefono, email) per le campagne.
+function moduloValutazione({ variante = 'home', id = '' } = {}) {
+  const chiave = (SITO.chiaviModuli || {}).vendere || (SITO.chiaviModuli || {}).generale || '';
+  if (variante === 'landing') {
+    return `<form class="contatto mini-valutazione lp-modulo" id="${id}" data-form="valutazione" data-successo="Richiesta inviata, grazie! Un consulente Evol Group ti contatterà per approfondire." data-chiave="${esc(chiave)}" method="post" action="https://api.web3forms.com/submit" aria-labelledby="${id}-titolo">
+    <input type="hidden" name="access_key" value="${esc(chiave)}"><input type="hidden" name="subject" value="Richiesta di valutazione – landing Milano (evolgroup.it)"><input type="hidden" name="from_name" value="Sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <h2 class="lp-modulo-titolo" id="${id}-titolo">Richiedi la valutazione gratuita</h2>
+    <label>Zona dell’immobile<input name="zona" required maxlength="120" placeholder="es. Città Studi, Milano · Sesto San Giovanni" autocomplete="address-level2"></label>
+    <div class="campi2"><label>Tipologia di immobile<select name="tipologia" required><option value="">Seleziona…</option><option>Appartamento</option><option>Villa</option><option>Ufficio</option><option>Altro</option></select></label>
+    <label>Superficie indicativa (m²)<input name="superficie" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="es. 80" required></label></div>
+    <label>Nome e cognome<input name="nome" required maxlength="100" autocomplete="name"></label>
+    <div class="campi2"><label>Telefono<input name="telefono" type="tel" required autocomplete="tel" inputmode="tel" pattern="[+0-9][0-9 ./()-]{5,19}" title="Inserisci un numero di telefono valido, ad esempio 333 123 4567" placeholder="es. 333 123 4567"></label>
+    <label>Email<input name="email" type="email" required autocomplete="email" placeholder="nome@esempio.it"></label></div>
+    <label class="check"><input type="checkbox" required><span>Ho letto l’<a href="${SITO.privacy}" target="_blank" rel="noopener">informativa privacy</a> e acconsento a essere ricontattato per questa richiesta.</span></label>
+    <button class="btn lp-invia">Richiedi la valutazione gratuita</button>
+    <p class="lp-nota">Gratuita e senza impegno. I tuoi dati saranno utilizzati per gestire la richiesta, secondo l’informativa privacy.</p>
+    <p class="form-esito" role="status" aria-live="polite" hidden></p>
+  </form>`;
+  }
+  return `<form class="contatto mini-valutazione" data-form="valutazione" data-chiave="${esc(chiave)}">
+    <input type="hidden" name="subject" value="Richiesta di valutazione dal sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
+    <label>Indirizzo dell’immobile<input name="indirizzo" required placeholder="Via, numero civico, città" autocomplete="street-address"></label>
+    <div class="campi2"><label>Tipologia<select name="tipologia" required><option value="">Seleziona…</option><option>Appartamento</option><option>Villa / casa indipendente</option><option>Negozio / ufficio</option><option>Box</option><option>Altro</option></select></label>
+    <label>Superficie (m²)<input name="superficie" type="number" min="1" inputmode="numeric" placeholder="es. 80" required></label></div>
+    <label>Condizioni<select name="condizioni" required><option value="">Seleziona…</option><option>Da ristrutturare</option><option>Buone condizioni</option><option>Ristrutturato</option><option>Nuovo</option></select></label>
+    <div class="campi2"><label>Nome<input name="nome" required autocomplete="name"></label>
+    <label>Telefono<input name="telefono" type="tel" required autocomplete="tel"></label></div>
+    <label>Email<input name="email" type="email" required autocomplete="email"></label>
+    <label><span>Maggiori informazioni <span class="facoltativo">(facoltativo)</span></span><textarea name="note" rows="3" placeholder="Piano, ascensore, box, cantina, tempi di vendita…"></textarea></label>
+    <label class="check"><input type="checkbox" required><span>Ho letto la <a href="${SITO.privacy}">privacy policy</a> e acconsento a essere ricontattato.</span></label>
+    <button class="btn">Richiedi la valutazione gratuita</button>
+    <p class="form-esito" hidden></p>
+  </form>`;
+}
+
 // ---------- pagine ----------
 function paginaHome() {
   const vendita = IMMOBILI.filter((i) => i.contratto !== 'A');
   const recenti = [...vendita].sort((a, b) => b.mod.localeCompare(a.mod)).slice(0, 3);
   const F = SITO.fiducia || {};
   const stelle = '<span class="stelle" aria-hidden="true">★★★★★</span>';
-  const chiave = (SITO.chiaviModuli || {}).vendere || (SITO.chiaviModuli || {}).generale || '';
   return `<section class="hero" style="background-image:linear-gradient(90deg,rgba(10,20,30,.78) 0%,rgba(10,20,30,.55) 45%,rgba(10,20,30,.15) 100%),url('${up(SITO.hero)}')">
   <div class="wrap hero-testo"><h1>${esc(SITO.slogan)}</h1><p>${esc(SITO.sottotitolo)}</p>
   <div class="azioni"><a class="btn" href="${link('immobili/')}">Gli immobili</a><a class="btn btn-chiaro" href="#valutazione">Valuta la tua casa</a></div></div>
@@ -237,20 +274,7 @@ function paginaHome() {
   <div><p class="occhiello">Vendere casa</p><h2>Quanto vale la tua casa?</h2>
     <p>Richiedi una valutazione gratuita e senza impegno: analizziamo il mercato della tua zona, gli immobili venduti e quelli in vendita, e ti ricontattiamo con una stima realistica.</p>
     <ul class="vantaggi"><li>Valutazione gratuita e senza impegno</li><li>Sopralluogo e analisi di mercato</li><li>Ti seguiamo fino al rogito</li></ul></div>
-  <form class="contatto mini-valutazione" data-form="valutazione" data-chiave="${esc(chiave)}">
-    <input type="hidden" name="subject" value="Richiesta di valutazione dal sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
-    <label>Indirizzo dell’immobile<input name="indirizzo" required placeholder="Via, numero civico, città" autocomplete="street-address"></label>
-    <div class="campi2"><label>Tipologia<select name="tipologia" required><option value="">Seleziona…</option><option>Appartamento</option><option>Villa / casa indipendente</option><option>Negozio / ufficio</option><option>Box</option><option>Altro</option></select></label>
-    <label>Superficie (m²)<input name="superficie" type="number" min="1" inputmode="numeric" placeholder="es. 80" required></label></div>
-    <label>Condizioni<select name="condizioni" required><option value="">Seleziona…</option><option>Da ristrutturare</option><option>Buone condizioni</option><option>Ristrutturato</option><option>Nuovo</option></select></label>
-    <div class="campi2"><label>Nome<input name="nome" required autocomplete="name"></label>
-    <label>Telefono<input name="telefono" type="tel" required autocomplete="tel"></label></div>
-    <label>Email<input name="email" type="email" required autocomplete="email"></label>
-    <label><span>Maggiori informazioni <span class="facoltativo">(facoltativo)</span></span><textarea name="note" rows="3" placeholder="Piano, ascensore, box, cantina, tempi di vendita…"></textarea></label>
-    <label class="check"><input type="checkbox" required><span>Ho letto la <a href="${SITO.privacy}">privacy policy</a> e acconsento a essere ricontattato.</span></label>
-    <button class="btn">Richiedi la valutazione gratuita</button>
-    <p class="form-esito" hidden></p>
-  </form>
+  ${moduloValutazione()}
 </div></section>
 <section class="wrap chi-siamo-home">
   <div><p class="occhiello">Chi siamo</p><h2>Tre consulenti, una visione</h2><p>${esc(SITO.chiSiamo)}</p><a class="link-freccia" href="${link('chi-siamo/')}">Scopri di più →</a></div>
@@ -443,6 +467,80 @@ function paginaInArrivo(titolo, url) {
 <p><a class="btn" href="${SITO.dominio}/${url}">Vedi la versione attuale</a></p></section>`;
 }
 
+// ---------- landing per le campagne: /valutazione-immobiliare-milano/ ----------
+// Pagina per Google Ads: navigazione ridotta, un solo modulo, noindex e fuori dalla sitemap finché serve solo alle campagne.
+const LP_ICONE = {
+  mercato: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>',
+  consulente: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
+  strategia: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6l1.5-2h5L16 6"/></svg>',
+};
+function intestazioneLanding() {
+  return `<header class="site-header lp-header"><div class="wrap nav-wrap">
+  <a href="${link('')}" class="logo"><img src="${up(SITO.logoChiaro)}" alt="${SITO.nome} – torna alla home" width="126" height="52"></a>
+  <a class="btn lp-header-cta" href="#richiesta">Valutazione gratuita</a>
+</div></header>`;
+}
+function piedeLanding() {
+  return `<footer class="site-footer lp-footer"><div class="wrap lp-footer-riga">
+  <p><strong>${esc(SITO.ragioneSociale)}</strong> · ${esc(SITO.indirizzo)} · P. IVA ${SITO.piva}</p>
+  <p><a href="mailto:${SITO.email}">${SITO.email}</a> · <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a> · <a href="${SITO.privacy}" rel="noopener">Privacy policy</a> · <a href="${SITO.cookie}" rel="noopener">Cookie policy</a></p>
+</div></footer>`;
+}
+const LP_FOTO_TEAM = { 'Pietro Torcia': 'landing/pietro-320.webp', 'Vittorio Maviglia': 'landing/vittorio-320.webp', 'Daniele Orsini': 'landing/daniele-320.webp' };
+const LP_FAQ = [
+  ['La valutazione è davvero gratuita?', 'Sì. La richiesta di valutazione non comporta costi né obblighi di affidare un incarico di vendita.'],
+  ['Devo necessariamente vendere casa dopo la valutazione?', 'No. La valutazione ti aiuta a conoscere il valore dell’immobile e a decidere con maggiore consapevolezza.'],
+  ['Come viene determinato il valore dell’immobile?', 'Attraverso l’analisi delle caratteristiche della proprietà, della posizione e delle condizioni del mercato immobiliare di riferimento.'],
+  ['Operate anche fuori Milano?', 'Sì, Evol Group opera anche nella Città Metropolitana di Milano. La possibilità di effettuare una valutazione viene verificata in base alla zona dell’immobile.'],
+];
+function paginaValutazioneMilano() {
+  const F = SITO.fiducia || {};
+  const google = F.googleVoto ? `<a class="lp-google" href="${F.googleUrl}" target="_blank" rel="noopener"><span class="stelle" aria-hidden="true">★★★★★</span> <strong>${F.googleVoto}</strong> su Google · ${F.googleRecensioni} recensioni</a>` : '';
+  const vantaggi = [
+    ['mercato', 'Una valutazione basata sul mercato reale', 'Analizziamo caratteristiche dell’immobile, posizione, domanda locale e dati di mercato per individuare un valore di vendita ragionato.'],
+    ['consulente', 'Un consulente immobiliare dedicato', 'Un professionista ti accompagna nella valutazione e ti aiuta a comprendere le opportunità e le criticità della vendita.'],
+    ['strategia', 'Una strategia per valorizzare il tuo immobile', 'Fotografie professionali, presentazione curata e strumenti di promozione per proporre l’immobile al mercato in modo efficace.'],
+  ];
+  const passi = [
+    ['Invia la richiesta', 'Compila il modulo con le informazioni principali del tuo immobile.'],
+    ['Parla con un consulente', 'Un professionista Evol Group ti contatterà per approfondire le caratteristiche dell’immobile e concordare gli eventuali passaggi successivi.'],
+    ['Ricevi una valutazione professionale', 'Attraverso l’analisi del mercato e delle caratteristiche della proprietà, potrai conoscere una stima ragionata del suo valore.'],
+  ];
+  return `<section class="lp-hero"><div class="wrap lp-hero-griglia">
+  <div class="lp-hero-testo">
+    <p class="occhiello">Valutazione immobiliare a Milano</p>
+    <h1>Vuoi vendere casa a Milano? Parti dal giusto valore.</h1>
+    <p class="lp-sottotitolo">Scopri il valore di mercato del tuo immobile con una valutazione professionale, gratuita e senza impegno. Un consulente Evol Group ti aiuterà a capire come valorizzare la tua proprietà e affrontare la vendita con maggiore consapevolezza.</p>
+    <p class="lp-azioni"><a class="btn" href="#richiesta">Richiedi la tua valutazione gratuita</a></p>
+    ${google}
+  </div>
+  ${moduloValutazione({ variante: 'landing', id: 'richiesta' })}
+</div></section>
+<section class="wrap lp-sezione" aria-labelledby="lp-perche"><h2 id="lp-perche">Perché scegliere Evol Group</h2>
+  <div class="lp-vantaggi">${vantaggi.map(([ic, t, d]) => `<div class="lp-vantaggio"><span class="lp-icona">${LP_ICONE[ic]}</span><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
+</section>
+<section class="fascia" aria-labelledby="lp-come"><div class="wrap"><h2 id="lp-come">Come funziona la valutazione</h2>
+  <ol class="lp-passi">${passi.map(([t, d]) => `<li><h3>${t}</h3><p>${d}</p></li>`).join('')}</ol>
+</div></section>
+<section class="fiducia" aria-label="Fiducia e reputazione"><div class="wrap fiducia-griglia">
+  ${F.googleVoto ? `<a class="fiducia-voce" href="${F.googleUrl}" target="_blank" rel="noopener"><strong>${F.googleVoto} <span class="stelle" aria-hidden="true">★★★★★</span></strong><span>${F.googleRecensioni} recensioni su Google</span><em>Leggi le recensioni →</em></a>` : ''}
+  ${F.vendutiAffittati ? `<div class="fiducia-voce"><strong>${F.vendutiAffittati}</strong><span>immobili venduti o affittati</span></div>` : ''}
+  <div class="fiducia-voce"><strong>Milano</strong><span>ufficio in ${esc(SITO.indirizzo.replace(/,\s*\d{5}.*$/, ''))}</span></div>
+  ${F.fimaa ? `<div class="fiducia-voce"><strong>FIMAA</strong><span>agenzia associata alla Federazione Italiana Mediatori Agenti d’Affari</span></div>` : ''}
+</div></section>
+<section class="wrap lp-sezione lp-team" aria-labelledby="lp-chi"><div>
+  <h2 id="lp-chi">Consulenti immobiliari, non solo intermediari</h2>
+  <p>${esc(SITO.chiSiamo)}</p></div>
+  <div class="team">${SITO.team.map((t) => `<figure><img src="${up(LP_FOTO_TEAM[t.nome] || t.foto)}" alt="${esc(t.nome)}" width="320" height="320" loading="lazy" decoding="async"><figcaption>${esc(t.nome)}</figcaption></figure>`).join('')}</div>
+</section>
+<section class="fascia" aria-labelledby="lp-faq"><div class="wrap lp-stretta"><h2 id="lp-faq">Domande frequenti</h2>
+  ${LP_FAQ.map(([d, r]) => `<details class="lp-faq"><summary>${d}</summary><p>${r}</p></details>`).join('')}
+</div></section>
+<section class="cta lp-cta"><div class="wrap lp-stretta"><h2>Conoscere il valore della tua casa è il primo passo per venderla bene.</h2>
+  <p>Richiedi una valutazione professionale e confrontati con un consulente Evol Group.</p>
+  <a class="btn" href="#richiesta">Richiedi la tua valutazione</a></div></section>`;
+}
+
 // ---------- elenco pagine ----------
 PAGINE.push({ id: 'home', url: '', titolo: `${SITO.nome} – Agenzia immobiliare a Milano`, descrizione: SITO.sottotitolo, attiva: '', trasparente: true, corpo: paginaHome });
 PAGINE.push({ id: 'immobili', url: 'immobili/', titolo: `Immobili in vendita a Milano – ${SITO.nome}`, descrizione: 'Appartamenti, negozi e box in vendita a Milano e Sesto San Giovanni.', attiva: 'immobili/', corpo: paginaImmobili });
@@ -463,6 +561,7 @@ PAGINE.push({ id: 'chi-siamo', url: 'chi-siamo/', titolo: `Chi siamo – ${SITO.
 PAGINE.push({ id: 'servizi', url: 'servizi/', titolo: `Servizi – ${SITO.nome}`, descrizione: 'Intermediazione e consulenza immobiliare, consulenza finanziaria e property finding a Milano.', attiva: 'servizi/', corpo: paginaServizi });
 PAGINE.push({ id: 'vendere-casa', url: 'vendere-casa/', titolo: `Vendere casa a Milano – ${SITO.nome}`, descrizione: 'Richiedi una valutazione gratuita del tuo immobile a Milano.', attiva: '', corpo: paginaVendereCasa });
 PAGINE.push({ id: 'vittorio-maviglia', url: 'agente-immobiliare-vittorio-maviglia/', titolo: `Vittorio Maviglia, agente immobiliare a Milano – ${SITO.nome}`, descrizione: 'Il mio unico obiettivo: diventare il tuo punto di riferimento se devi vendere o acquistare casa.', attiva: 'chi-siamo/', corpo: paginaVittorio });
+PAGINE.push({ id: 'valutazione-milano', url: 'valutazione-immobiliare-milano/', titolo: `Valutazione immobiliare gratuita a Milano – ${SITO.nome}`, descrizione: 'Vuoi vendere casa a Milano? Richiedi una valutazione professionale, gratuita e senza impegno con un consulente Evol Group.', attiva: '', noindex: true, mappe: false, ridotta: true, corpo: paginaValutazioneMilano });
 PAGINE.push({ id: 'blog', url: 'blog/', titolo: `Blog – ${SITO.nome}`, descrizione: 'Il blog di Pietro Torcia sul mercato immobiliare di Milano.', attiva: 'blog/', corpo: paginaBlog });
 for (const a of ARTICOLI) {
   const img = a.immagine ? (a.immagine.startsWith('/') ? SITO.dominio + a.immagine : up(a.immagine)) : null;
@@ -484,7 +583,7 @@ function datiAgenzia() {
     areaServed: ['Milano', 'Sesto San Giovanni'] };
 }
 const jsonLd = (o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`;
-function documento({ titolo, descrizione, immagine, url, tipo = 'website', dati = [] }, corpoHtml) {
+function documento({ titolo, descrizione, immagine, url, tipo = 'website', dati = [], noindex = false, mappe = true, ridotta = false }, corpoHtml) {
   const canonical = SITO.dominio + '/' + url;
   const img = immagine || up(SITO.hero);
   return `<!DOCTYPE html>
@@ -497,24 +596,24 @@ ${SITO.iubendaWidget && !ANTEPRIMA ? `<script>var _iub=window._iub=window._iub||
 ${SITO.googleAnalytics && !ANTEPRIMA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${SITO.googleAnalytics}"></script>
 <script>gtag('js',new Date());gtag('config','${SITO.googleAnalytics}');</script>` : ''}
 <title>${esc(titolo)}</title><meta name="description" content="${esc(descrizione)}">
-<link rel="canonical" href="${canonical}"><link rel="icon" href="${up(SITO.favicon)}">
+${noindex ? '<meta name="robots" content="noindex, follow">\n' : ''}<link rel="canonical" href="${canonical}"><link rel="icon" href="${up(SITO.favicon)}">
 <meta property="og:type" content="${tipo}"><meta property="og:site_name" content="${esc(SITO.nome)}"><meta property="og:locale" content="it_IT">
 <meta property="og:title" content="${esc(titolo)}"><meta property="og:description" content="${esc(descrizione)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${esc(img)}"><meta name="twitter:card" content="summary_large_image">
 ${[datiAgenzia(), ...dati].map(jsonLd).join('')}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin defer></script>
-<style>${CSS}</style></head>
+${mappe ? `<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin defer></script>` : ''}
+<style>${CSS}${ridotta ? CSS_LANDING : ''}</style></head>
 <body>${corpoHtml}<script>${JS}</script></body></html>`;
 }
 
 if (ANTEPRIMA) {
-  const sezioni = PAGINE.map((p) => `<div class="vista" data-vista="${p.id}" data-titolo="${esc(p.titolo)}" hidden>${intestazione(p.attiva, p.trasparente)}<main>${p.corpo()}</main>${piede(p.wa)}</div>`).join('\n');
+  const sezioni = PAGINE.map((p) => `<div class="vista" data-vista="${p.id}" data-titolo="${esc(p.titolo)}" hidden>${p.ridotta ? intestazioneLanding() : intestazione(p.attiva, p.trasparente)}<main>${p.corpo()}</main>${p.ridotta ? piedeLanding() : piede(p.wa)}</div>`).join('\n');
   const banner = `<div class="banner-anteprima">Anteprima del nuovo sito Evol Group · i moduli non inviano ancora messaggi</div>`;
   const out = path.join(ROOT, 'anteprima/evolgroup-anteprima.html');
   fs.mkdirSync(path.dirname(out), { recursive: true });
-  fs.writeFileSync(out, documento(PAGINE[0], banner + sezioni).replace('<body>', '<body class="modalita-anteprima">'));
+  fs.writeFileSync(out, documento({ ...PAGINE[0], ridotta: true }, banner + sezioni).replace('<body>', '<body class="modalita-anteprima">'));
   console.log('Anteprima scritta in', path.relative(ROOT, out), `(${PAGINE.length} pagine)`);
 } else {
   const dist = path.join(ROOT, 'dist');
@@ -522,7 +621,7 @@ if (ANTEPRIMA) {
   for (const p of PAGINE) {
     const file = path.join(dist, p.url, 'index.html');
     fs.mkdirSync(path.dirname(file), { recursive: true });
-    fs.writeFileSync(file, documento(p, `${intestazione(p.attiva, p.trasparente)}<main>${p.corpo()}</main>${piede(p.wa)}`));
+    fs.writeFileSync(file, documento(p, `${p.ridotta ? intestazioneLanding() : intestazione(p.attiva, p.trasparente)}<main>${p.corpo()}</main>${p.ridotta ? piedeLanding() : piede(p.wa)}`));
   }
   const pub = path.join(ROOT, 'public');
   if (fs.existsSync(pub)) fs.cpSync(pub, dist, { recursive: true });
@@ -534,7 +633,7 @@ if (ANTEPRIMA) {
   // pagina 404
   fs.writeFileSync(path.join(dist, '404.html'), documento({ titolo: `Pagina non trovata – ${SITO.nome}`, descrizione: '', url: '404' }, `${intestazione('', false)}<main><section class="pagina-titolo"><div class="wrap"><h1>Pagina non trovata</h1><p>La pagina che cerchi non esiste più o è stata spostata.</p></div></section>
 <section class="wrap in-arrivo"><p>Forse l’immobile è stato venduto o affittato.</p><p><a class="btn" href="/immobili/">Vedi gli immobili disponibili</a> <a class="btn btn-chiaro-scuro" href="/">Torna alla home</a></p></section></main>${piede()}`));
-  fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${PAGINE.map((p) => `  <url><loc>${SITO.dominio}/${p.url}</loc></url>`).join('\n')}\n</urlset>\n`);
+  fs.writeFileSync(path.join(dist, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${PAGINE.filter((p) => !p.noindex).map((p) => `  <url><loc>${SITO.dominio}/${p.url}</loc></url>`).join('\n')}\n</urlset>\n`);
   fs.writeFileSync(path.join(dist, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${SITO.dominio}/sitemap.xml\n`);
   console.log('Sito scritto in dist/ —', PAGINE.length, 'pagine');
 }

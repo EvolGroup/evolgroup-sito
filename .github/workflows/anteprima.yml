@@ -1,0 +1,35 @@
+name: Anteprima (branch di sviluppo)
+
+# Pubblica i branch "landing-*" come ANTEPRIMA su Cloudflare Pages (indirizzo <branch>.evolgroup.pages.dev).
+# Non tocca il sito in produzione (che si pubblica solo da "main") e non scarica Getrix né salva dati.
+
+on:
+  push:
+    branches: ['landing-*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: anteprima-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  anteprima:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Costruisci il sito
+        run: node src/build.mjs
+
+      - name: Pubblica l'anteprima su Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy dist --project-name=evolgroup --branch=${{ github.ref_name }}
