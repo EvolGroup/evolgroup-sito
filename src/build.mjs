@@ -163,17 +163,21 @@ function piede(testoWa = 'Buongiorno, vi contatto dal sito evolgroup.it') {
     <div><h4>Contatti</h4><p>${esc(SITO.indirizzo)}</p><p><a href="mailto:${SITO.email}">${SITO.email}</a></p><p>Tel. <a href="tel:${tel(SITO.telefoni[0])}">${SITO.telefoni[0]}</a></p><p>Cell. <a href="tel:${tel(SITO.cellulare)}">${SITO.cellulare}</a></p>
       <p><a href="${SITO.privacy}" rel="noopener">Privacy policy</a> · <a href="${SITO.cookie}" rel="noopener">Cookie policy</a></p></div>
     <div><h4>Newsletter</h4><p>Iscriviti alla newsletter per rimanere aggiornato sui nuovi articoli.</p>
-      <form class="newsletter" data-form="newsletter" data-chiave="${esc((SITO.chiaviModuli || {}).generale || '')}"><input type="hidden" name="subject" value="Nuova iscrizione alla newsletter dal sito evolgroup.it"><input type="hidden" name="from_name" value="Sito evolgroup.it"><input type="hidden" name="messaggio" value="Nuova iscrizione alla newsletter del sito evolgroup.it. L’indirizzo da aggiungere alla lista è nel campo Email."><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off"><input type="email" name="email" placeholder="La tua email" required aria-label="Email"><button class="btn">Iscriviti</button>
+      <form class="newsletter" data-form="newsletter" data-chiave="${esc((SITO.chiaviModuli || {}).generale || '')}" ${invioSicuro()}>${chiaveNascosta((SITO.chiaviModuli || {}).generale || '')}<input type="hidden" name="subject" value="Nuova iscrizione alla newsletter dal sito evolgroup.it"><input type="hidden" name="from_name" value="Sito evolgroup.it"><input type="hidden" name="messaggio" value="Nuova iscrizione alla newsletter del sito evolgroup.it. L’indirizzo da aggiungere alla lista è nel campo Email."><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off"><input type="email" name="email" placeholder="La tua email" required aria-label="Email"><button class="btn">Iscriviti</button>
       <label class="check"><input type="checkbox" required><span>Accetto la <a href="${SITO.privacy}">privacy policy</a></span></label><p class="form-esito" hidden></p></form></div>
   </div>
   <div class="wrap copyright">© ${new Date().getFullYear()} ${SITO.ragioneSociale} · P. IVA ${SITO.piva} · ${esc(SITO.indirizzo)}</div>
 </footer>`;
 }
 
+// Invio di riserva se il JavaScript non parte: POST diretto a Web3Forms con la chiave nascosta.
+// Mai GET: i dati personali non devono finire nell'indirizzo della pagina (e quindi in cronologia, log o Analytics).
+const invioSicuro = () => `method="post" action="https://api.web3forms.com/submit"`;
+const chiaveNascosta = (chiave) => `<input type="hidden" name="access_key" value="${esc(chiave)}">`;
 // tipo = nome del modulo in Google Analytics (dimensione "Tipo di modulo"): contatto, immobile, valutazione, ricerca
 function moduloContatto({ oggetto = '', destinatario = 'generale', titolo = 'Scrivici', soggetto = 'Nuovo messaggio dal sito evolgroup.it', tipo = 'contatto' } = {}) {
   const chiave = (SITO.chiaviModuli || {})[destinatario] || (SITO.chiaviModuli || {}).generale || '';
-  return `<form class="contatto" data-form="${tipo}" data-chiave="${esc(chiave)}" data-destinatario="${destinatario}">
+  return `<form class="contatto" data-form="${tipo}" data-chiave="${esc(chiave)}" data-destinatario="${destinatario}" ${invioSicuro()}>${chiaveNascosta(chiave)}
   <input type="hidden" name="subject" value="${esc(soggetto)}"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
   <h3>${titolo}</h3>
   <div class="campi2"><label>Nome e cognome<input name="nome" required autocomplete="name"></label>
@@ -190,7 +194,7 @@ const TITOLO_RICERCA = 'Raccontaci cosa stai cercando';
 function moduloRicerca() {
   const chiave = (SITO.chiaviModuli || {}).generale || '';
   const sel = (nome, voci, req = true) => `<select name="${nome}"${req ? ' required' : ''}><option value="">Seleziona…</option>${voci.map((v) => `<option>${v}</option>`).join('')}</select>`;
-  return `<form class="contatto modulo-ricerca" data-form="ricerca" data-chiave="${esc(chiave)}">
+  return `<form class="contatto modulo-ricerca" data-form="ricerca" data-chiave="${esc(chiave)}" ${invioSicuro()}>${chiaveNascosta(chiave)}
   <input type="hidden" name="subject" value="Ricerca immobile dal sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
   <div class="campi2"><label>Cerco per${sel('cerco_per', ['Acquisto', 'Affitto'])}</label>
   <label>Tipologia${sel('tipologia', ['Appartamento', 'Villa / casa indipendente', 'Negozio', 'Ufficio', 'Box / posto auto', 'Capannone / laboratorio', 'Terreno', 'Altro'])}</label></div>
@@ -233,7 +237,7 @@ function moduloValutazione({ variante = 'home', id = '' } = {}) {
     <p class="form-esito" role="status" aria-live="polite" hidden></p>
   </form>`;
   }
-  return `<form class="contatto mini-valutazione" data-form="valutazione" data-chiave="${esc(chiave)}">
+  return `<form class="contatto mini-valutazione" data-form="valutazione" data-chiave="${esc(chiave)}" ${invioSicuro()}>${chiaveNascosta(chiave)}
     <input type="hidden" name="subject" value="Richiesta di valutazione dal sito evolgroup.it"><input type="checkbox" name="botcheck" class="trappola" tabindex="-1" autocomplete="off">
     <label>Indirizzo dell’immobile<input name="indirizzo" required placeholder="Via, numero civico, città" autocomplete="street-address"></label>
     <div class="campi2"><label>Tipologia<select name="tipologia" required><option value="">Seleziona…</option><option>Appartamento</option><option>Villa / casa indipendente</option><option>Negozio / ufficio</option><option>Box</option><option>Altro</option></select></label>
