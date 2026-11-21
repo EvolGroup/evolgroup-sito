@@ -1,14 +1,39 @@
 (function () {
   var anteprima = document.body.classList.contains('modalita-anteprima');
   function traccia(nome, dati) { try { if (window.gtag && !anteprima) window.gtag('event', nome, dati || {}); } catch (e) {} }
-  // provenienza del visitatore (solo per questa visita, nessun dato personale): finisce nelle email dei moduli
+  // provenienza del visitatore (solo per questa visita, nessun dato personale): finisce nelle email dei moduli.
+  // Fonte, campagna, annuncio e pagina di arrivo non contengono identificativi e vengono sempre conservati.
+  // L'identificativo del clic Google Ads (gclid) viene invece salvato e inviato SOLO se il visitatore
+  // ha dato il consenso alla pubblicità (ad_storage "granted" in Google Consent Mode, gestito da iubenda).
+  var ID_CLIC = ['gclid', 'gbraid', 'wbraid', 'dclid', 'gclsrc', '_gl', 'fbclid', 'msclkid'];
+  function consensoPubblicita() {
+    var dl = window.dataLayer || [], stato = 'denied';
+    for (var i = 0; i < dl.length; i++) {
+      var c = dl[i];
+      if (c && c[0] === 'consent' && c[2] && typeof c[2].ad_storage === 'string') stato = c[2].ad_storage;
+    }
+    return stato === 'granted';
+  }
+  function indirizzoPulito() {
+    try {
+      var u = new URL(location.href);
+      ID_CLIC.forEach(function (k) { u.searchParams.delete(k); });
+      return u.toString();
+    } catch (e) { return location.origin + location.pathname; }
+  }
+  function salvaProvenienza(p) { try { sessionStorage.setItem('evol_provenienza', JSON.stringify(p)); } catch (e) {} }
+  var gclidInAttesa = '';
   var provenienza = (function () {
-    try { var salvata = sessionStorage.getItem('evol_provenienza'); if (salvata) return JSON.parse(salvata); } catch (e) {}
-    var q = new URLSearchParams(location.search), ref = document.referrer, host = '';
+    var q = new URLSearchParams(location.search);
+    try {
+      var salvata = sessionStorage.getItem('evol_provenienza');
+      if (salvata) { var s = JSON.parse(salvata); if (!s.gclid && q.get('gclid')) gclidInAttesa = q.get('gclid'); return s; }
+    } catch (e) {}
+    var ref = document.referrer, host = '';
     try { host = ref ? new URL(ref).hostname : ''; } catch (e) {}
     if (host === location.hostname) host = '';
     var p = { pagina_di_arrivo: location.pathname };
-    if (q.get('gclid')) p.gclid = q.get('gclid');
+    if (q.get('gclid')) gclidInAttesa = q.get('gclid');
     if (q.get('utm_source')) {
       p.fonte = [q.get('utm_source'), q.get('utm_medium')].filter(Boolean).join(' / ');
       if (q.get('utm_campaign')) p.campagna = q.get('utm_campaign');
@@ -22,9 +47,17 @@
     else if (/immobiliare\.it|idealista|casa\.it|getrix/.test(host)) p.fonte = 'Portali (' + host + ')';
     else if (host) p.fonte = 'Link da ' + host;
     else p.fonte = 'Diretto (indirizzo digitato, preferiti, WhatsApp o email)';
-    try { sessionStorage.setItem('evol_provenienza', JSON.stringify(p)); } catch (e) {}
     return p;
   })();
+  // allinea il gclid al consenso attuale: lo aggiunge se c'è il consenso, lo toglie se manca o è stato revocato
+  function aggiornaGclid() {
+    if (consensoPubblicita()) { if (gclidInAttesa && !provenienza.gclid) provenienza.gclid = gclidInAttesa; }
+    else if (provenienza.gclid) { gclidInAttesa = gclidInAttesa || provenienza.gclid; delete provenienza.gclid; }
+    salvaProvenienza(provenienza);
+  }
+  aggiornaGclid();
+  // il consenso può arrivare dopo il caricamento (scelta nel banner): si riallinea prima di lasciare la pagina
+  window.addEventListener('pagehide', aggiornaGclid);
   // clic su WhatsApp, telefono ed email: contano come contatti
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]'); if (!a) return;
@@ -159,7 +192,8 @@
       var blocca = function (si) { f.dataset.inInvio = si ? '1' : ''; for (var k = 0; k < pulsanti.length; k++) pulsanti[k].disabled = si; f.setAttribute('aria-busy', si ? 'true' : 'false'); };
       blocca(true);
       esito.textContent = 'Invio in corso…';
-      var dati = new FormData(f); dati.set('access_key', chiave); dati.append('pagina', location.href);
+      var dati = new FormData(f); dati.set('access_key', chiave); dati.append('pagina', indirizzoPulito());
+      aggiornaGclid();
       if (provenienza) { dati.append('provenienza', provenienza.fonte || ''); if (provenienza.campagna) dati.append('campagna', provenienza.campagna); if (provenienza.annuncio) dati.append('annuncio', provenienza.annuncio); if (provenienza.gclid) dati.append('gclid', provenienza.gclid); dati.append('pagina_di_arrivo', provenienza.pagina_di_arrivo || ''); }
       fetch('https://api.web3forms.com/submit', { method: 'POST', body: dati, headers: { Accept: 'application/json' } })
         .then(function (r) { return r.json(); })
