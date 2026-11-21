@@ -1,6 +1,6 @@
 # Da fare – nuovo sito Evol Group
 
-Aggiornato al 16/11/2026.
+Aggiornato al 21/11/2026.
 
 ## Prima del passaggio del dominio
 - [x] Reindirizzamenti dei vecchi indirizzi WordPress (public/_redirects, 37 indirizzi + regole generali) e pagina 404.
@@ -26,6 +26,16 @@ Aggiornato al 16/11/2026.
 - [x] **Provenienza dei contatti** nei moduli (UTM, gclid/fbclid, motori di ricerca, portali, diretto): arriva nell'email come "provenienza", "campagna", "annuncio", "pagina_di_arrivo".
 - [x] **Anteprime social/WhatsApp** (Open Graph completo: prezzo, locali, m², indirizzo e foto) e **dati strutturati** schema.org (agenzia, immobili, articoli).
 - [x] **Home: 3 anteprime** di immobili invece di 6.
+
+## Google Ads e consenso (20–21/11/2026)
+- [x] **GA4: evento `lead_valutazione`** (solo richieste di valutazione, da `generate_lead` con modulo = valutazione), segnato come evento chiave.
+- [x] **Google Ads (291-879-3391) collegato a GA4**; `lead_valutazione` importata come unica conversione **principale**, conteggio "Una" (obiettivo "Richiesta preventivo"). Le 3 conversioni automatiche restano **secondarie**.
+- [x] **Registrazione chiamate Google Ads disattivata** (monitoraggio chiamate invariato).
+- [x] **iubenda**: aggiunto "Monitoraggio conversioni di Google Ads" (finalità Marketing); modulo di contatto con nome, telefono, città, varie tipologie di dati; nome del sito "Evol Group"; tolto Google Fonts. Consent Mode v2 in modalità **base**; richiesta di nuovo consenso all'aggiornamento della cookie policy attiva.
+- [x] **gclid** salvato e inviato nelle email solo con consenso pubblicitario; identificativi di clic tolti dall'indirizzo della pagina.
+- [x] **Font ospitati sul sito** (niente Google Fonts) e **tag Google bloccato nell'HTML** finché non c'è il consenso alle statistiche.
+- [ ] **Campagna sulla Rete di ricerca**: da preparare in bozza solo dopo le decisioni su budget, zone, parole chiave e testi. Non pubblicare senza approvazione.
+- [ ] Controllare in Google Ads → Obiettivi → Diagnostica lo stato di Consent Mode dopo i primi giorni di traffico.
 
 ## Più avanti
 - [ ] Aggiungere info@evolgroup.it come secondo utente su iubenda, Google Analytics e Cloudflare.
