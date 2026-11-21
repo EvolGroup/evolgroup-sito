@@ -1,0 +1,30 @@
+name: Scarica i font (una tantum)
+
+# Scarica i caratteri da Google Fonts e li salva nel repository (public/fonti e src/font.css),
+# così il sito li serve da sé e non contatta Google. Si avvia a mano o quando cambia lo script.
+on:
+  workflow_dispatch:
+  push:
+    branches: ['landing-*']
+    paths: ['scripts/scarica-font.mjs']
+
+permissions:
+  contents: write
+
+jobs:
+  font:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/scarica-font.mjs
+      - name: Salva i font nel repository
+        run: |
+          if [ -z "$(git status --porcelain public/fonti src/font.css)" ]; then echo "Nessuna modifica"; exit 0; fi
+          git config user.name "aggiornamento-automatico"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/fonti src/font.css
+          git commit -m "Font ospitati sul sito (scaricati da Google Fonts)"
+          git push
