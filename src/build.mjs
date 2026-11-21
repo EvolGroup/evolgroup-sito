@@ -9,6 +9,8 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITO = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/sito.json'), 'utf8'));
 const { immobili: IMMOBILI } = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/immobili.json'), 'utf8'));
 const CSS = fs.readFileSync(path.join(ROOT, 'src/stile.css'), 'utf8');
+// font ospitati sul sito (src/font.css, generato da scripts/scarica-font.mjs): nessuna richiesta a Google Fonts
+const FONT_CSS = (() => { try { return fs.readFileSync(path.join(ROOT, 'src/font.css'), 'utf8'); } catch { return ''; } })();
 const CSS_LANDING = fs.readFileSync(path.join(ROOT, 'src/landing.css'), 'utf8'); // solo per le pagine con intestazione ridotta
 
 // ---------- articoli del blog (content/blog/*.md, scritti anche dal pannello Pages CMS) ----------
@@ -606,18 +608,16 @@ gtag('consent','default',{ad_storage:'denied',ad_user_data:'denied',ad_personali
 gtag('set','ads_data_redaction',true);gtag('set','url_passthrough',true);</script>` : ''}
 ${SITO.iubendaWidget && !ANTEPRIMA ? `<script>var _iub=window._iub=window._iub||[];if(/\.pages\.dev$/.test(location.hostname))_iub.csConfiguration=Object.assign(_iub.csConfiguration||{},{localConsentDomain:location.hostname,localConsentDomainExact:true});</script>
 <script src="${SITO.iubendaWidget}"></script>` : ''}
-${SITO.googleAnalytics && !ANTEPRIMA ? `<script async src="https://www.googletagmanager.com/gtag/js?id=${SITO.googleAnalytics}"></script>
+${SITO.googleAnalytics && !ANTEPRIMA ? `<script type="text/plain" class="_iub_cs_activate" data-iub-purposes="4" async data-suppressedsrc="https://www.googletagmanager.com/gtag/js?id=${SITO.googleAnalytics}"></script>
 <script>gtag('js',new Date());gtag('config','${SITO.googleAnalytics}');</script>` : ''}
 <title>${esc(titolo)}</title><meta name="description" content="${esc(descrizione)}">
 ${noindex ? '<meta name="robots" content="noindex, follow">\n' : ''}<link rel="canonical" href="${canonical}"><link rel="icon" href="${up(SITO.favicon)}">
 <meta property="og:type" content="${tipo}"><meta property="og:site_name" content="${esc(SITO.nome)}"><meta property="og:locale" content="it_IT">
 <meta property="og:title" content="${esc(titolo)}"><meta property="og:description" content="${esc(descrizione)}"><meta property="og:url" content="${canonical}"><meta property="og:image" content="${esc(img)}"><meta name="twitter:card" content="summary_large_image">
 ${[datiAgenzia(), ...dati].map(jsonLd).join('')}
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
 ${mappe ? `<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin defer></script>` : ''}
-<style>${CSS}${ridotta ? CSS_LANDING : ''}</style></head>
+<style>${FONT_CSS}${CSS}${ridotta ? CSS_LANDING : ''}</style></head>
 <body>${corpoHtml}<script>${JS}</script></body></html>`;
 }
 
