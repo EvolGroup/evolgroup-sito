@@ -1,5 +1,5 @@
 {
- "_fonte": "Flusso Getrix, aggiornato il 2026-11-21T02:08:05.974Z",
+ "_fonte": "Flusso Getrix, aggiornato il 2026-11-24T02:14:36.674Z",
  "immobili": [
   {
    "id": "193848917",
@@ -720,7 +720,7 @@
   },
   {
    "id": "193848899",
-   "rif": "TA10",
+   "rif": "TA10.1",
    "titolo": "AMPIO BILOCALE - M.M. COMASINA",
    "testo": "EVOL GROUP propone in ESCLUSIVA un grazioso bilocale di 70 mq situato al primo piano di un condominio di quattro piano. L’appartamento si distingue per una distribuzione interna razionale e funzionale: dall'ingresso si accede a un corridoio che disimpegna tutti gli ambienti. Sulla destra troviamo la cucina abitabile; proseguendo si sviluppano, la camera matrimoniale con accesso al balcone, il bagno finestrato con box doccia e infine l'ampio soggiorno. Pavimentazione uniforme in tutti gli ambienti. L’immobile è dotato di riscaldamento centralizzato e impianto di aria condizionata. La doppia esposizione Est/Ovest garantisce un’ottima luminosità durante tutto l’arco della giornata. Completa la proprietà un solaio di pertinenza. Il contesto è tranquillo e ben servito, a pochi passi dai principali servizi commerciali (supermercati, farmacie, bar, scuole di ogni ordine e grado). Ottimi i collegamenti con i mezzi pubblici: fermata M3 Comasina a 90m e linee autobus 41 (direzione Niguarda), 52 (direzione Bruzzano) a 150m. In pochi minuti d’auto si raggiungono le principali tangenziali e autostrade. Per ulteriori informazioni o per fissare un appuntamento: 02 59647813 – 333 5961118.",
    "contratto": "V",
@@ -734,13 +734,14 @@
    "civico": "10/1",
    "lat": 45.5284996,
    "lng": 9.1619997,
-   "prezzo": 219000,
+   "prezzo": 209000,
    "mq": 70,
    "locali": "2",
-   "spese": "200.0000",
+   "spese": "190.0000",
    "tour": "https://tour360.getrix.it/vrtours/2560697/",
-   "mod": "2026-11-04",
+   "mod": "2026-11-23",
    "det": {
+    "StatoImmobile": "1",
     "NrLivelli": "1",
     "Piano": "1",
     "PianiEdificio": "4",
