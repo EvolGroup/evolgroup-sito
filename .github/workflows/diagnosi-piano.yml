@@ -1,0 +1,32 @@
+name: Diagnosi piano (temporaneo)
+on:
+  push:
+    branches: [diagnosi-piano]
+jobs:
+  leggi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Campi piano nel feed Getrix
+        env:
+          GETRIX_CODICE: ${{ secrets.GETRIX_CODICE }}
+        run: |
+          cat > leggi.mjs <<'EOF'
+          import zlib from 'node:zlib';
+          const r = await fetch(`https://feed.getrix.it/xml/${process.env.GETRIX_CODICE}.zip`);
+          const buf = Buffer.from(await r.arrayBuffer());
+          let e = -1; for (let i = buf.length - 22; i >= 0; i--) if (buf.readUInt32LE(i) === 0x06054b50) { e = i; break; }
+          const p = buf.readUInt32LE(e + 16); const lho = buf.readUInt32LE(p + 42); const cs = buf.readUInt32LE(p + 20);
+          const st = lho + 30 + buf.readUInt16LE(lho + 26) + buf.readUInt16LE(lho + 28);
+          const xml = (buf.readUInt16LE(p + 10) === 0 ? buf.slice(st, st + cs) : zlib.inflateRawSync(buf.slice(st, st + cs))).toString('utf8');
+          for (const id of ['193848922', '193757668', '193431666', '193848798', '193795815']) {
+            const i = xml.indexOf(`IDImmobile="${id}"`); const f = xml.indexOf('</Immobile>', i);
+            const blocco = xml.slice(i, f);
+            const sezioni = [...blocco.matchAll(/<(Residenziale|Commerciale|Attivita|Vacanze|Terreno|Box|Stanze)\b/g)].map(m => m[1]);
+            const piani = [...blocco.matchAll(/<([\w]*(?:[Pp]iano|Livell|Floor)[\w]*)[^>]*>([^<]{0,40})</g)].map(m => m[1] + '=' + m[2]);
+            console.log(id, '| sezioni:', sezioni.join(','), '| campi piano:', piani.join('; ') || 'nessuno');
+          }
+          EOF
+          node leggi.mjs
