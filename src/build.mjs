@@ -88,7 +88,11 @@ function caratteristiche(im) {
   if (+im.locali > 0) add('Locali', im.locali);
   if (+d.NrCamereLetto) add('Camere da letto', d.NrCamereLetto);
   if (+d.NrBagni || +d.NrServiziIgiene) add('Bagni', d.NrBagni || d.NrServiziIgiene);
-  if (d.Piano) add('Piano', d.Piano);
+  // Getrix (specifiche feed_2_0_0.xsd): "Piano" è il numero del piano (0–255);
+  // "PianoFuoriTerra" è un codice per i piani senza numero.
+  const PIANI_GETRIX = { 1: 'Terra', 2: 'Scantinato', 3: 'Seminterrato', 4: 'Rialzato', 5: 'Ammezzato', 6: 'Alto', 7: 'Ultimo', 8: 'Intero edificio', 9: 'Interrato' };
+  const piano = d.Piano === '0' ? 'Terra' : d.Piano || PIANI_GETRIX[d.PianoFuoriTerra];
+  if (piano) add('Piano', piano);
   if (d.PianiEdificio) add('Piani dell’edificio', d.PianiEdificio);
   add('Cucina', { 1: 'Abitabile', 6: 'A vista' }[d.Cucina]);
   add('Riscaldamento', { 1: 'Autonomo', 2: 'Centralizzato' }[d.Riscaldamento]);
