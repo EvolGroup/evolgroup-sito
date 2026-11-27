@@ -1,5 +1,5 @@
 {
- "_fonte": "Flusso Getrix, aggiornato il 2026-11-25T02:22:08.813Z",
+ "_fonte": "Flusso Getrix, aggiornato il 2026-11-27T02:53:46.691Z",
  "immobili": [
   {
    "id": "193848917",
@@ -998,6 +998,81 @@
     ]
    },
    "slug": "ampio-bilocale-in-recente-costruzione"
+  },
+  {
+   "id": "193867112",
+   "rif": "Via Valvassori peroni 81",
+   "titolo": "MILANO CITTA STUDI– BILOCALE ARREDATO CON TERRAZZO",
+   "testo": "In Via Carlo Valvassori Peroni 81, nel quartiere Lambrate, proponiamo in locazione un bilocale arredato, situato al terzo piano di uno stabile dotato di ascensore e servizio di portineria mezza giornata. L’appartamento si compone di un soggiorno arredato con divano letto, zona pranzo e TV, una cucina separata attrezzata con piano a induzione, una camera matrimoniale con armadi e un bagno completo di doccia e lavatrice. Completa la proprietà un ampio terrazzo che si sviluppa lungo l’appartamento, oltre a una cantina di pertinenza. La posizione è particolarmente comoda, a breve distanza dalla fermata della metropolitana M2 Lambrate, dalla stazione ferroviaria e dal quartiere Città Studi, con il Politecnico di Milano facilmente raggiungibile. La zona è inoltre ben servita da negozi, supermercati e attività di quartiere. Contratto 3+2 a canone concordato, Totale Mensile € 1.450 Canone mensile: € 1.100, Spese condominiali: € 350 mensili, comprensive di riscaldamento Deposito cauzionale: 3 mensilità, pari a € 3.300. Utenza elettrica esclusa; nessuna utenza gas Disponibile dal 1° dicembre 2026",
+   "contratto": "A",
+   "categoria": "1",
+   "tipologia": "Appartamento",
+   "comune": "Milano",
+   "zona": "Città Studi, Susa",
+   "quartiere": "Citta' Studi, Lambrate",
+   "strada": "via",
+   "indirizzo": "Carlo Valvassori Peroni",
+   "civico": "81",
+   "lat": 45.48260117,
+   "lng": 9.23639965,
+   "prezzo": 1100,
+   "mq": 55,
+   "locali": "2",
+   "spese": "350.0000",
+   "tour": "https://tour360.getrix.it/vrtours/2589093/",
+   "mod": "2026-11-26",
+   "det": {
+    "StatoImmobile": "1",
+    "NrLivelli": "1",
+    "Piano": "3",
+    "PianiEdificio": "5",
+    "NrCamereLetto": "1",
+    "NrAltreCamere": "1",
+    "NrBagni": "1",
+    "Cucina": "3",
+    "NrTerrazzi": "1",
+    "NrAscensori": "1",
+    "BoxAuto": "255",
+    "Cantina": "1",
+    "Portineria": "true",
+    "GiardinoPrivato": "2",
+    "Riscaldamento": "2",
+    "Arredamento": "2",
+    "CategoriaCatastale": "A/2",
+    "AnnoCostruzione": "2006",
+    "TipoCostruzione": "3",
+    "StatoManutenzione": "2",
+    "StatoCostruzione": "2",
+    "VideoCitofono": "true",
+    "PortaBlindata": "true",
+    "ImpiantoTV": "1",
+    "EsposizioneEsterna": "true",
+    "LeggeClasseEnergetica": "1",
+    "ClasseEnergetica": "D",
+    "IPE": "175.00"
+   },
+   "foto": {
+    "ad": "134852617",
+    "titoli": [
+     "Salone",
+     "Salone",
+     "Salone",
+     "Salone",
+     "Camera da letto",
+     "Camera da letto",
+     "Camera da letto",
+     "Camera da letto",
+     "Cucina",
+     "Cucina",
+     "Bagno",
+     "Bagno",
+     "Terrazzo",
+     "Terrazzo",
+     "Facciata",
+     "Facciata"
+    ]
+   },
+   "slug": "bilocale-affitto-via-carlo-valvassori-peroni-milano"
   }
  ]
 }
